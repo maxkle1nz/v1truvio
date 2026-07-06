@@ -23,8 +23,9 @@
   --mns-stale-cor: #89848f;
   --mns-stale-txt: #948f9c;
   --mns-stale-faixa: rgba(137,132,143,.07);
-  --mns-trilho-min-ms: 60000;
+  --mns-trilho-min-ms: 3600000;
   --mns-trilho-max-ms: 2592000000;
+  --mns-trilho-colisao-px: 90px;
   --mns-trilho-tier-medulla: 3.5px;
   --mns-trilho-tier-project: 1.5px;
   --mns-trilho-marca-altura: 46px;
@@ -32,6 +33,7 @@
   --mns-placa-inclina: -1.4;
   --mns-placa-sombra-assento: 0 8px 20px rgba(4,4,8,.42);
   --mns-placa-sombra-desloc: 0 22px 44px rgba(4,4,8,.58);
+  --mns-placa-sombra-flutua: 0 6px 24px rgba(4,4,8,.5);
   --mns-dim-grid: 8px;
   --mns-dim-borda: 1px;
   --mns-dim-raio: 3px;

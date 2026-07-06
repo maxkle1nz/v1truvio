@@ -1,0 +1,45 @@
+{
+  "_source": "Estrutura verbatim dos endpoints reais da Direzione do Cherry Bubbles: server.ts:1855-1880 (mapCoreStaff), server.ts:8536-8611 (GET /api/core/admin/pendenze-denaro, escrito em 2026-07-06), dashboard KPIs derivados de computeMonthlyCommissions (server.ts:2320-2426, base INCASSATO). Valores do dominio REAL — canone Publisher EUR 137/mese, niveis L1-L6 do piano provvigionale ufficiale (Venditore/Supervisore/Coordinatore/Manager), status ATTIVO/SOSPESO/OMAGGIO, regola tetto 5000 EUR procacciatore. Nomi italiani generici (nessun PII di produzione).",
+  "azienda": "Cherry Bubbles — Direzione (90Steps Srls)",
+  "kpi": {
+    "mrrNazionale": 3151,
+    "esercentiAttivi": 23,
+    "esercentiOmaggio": 2,
+    "agentiAttivi": 8,
+    "incassatoMese": 2603,
+    "fattureEmesse": 19,
+    "periodo": "2026-07"
+  },
+  "agenti": [
+    { "id": "stf_001", "name": "Marco Bianchi", "level": "Coordinatore", "levelOrder": 5, "mrrGenerated": 1370, "personalMonthly": 205.50, "networkMonthly": 148.30, "totalMonthly": 353.80, "contrattoAgenzia": true, "dichiarazioneAnno": 2026, "suspended": false },
+    { "id": "stf_002", "name": "Giulia Ferrari", "level": "Supervisore", "levelOrder": 2, "mrrGenerated": 685, "personalMonthly": 157.55, "networkMonthly": 54.80, "totalMonthly": 212.35, "contrattoAgenzia": false, "dichiarazioneAnno": 2026, "suspended": false },
+    { "id": "stf_003", "name": "Alessandro Conti", "level": "Venditore", "levelOrder": 1, "mrrGenerated": 411, "personalMonthly": 61.65, "networkMonthly": 0, "totalMonthly": 61.65, "contrattoAgenzia": false, "dichiarazioneAnno": null, "suspended": false },
+    { "id": "stf_004", "name": "Francesca Russo", "level": "Venditore", "levelOrder": 1, "mrrGenerated": 274, "personalMonthly": 41.10, "networkMonthly": 0, "totalMonthly": 41.10, "contrattoAgenzia": false, "dichiarazioneAnno": 2026, "suspended": false },
+    { "id": "stf_005", "name": "Davide Greco", "level": "Manager", "levelOrder": 4, "mrrGenerated": 137, "personalMonthly": 45.21, "networkMonthly": 0, "totalMonthly": 45.21, "contrattoAgenzia": false, "dichiarazioneAnno": 2026, "suspended": true }
+  ],
+  "esercenti": [
+    { "id": "mer_001", "name": "Bar Centrale", "category": "Bar & Caffe", "city": "Milano", "status": "ATTIVO", "canone": 137, "agente": "Marco Bianchi" },
+    { "id": "mer_002", "name": "Trattoria da Nino", "category": "Ristorante", "city": "Roma", "status": "ATTIVO", "canone": 137, "agente": "Giulia Ferrari" },
+    { "id": "mer_003", "name": "Estetica Luce", "category": "Estetica", "city": "Torino", "status": "SOSPESO", "canone": 137, "agente": "Alessandro Conti" },
+    { "id": "mer_004", "name": "Panificio Aurora", "category": "Panetteria", "city": "Bologna", "status": "ATTIVO", "canone": 137, "agente": "Marco Bianchi" },
+    { "id": "mer_005", "name": "ONLUS Il Sorriso", "category": "No-profit", "city": "Firenze", "status": "OMAGGIO", "canone": 0, "agente": "Francesca Russo" }
+  ],
+  "pendenze": {
+    "counts": { "daFatturare": 3, "insoluti": 1, "payoutDaChiudere": 5, "soglia5k": 2, "storniDaRecuperare": 1 },
+    "daFatturare": [
+      { "merchantName": "Bar Centrale", "period": "2026-07", "amountCents": 16714 },
+      { "merchantName": "Trattoria da Nino", "period": "2026-07", "amountCents": 16714 },
+      { "merchantName": "Panificio Aurora", "period": "2026-06", "amountCents": 16714 }
+    ],
+    "insoluti": [
+      { "merchantName": "Estetica Luce", "contractId": "ctr_003", "since": "2026-07-02" }
+    ],
+    "soglia5k": [
+      { "staffName": "Giulia Ferrari", "liquidatoAnno": 4280.50, "dichiarazioneOk": true },
+      { "staffName": "Alessandro Conti", "liquidatoAnno": 3910.00, "dichiarazioneOk": false }
+    ],
+    "storniDaRecuperare": [
+      { "staffName": "Marco Bianchi", "period": "2026-05", "merchantName": "Bar Vecchio", "amountCents": 13700 }
+    ]
+  }
+}

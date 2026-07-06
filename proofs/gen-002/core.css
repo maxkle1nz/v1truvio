@@ -166,7 +166,7 @@
 }
 .mns-rail__track {                /* o eixo confiável: a linha física do tempo */
   position: relative;
-  height: calc(var(--mns-trilho-marca-altura) + var(--mns-dim-grid) * 11);   /* espaço p/ haste + até 3 faixas de rótulo */
+  height: calc(var(--mns-trilho-marca-altura) + var(--mns-dim-grid) * 22);   /* espaço p/ haste + até 3 faixas de rótulo escalonadas (passo 4.75) */
   border-bottom: 2px solid var(--mns-linha-trilho);
 }
 /* a MARCA é um único container cravado em x (posição = dado, inviolável), ancorado na BASE do trilho.
@@ -178,7 +178,7 @@
   left: calc(var(--mns-x) * 100%);
   transform: translateX(-50%);
   display: flex; flex-direction: column-reverse; align-items: center;  /* haste no fundo, rótulo sobe */
-  width: 168px;
+  width: 132px;
 }
 .mns-rail__stem {                 /* o traço vertical: espessura = tier (medulla pesado / project fino) */
   width: var(--mns-trilho-tier-project);
@@ -191,13 +191,13 @@
  * e ela mesma É a linha contínua que liga rótulo→haste (borda esquerda). */
 .mns-rail__labels {
   display: flex; flex-direction: column; align-items: center;
-  margin-bottom: calc(var(--mns-lane, 0) * var(--mns-dim-grid) * 2.75);   /* faixa: empurra o rótulo para cima */
+  margin-bottom: calc(var(--mns-lane, 0) * var(--mns-dim-grid) * 4.75);   /* faixa: passo vertical > altura do rótulo (sem overlap) */
   padding-bottom: calc(var(--mns-dim-grid) * 0.5);
   position: relative;
 }
 .mns-rail__labels::before {        /* a guia contínua: preenche o vão criado pela faixa (nada órfão) */
-  content: ""; position: absolute; bottom: calc(-1 * var(--mns-lane, 0) * var(--mns-dim-grid) * 2.75); left: 50%;
-  width: 1px; height: calc(var(--mns-lane, 0) * var(--mns-dim-grid) * 2.75);
+  content: ""; position: absolute; bottom: calc(-1 * var(--mns-lane, 0) * var(--mns-dim-grid) * 4.75); left: 50%;
+  width: 1px; height: calc(var(--mns-lane, 0) * var(--mns-dim-grid) * 4.75);
   background: var(--mns-linha-soft);
 }
 .mns-rail__ms {                   /* O DÍGITO VIVO — mono, tabular, incremento monotônico real (só aqui) */
@@ -354,7 +354,7 @@
 .mns-fp__grid dd { color: var(--mns-tinta-soft); margin: 0; }
 
 /* switcher de estados (rodapé, discreto) */
-.mns-switch { position: fixed; left: 50%; bottom: calc(var(--mns-dim-grid)*2); transform: translateX(-50%); display: flex; gap: calc(var(--mns-dim-grid)); background: var(--mns-massa-alta); border: 1px solid var(--mns-linha-forte); border-radius: 999px; padding: calc(var(--mns-dim-grid)*0.75) calc(var(--mns-dim-grid)*1.25); z-index: 30; box-shadow: 0 6px 24px rgba(4,4,8,.5); }
+.mns-switch { position: fixed; left: 50%; bottom: calc(var(--mns-dim-grid)*2); transform: translateX(-50%); display: flex; gap: calc(var(--mns-dim-grid)); background: var(--mns-massa-alta); border: 1px solid var(--mns-linha-forte); border-radius: 999px; padding: calc(var(--mns-dim-grid)*0.75) calc(var(--mns-dim-grid)*1.25); z-index: 30; box-shadow: var(--mns-placa-sombra-flutua); }
 .mns-switch__btn { all: unset; cursor: pointer; padding: calc(var(--mns-dim-grid)*0.5) calc(var(--mns-dim-grid)*1.25); border-radius: 999px; font-family: var(--mns-fonte-mono); font-size: var(--mns-fs-xs); color: var(--mns-tinta-soft); }
 .mns-switch__btn[aria-pressed="true"] { background: var(--mns-massa-vidro-foco); color: var(--mns-tinta-alta); }
 .mns-switch__btn:focus-visible { outline: 1px solid var(--mns-trust-reverify); }
