@@ -1,0 +1,43 @@
+/* GERADO por build-tokens.mjs — não edite à mão. Fonte: tokens.json */
+:root {
+  --v1t-cor-massa: #0E0F12;
+  --v1t-cor-massa-alta: #16181C;
+  --v1t-cor-massa-media: #1C1F24;
+  --v1t-cor-linha-estrutura: #2A2E35;
+  --v1t-cor-linha-tenue: rgba(230,232,238,0.10);
+  --v1t-cor-luz-de-acao: #F4A24C;
+  --v1t-cor-luz-de-acao-forte: #FFB765;
+  --v1t-cor-luz-de-acao-brasa: rgba(244,162,76,0.14);
+  --v1t-cor-estado-frio: #7E8794;
+  --v1t-cor-estado-frio-brasa: rgba(126,135,148,0.10);
+  --v1t-cor-estado-atencao: #C9A24B;
+  --v1t-cor-texto-alto: #F2EFE9;
+  --v1t-cor-texto-medio: #B9BCC4;
+  --v1t-cor-texto-fraco: #868B94;
+  --v1t-cor-texto-sobre-luz: #1B120A;
+  --v1t-dimensao-grid: 8px;
+  --v1t-dimensao-grid-2: 16px;
+  --v1t-dimensao-grid-3: 24px;
+  --v1t-dimensao-grid-4: 32px;
+  --v1t-dimensao-chanfro: 2px;
+  --v1t-dimensao-fio: 1px;
+  --v1t-dimensao-fresta: 3px;
+  --v1t-dimensao-largura-tela: 1080px;
+  --v1t-tipo-familia-bancada: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+  --v1t-tipo-familia-numero: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
+  --v1t-tipo-veredito: 72px;
+  --v1t-tipo-ow: 34px;
+  --v1t-tipo-titulo: 15px;
+  --v1t-tipo-corpo: 14px;
+  --v1t-tipo-label: 12px;
+  --v1t-tipo-micro: 11px;
+  --v1t-tipo-peso-veredito: 700;
+  --v1t-tipo-peso-medio: 600;
+  --v1t-tipo-peso-corpo: 400;
+  --v1t-tipo-trilha-tabular: "tnum" 1, "lnum" 1;
+  --v1t-tipo-entreletra-etiqueta: 0.08em;
+  --v1t-motion-corte-de-luz: 520ms;
+  --v1t-motion-deslocamento: 260ms;
+  --v1t-motion-pulso-frescor: 4.8s;
+  --v1t-motion-curva-bancada: 0.2 0.7 0.2 1;
+}

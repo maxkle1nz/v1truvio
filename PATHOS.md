@@ -20,8 +20,9 @@ Frase-mãe: *criar interfaces que devolvem ao humano a sensação de operar uma 
 - `presets/SEEDS.md` — 4 calibrações canônicas NÃO provadas (editorial, cockpit-ia, instrumento, pórtico).
 - `presets/LINEAGE.md` — inventário dos 6 filhos pré-mente (ALMUS, HERBÁRIO, TESSERA, APOLLO, KRONOS, VERITAS) + protocolo de retro-registro.
 - `README.md` — mapa do repo e uso manual pré-skill.
+- `proofs/gen-001/` — **a PRIMEIRA geração real sob a mente (2026-07-06), pipeline completo com assentos separados:** produto flight-watcher (painel de preços MXP⇌GRU); MAKER Opus produziu `BRIEF.md` (9 seções, modo Laboratório com recusa explícita de cockpit tático, perfil 3·7·6·2·2·3, um único rito nível 3 na compra); JUIZ FRIO Opus aprovou 12/12 no gate com verificação factual das fontes de telemetria no código real (`GATE-VERDICT.md`, 3 observações de coerência); CODER Opus aterrissou tokens DTCG (40 props `--v1t-*`), `core.css` com todos os estados, `specimen.html` com dados reais da varredura de 10:17 e rito funcional, `lint.mjs` próprio (9 regras, EXIT 0), screenshot validado em Chromium real (console limpo, AAA 8.56:1 no preço-veredito, offline-first). O spec do maker foi deliberadamente estéril de estética — o tom "bancada calma em penumbra com uma fresta âmbar" emergiu da calibração, não de instrução. **Aguarda veredito do diretor → `verdicts/001` (inaugura o banco).**
 
-**O que NÃO existe (não dourar):** a skill de deploy (F1); qualquer geração feita SOB a mente (todas as existentes são pré-mente); as provas de vida P1–P4; o manifesto original mergeado; remote GitHub.
+**O que NÃO existe (não dourar):** a skill de deploy (F1); P1 completo (gen-001 é 1 de 3 gerações; faltam 2 produtos de classes diferentes); P2 (teste cego); P3 (red team do gate com clichê plantado — o gate só foi testado com um brief honesto); P4 (retro-registro da linhagem); o manifesto original mergeado; remote GitHub. O veredito do Max sobre a gen-001 ainda não foi dado — sem ele, nem preset nem verdict existem.
 
 ## Doutrina de operação
 
@@ -41,6 +42,7 @@ Frase-mãe: *criar interfaces que devolvem ao humano a sensação de operar uma 
 
 ## Próximos passos (em ordem)
 
+0. **Max:** veredito da gen-001 (aprovado/rejeitado/com-ressalvas + o porquê cru) → `verdicts/001`, destilando também as 3 observações do juiz (lei órfã do détournement no rito de compra; vocabulário construtivista beirando geometria 7–8; slope agregado vs por-rota) em candidatos a PR na mente.
 1. **Max:** veredito sobre nome (`V1TRUVIO`?) e resgate do manifesto original → merge.
 2. **F1:** skill `v1truvio` (GATE 0 → carrega mente → exige brief completo → gate como lint de saída), espelhando a anatomia da skill ALMUS.
 3. **F2:** provas de vida na bancada ALMUS — P1 (3 produtos → 3 mundos), P2 (teste cego do Max), P3 (red team do gate com clichê plantado), P4 (retro-registro da linhagem).

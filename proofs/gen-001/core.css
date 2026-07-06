@@ -1,0 +1,443 @@
+/* core.css — a identidade de gen-001 · flight-watcher.
+   Bancada em penumbra (Ando): massa escura mate; a luz (a fresta quente) é gasta só no ponto de ação.
+   Toda cor referencia var(--v1t-*) de tokens.css — nenhum hex cru aqui (lint R-i).
+   BRIEF.md §8. */
+
+/* ---------- reset mínimo de bancada ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--v1t-cor-massa);
+  color: var(--v1t-cor-texto-medio);
+  font-family: var(--v1t-tipo-familia-bancada);
+  font-size: var(--v1t-tipo-corpo);
+  line-height: 1.45;
+  font-feature-settings: var(--v1t-tipo-trilha-tabular);
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3, p, figure { margin: 0; }
+
+/* números sempre tabulares e monoespaçados para varredura vertical (dinheiro) */
+.v1t-num {
+  font-family: var(--v1t-tipo-familia-numero);
+  font-feature-settings: var(--v1t-tipo-trilha-tabular);
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+/* ---------- BACKGROUND — a bancada ---------- */
+.v1t-bancada {
+  min-height: 100vh;
+  /* penumbra: leve gradiente radial frio, sem textura decorativa — é massa que faz a luz significar */
+  background:
+    radial-gradient(120% 90% at 22% 8%, var(--v1t-cor-massa-alta) 0%, var(--v1t-cor-massa) 60%) fixed;
+}
+.v1t-tela {
+  max-width: var(--v1t-dimensao-largura-tela);
+  margin: 0 auto;
+  padding: var(--v1t-dimensao-grid-4) var(--v1t-dimensao-grid-3) var(--v1t-dimensao-grid-4);
+}
+
+/* cabeçalho de bancada: instrumento que registra, não app de viagem */
+.v1t-cabecalho {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--v1t-dimensao-grid-2);
+  padding-bottom: var(--v1t-dimensao-grid-2);
+  border-bottom: var(--v1t-dimensao-fio) solid var(--v1t-cor-linha-estrutura);
+  margin-bottom: var(--v1t-dimensao-grid-3);
+}
+.v1t-cabecalho__nome {
+  font-size: var(--v1t-tipo-titulo);
+  font-weight: var(--v1t-tipo-peso-medio);
+  color: var(--v1t-cor-texto-alto);
+  letter-spacing: var(--v1t-tipo-entreletra-etiqueta);
+  text-transform: uppercase;
+}
+.v1t-cabecalho__rota { color: var(--v1t-cor-texto-fraco); font-size: var(--v1t-tipo-label); }
+
+/* ---------- FOREGROUND — grid com tensão assimétrica (placa Lissitzky) ---------- */
+.v1t-foreground {
+  display: grid;
+  grid-template-columns: 1.9fr 1fr;  /* o veredito recebe mais área que sua vizinhança */
+  gap: var(--v1t-dimensao-grid-3);
+  align-items: stretch;
+  margin-bottom: var(--v1t-dimensao-grid-3);
+}
+
+/* ===== Bloco-veredito — a placa pesada, único ponto luminoso ===== */
+.v1t-veredito {
+  position: relative;
+  background: var(--v1t-cor-massa-alta);
+  border: var(--v1t-dimensao-fio) solid var(--v1t-cor-linha-estrutura);
+  border-radius: var(--v1t-dimensao-chanfro);
+  padding: var(--v1t-dimensao-grid-3) var(--v1t-dimensao-grid-3) var(--v1t-dimensao-grid-2);
+  display: flex;
+  flex-direction: column;
+  gap: var(--v1t-dimensao-grid-2);
+  overflow: hidden;
+}
+/* a FRESTA: barra de luz vertical à esquerda — só acende em-alvo/novo-piso */
+.v1t-veredito::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: var(--v1t-dimensao-fresta);
+  background: var(--v1t-cor-linha-estrutura);  /* apagada por padrão */
+}
+.v1t-veredito__topo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--v1t-dimensao-grid);
+}
+.v1t-etiqueta {
+  font-size: var(--v1t-tipo-label);
+  font-weight: var(--v1t-tipo-peso-medio);
+  letter-spacing: var(--v1t-tipo-entreletra-etiqueta);
+  text-transform: uppercase;
+  padding: 4px var(--v1t-dimensao-grid);
+  border-radius: var(--v1t-dimensao-chanfro);
+  border: var(--v1t-dimensao-fio) solid var(--v1t-cor-linha-estrutura);
+  color: var(--v1t-cor-texto-medio);
+  white-space: nowrap;
+}
+.v1t-veredito__tipo { font-size: var(--v1t-tipo-label); color: var(--v1t-cor-texto-fraco); letter-spacing: var(--v1t-tipo-entreletra-etiqueta); text-transform: uppercase; }
+
+.v1t-preco {
+  font-family: var(--v1t-tipo-familia-numero);
+  font-feature-settings: var(--v1t-tipo-trilha-tabular);
+  font-variant-numeric: tabular-nums lining-nums;
+  font-size: var(--v1t-tipo-veredito);
+  font-weight: var(--v1t-tipo-peso-veredito);
+  line-height: 1;
+  color: var(--v1t-cor-texto-alto);
+  letter-spacing: -0.02em;
+}
+.v1t-veredito__meta { display: flex; flex-wrap: wrap; gap: var(--v1t-dimensao-grid) var(--v1t-dimensao-grid-2); color: var(--v1t-cor-texto-medio); font-size: var(--v1t-tipo-corpo); }
+.v1t-veredito__meta .v1t-rota { color: var(--v1t-cor-texto-alto); font-weight: var(--v1t-tipo-peso-medio); }
+.v1t-veredito__meta .v1t-sub { color: var(--v1t-cor-texto-fraco); }
+
+/* ---- ESTADO em-alvo: a fresta acende (a única luz da tela) ---- */
+.v1t-veredito[data-estado="em-alvo"] { box-shadow: inset 0 0 0 var(--v1t-dimensao-fio) var(--v1t-cor-luz-de-acao-brasa), 0 0 var(--v1t-dimensao-grid-3) var(--v1t-cor-luz-de-acao-brasa); }
+.v1t-veredito[data-estado="em-alvo"]::before { background: var(--v1t-cor-luz-de-acao); }
+.v1t-veredito[data-estado="em-alvo"] .v1t-preco { color: var(--v1t-cor-luz-de-acao); }
+.v1t-veredito[data-estado="em-alvo"] .v1t-etiqueta {
+  color: var(--v1t-cor-texto-sobre-luz);
+  background: var(--v1t-cor-luz-de-acao);
+  border-color: var(--v1t-cor-luz-de-acao);
+}
+
+/* ---- ESTADO novo-piso: a luz mais intensa + deslocamento com peso (evento raro real) ---- */
+.v1t-veredito[data-estado="novo-piso"] { box-shadow: inset 0 0 0 var(--v1t-dimensao-fio) var(--v1t-cor-luz-de-acao-brasa), 0 0 var(--v1t-dimensao-grid-4) var(--v1t-cor-luz-de-acao-brasa); }
+.v1t-veredito[data-estado="novo-piso"]::before { background: var(--v1t-cor-luz-de-acao-forte); width: calc(var(--v1t-dimensao-fresta) + 2px); }
+.v1t-veredito[data-estado="novo-piso"] .v1t-preco { color: var(--v1t-cor-luz-de-acao-forte); }
+.v1t-veredito[data-estado="novo-piso"] .v1t-etiqueta {
+  color: var(--v1t-cor-texto-sobre-luz);
+  background: var(--v1t-cor-luz-de-acao-forte);
+  border-color: var(--v1t-cor-luz-de-acao-forte);
+}
+
+/* ---- ESTADO acima-do-alvo: frio, apagado. Significa 'não é hora' pela AUSÊNCIA de luz ---- */
+.v1t-veredito[data-estado="acima-do-alvo"]::before { background: var(--v1t-cor-estado-frio); }
+.v1t-veredito[data-estado="acima-do-alvo"] .v1t-preco { color: var(--v1t-cor-estado-frio); }
+.v1t-veredito[data-estado="acima-do-alvo"] .v1t-etiqueta { color: var(--v1t-cor-estado-frio); border-color: var(--v1t-cor-estado-frio); }
+
+/* ---- ESTADO sem-dado: sem veredito falso ---- */
+.v1t-veredito[data-estado="sem-dado"] .v1t-preco { color: var(--v1t-cor-texto-fraco); font-size: var(--v1t-tipo-ow); }
+.v1t-veredito[data-estado="sem-dado"] .v1t-etiqueta { color: var(--v1t-cor-texto-fraco); }
+.v1t-veredito[data-estado="sem-dado"] .v1t-veredito__meta { color: var(--v1t-cor-texto-fraco); }
+
+/* ===== Gesto de compra — o único ponto de consequência (acento médico: clareza total) ===== */
+.v1t-compra {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--v1t-dimensao-grid);
+  align-self: flex-start;
+  margin-top: var(--v1t-dimensao-grid);
+  font-family: var(--v1t-tipo-familia-bancada);
+  font-size: var(--v1t-tipo-corpo);
+  font-weight: var(--v1t-tipo-peso-medio);
+  letter-spacing: var(--v1t-tipo-entreletra-etiqueta);
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  color: var(--v1t-cor-texto-sobre-luz);
+  background: var(--v1t-cor-luz-de-acao);
+  border: var(--v1t-dimensao-fio) solid var(--v1t-cor-luz-de-acao);
+  border-radius: var(--v1t-dimensao-chanfro);
+  padding: var(--v1t-dimensao-grid) var(--v1t-dimensao-grid-2);
+}
+.v1t-compra:focus-visible { outline: 2px solid var(--v1t-cor-luz-de-acao-forte); outline-offset: 3px; }
+.v1t-compra__seta { font-family: var(--v1t-tipo-familia-numero); }
+/* fora de alvo, o gesto perde a luz quente e vira ação fria e sóbria (não convida, mas existe) */
+.v1t-veredito[data-estado="acima-do-alvo"] .v1t-compra,
+.v1t-veredito[data-estado="sem-dado"] .v1t-compra {
+  color: var(--v1t-cor-texto-medio);
+  background: transparent;
+  border-color: var(--v1t-cor-estado-frio);
+}
+
+/* ===== Cartão OW — irmão secundário, sem a luz quente ===== */
+.v1t-ow {
+  background: var(--v1t-cor-massa-alta);
+  border: var(--v1t-dimensao-fio) solid var(--v1t-cor-linha-estrutura);
+  border-radius: var(--v1t-dimensao-chanfro);
+  padding: var(--v1t-dimensao-grid-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--v1t-dimensao-grid);
+}
+.v1t-ow__rotulo { font-size: var(--v1t-tipo-label); color: var(--v1t-cor-texto-fraco); letter-spacing: var(--v1t-tipo-entreletra-etiqueta); text-transform: uppercase; }
+.v1t-ow__preco {
+  font-family: var(--v1t-tipo-familia-numero);
+  font-feature-settings: var(--v1t-tipo-trilha-tabular);
+  font-variant-numeric: tabular-nums lining-nums;
+  font-size: var(--v1t-tipo-ow);
+  font-weight: var(--v1t-tipo-peso-veredito);
+  color: var(--v1t-cor-texto-alto);
+  line-height: 1;
+}
+.v1t-ow__meta { font-size: var(--v1t-tipo-label); color: var(--v1t-cor-texto-medio); }
+.v1t-ow__meta .v1t-sub { color: var(--v1t-cor-texto-fraco); }
+.v1t-ow .v1t-compra { margin-top: var(--v1t-dimensao-grid); color: var(--v1t-cor-texto-medio); background: transparent; border-color: var(--v1t-cor-estado-frio); }
+
+/* ---------- MIDGROUND — trilha de contexto (peso médio, sem luz de alarme) ---------- */
+.v1t-midground {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: var(--v1t-dimensao-grid-3);
+  margin-bottom: var(--v1t-dimensao-grid-3);
+}
+
+/* ===== Barra de posição histórica ===== */
+.v1t-historico {
+  background: var(--v1t-cor-massa-media);
+  border: var(--v1t-dimensao-fio) solid var(--v1t-cor-linha-estrutura);
+  border-radius: var(--v1t-dimensao-chanfro);
+  padding: var(--v1t-dimensao-grid-3);
+}
+.v1t-historico__titulo,
+.v1t-painel__titulo {
+  font-size: var(--v1t-tipo-label);
+  color: var(--v1t-cor-texto-fraco);
+  letter-spacing: var(--v1t-tipo-entreletra-etiqueta);
+  text-transform: uppercase;
+  margin-bottom: var(--v1t-dimensao-grid-2);
+}
+/* trilho: fantasma → piso → atual, marcadores em posição real da escala */
+.v1t-trilho { position: relative; height: 6px; background: var(--v1t-cor-massa-alta); border-radius: var(--v1t-dimensao-chanfro); margin: var(--v1t-dimensao-grid-3) 0 var(--v1t-dimensao-grid-2); }
+.v1t-trilho__marca { position: absolute; top: -5px; width: var(--v1t-dimensao-fio); height: 16px; background: var(--v1t-cor-texto-fraco); transform: translateX(-50%); }
+.v1t-trilho__marca[data-tipo="fantasma"] { background: var(--v1t-cor-estado-frio); }
+.v1t-trilho__marca[data-tipo="piso"] { background: var(--v1t-cor-texto-medio); }
+.v1t-trilho__marca[data-tipo="atual"] { background: var(--v1t-cor-luz-de-acao); height: 20px; top: -7px; width: calc(var(--v1t-dimensao-fio) + 1px); }
+.v1t-trilho__legenda { position: absolute; top: 18px; transform: translateX(-50%); font-size: var(--v1t-tipo-micro); color: var(--v1t-cor-texto-fraco); white-space: nowrap; }
+.v1t-trilho__legenda .v1t-num { color: var(--v1t-cor-texto-medio); }
+.v1t-trilho__legenda[data-tipo="atual"] .v1t-num { color: var(--v1t-cor-luz-de-acao); }
+
+.v1t-historico__leitura { display: flex; flex-wrap: wrap; gap: var(--v1t-dimensao-grid-3); margin-top: var(--v1t-dimensao-grid-4); }
+.v1t-dado { display: flex; flex-direction: column; gap: 2px; }
+.v1t-dado__rotulo { font-size: var(--v1t-tipo-micro); color: var(--v1t-cor-texto-fraco); letter-spacing: 0.04em; text-transform: uppercase; }
+.v1t-dado__valor { font-family: var(--v1t-tipo-familia-numero); font-variant-numeric: tabular-nums lining-nums; font-size: var(--v1t-tipo-titulo); color: var(--v1t-cor-texto-alto); }
+.v1t-dado__valor.v1t-distancia { color: var(--v1t-cor-texto-medio); }
+
+/* estados da barra histórica */
+.v1t-historico[data-estado="no-piso"] .v1t-dado__valor.v1t-distancia { color: var(--v1t-cor-luz-de-acao); }
+.v1t-historico[data-estado="novo-piso"] { box-shadow: inset 0 0 0 var(--v1t-dimensao-fio) var(--v1t-cor-luz-de-acao-brasa); }
+.v1t-historico[data-estado="novo-piso"] .v1t-dado__valor.v1t-distancia { color: var(--v1t-cor-luz-de-acao-forte); }
+
+/* ===== Painel de leitura (tendência + selo frescor/confiança) ===== */
+.v1t-painel {
+  background: var(--v1t-cor-massa-media);
+  border: var(--v1t-dimensao-fio) solid var(--v1t-cor-linha-estrutura);
+  border-radius: var(--v1t-dimensao-chanfro);
+  padding: var(--v1t-dimensao-grid-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--v1t-dimensao-grid-3);
+}
+
+/* Indicador de tendência — seta mínima como vetor (Moholy-Nagy) */
+.v1t-tendencia { display: flex; align-items: baseline; gap: var(--v1t-dimensao-grid); }
+.v1t-tendencia__seta { font-family: var(--v1t-tipo-familia-numero); font-size: var(--v1t-tipo-titulo); color: var(--v1t-cor-texto-medio); width: 1.2em; text-align: center; }
+.v1t-tendencia__rotulo { font-size: var(--v1t-tipo-corpo); color: var(--v1t-cor-texto-alto); text-transform: uppercase; letter-spacing: var(--v1t-tipo-entreletra-etiqueta); }
+.v1t-tendencia__nota { font-size: var(--v1t-tipo-micro); color: var(--v1t-cor-texto-fraco); }
+.v1t-tendencia[data-estado="indefinida"] .v1t-tendencia__rotulo { color: var(--v1t-cor-texto-fraco); }
+
+/* Selo de frescor + confiança — o único elemento que respira (pulso de frescor) */
+.v1t-selo { display: flex; align-items: flex-start; gap: var(--v1t-dimensao-grid-2); }
+.v1t-selo__pulso {
+  flex: none;
+  width: 9px; height: 9px;
+  margin-top: 5px;
+  border-radius: 50%;
+  background: var(--v1t-cor-texto-medio);
+  position: relative;
+}
+.v1t-selo__pulso::after {
+  content: "";
+  position: absolute; inset: -5px;
+  border-radius: 50%;
+  border: var(--v1t-dimensao-fio) solid var(--v1t-cor-texto-medio);
+  opacity: 0;
+  animation: v1t-respira var(--v1t-motion-pulso-frescor) ease-in-out infinite;
+}
+.v1t-selo__texto { display: flex; flex-direction: column; gap: 2px; }
+.v1t-selo__linha { font-size: var(--v1t-tipo-label); color: var(--v1t-cor-texto-medio); }
+.v1t-selo__linha .v1t-num { color: var(--v1t-cor-texto-alto); }
+.v1t-selo__estado { font-size: var(--v1t-tipo-micro); letter-spacing: var(--v1t-tipo-entreletra-etiqueta); text-transform: uppercase; }
+/* confiança: confiavel / parcial / ruido / desatualizado — nunca só cor, sempre rótulo */
+.v1t-selo[data-confianca="confiavel"] .v1t-selo__estado { color: var(--v1t-cor-texto-medio); }
+.v1t-selo[data-confianca="parcial"] .v1t-selo__estado { color: var(--v1t-cor-texto-fraco); }
+.v1t-selo[data-confianca="ruido"] .v1t-selo__estado { color: var(--v1t-cor-texto-fraco); }
+.v1t-selo[data-confianca="ruido"] .v1t-selo__pulso { background: var(--v1t-cor-texto-fraco); }
+.v1t-selo[data-confianca="ruido"] .v1t-selo__pulso::after { border-color: var(--v1t-cor-texto-fraco); }
+/* desatualizado: falha visível, âmbar sóbrio (jamais sirene) + pulso PARADO (o daemon não bateu) */
+.v1t-selo[data-confianca="desatualizado"] .v1t-selo__estado { color: var(--v1t-cor-estado-atencao); }
+.v1t-selo[data-confianca="desatualizado"] .v1t-selo__pulso { background: var(--v1t-cor-estado-atencao); }
+.v1t-selo[data-confianca="desatualizado"] .v1t-selo__pulso::after { animation: none; }
+
+@keyframes v1t-respira {
+  0%   { opacity: 0; transform: scale(0.6); }
+  35%  { opacity: 0.55; }
+  100% { opacity: 0; transform: scale(1.6); }
+}
+
+/* ---------- MIDGROUND — matriz de cenários (tabela honesta) ---------- */
+.v1t-matriz-bloco {
+  background: var(--v1t-cor-massa-media);
+  border: var(--v1t-dimensao-fio) solid var(--v1t-cor-linha-estrutura);
+  border-radius: var(--v1t-dimensao-chanfro);
+  padding: var(--v1t-dimensao-grid-3);
+}
+.v1t-matriz-bloco__cabecalho { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: var(--v1t-dimensao-grid-2); }
+.v1t-matriz-scroll { overflow-x: auto; }
+.v1t-matriz {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--v1t-tipo-label);
+}
+.v1t-matriz thead th {
+  text-align: left;
+  padding: var(--v1t-dimensao-grid) var(--v1t-dimensao-grid-2);
+  color: var(--v1t-cor-texto-fraco);
+  font-weight: var(--v1t-tipo-peso-medio);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border-bottom: var(--v1t-dimensao-fio) solid var(--v1t-cor-linha-estrutura);
+  white-space: nowrap;
+}
+.v1t-matriz tbody td {
+  padding: var(--v1t-dimensao-grid) var(--v1t-dimensao-grid-2);
+  border-bottom: var(--v1t-dimensao-fio) solid var(--v1t-cor-linha-tenue);
+  color: var(--v1t-cor-texto-medio);
+  white-space: nowrap;
+}
+.v1t-matriz tbody th[scope="row"] {
+  padding: var(--v1t-dimensao-grid) var(--v1t-dimensao-grid-2);
+  border-bottom: var(--v1t-dimensao-fio) solid var(--v1t-cor-linha-tenue);
+  text-align: left;
+  font-family: var(--v1t-tipo-familia-numero);
+  font-variant-numeric: tabular-nums lining-nums;
+  font-weight: var(--v1t-tipo-peso-veredito);
+  color: var(--v1t-cor-texto-alto);
+}
+.v1t-matriz .v1t-col-num { font-family: var(--v1t-tipo-familia-numero); font-variant-numeric: tabular-nums lining-nums; }
+.v1t-matriz .v1t-marca { color: var(--v1t-cor-texto-fraco); }
+.v1t-matriz a { color: var(--v1t-cor-texto-medio); text-decoration: none; border-bottom: var(--v1t-dimensao-fio) solid var(--v1t-cor-estado-frio); }
+.v1t-matriz a:focus-visible { outline: 2px solid var(--v1t-cor-luz-de-acao); outline-offset: 2px; }
+
+/* linha em-alvo: marcador DISCRETO — fresta fina na borda, não fundo gritante */
+.v1t-matriz tr[data-marca="em-alvo"] th[scope="row"] { color: var(--v1t-cor-luz-de-acao); box-shadow: inset var(--v1t-dimensao-fresta) 0 0 0 var(--v1t-cor-luz-de-acao); }
+.v1t-matriz tr[data-marca="em-alvo"] .v1t-marca { color: var(--v1t-cor-luz-de-acao); }
+
+/* ---------- Rito de compra (nível 3) — leitura de consequência ---------- */
+.v1t-rito { position: fixed; inset: 0; display: none; place-items: center; z-index: 20; padding: var(--v1t-dimensao-grid-3); }
+.v1t-rito[data-aberto="true"] { display: grid; }
+.v1t-rito__fundo { position: absolute; inset: 0; background: var(--v1t-cor-massa); opacity: 0.82; }
+.v1t-rito__caixa {
+  position: relative;
+  max-width: 560px;
+  width: 100%;
+  background: var(--v1t-cor-massa-alta);
+  border: var(--v1t-dimensao-fio) solid var(--v1t-cor-luz-de-acao);
+  border-radius: var(--v1t-dimensao-chanfro);
+  padding: var(--v1t-dimensao-grid-4);
+  box-shadow: 0 0 var(--v1t-dimensao-grid-4) var(--v1t-cor-luz-de-acao-brasa);
+}
+.v1t-rito__rotulo { font-size: var(--v1t-tipo-micro); color: var(--v1t-cor-luz-de-acao); letter-spacing: var(--v1t-tipo-entreletra-etiqueta); text-transform: uppercase; margin-bottom: var(--v1t-dimensao-grid-2); }
+.v1t-rito__consequencia { font-size: var(--v1t-tipo-titulo); color: var(--v1t-cor-texto-alto); line-height: 1.5; }
+.v1t-rito__consequencia .v1t-num { color: var(--v1t-cor-luz-de-acao); font-family: var(--v1t-tipo-familia-numero); }
+.v1t-rito__consequencia .v1t-sub { color: var(--v1t-cor-texto-medio); }
+.v1t-rito__acoes { display: flex; gap: var(--v1t-dimensao-grid-2); margin-top: var(--v1t-dimensao-grid-3); align-items: center; }
+.v1t-rito__sair {
+  display: inline-flex; align-items: center; gap: var(--v1t-dimensao-grid);
+  font-family: var(--v1t-tipo-familia-bancada); font-size: var(--v1t-tipo-corpo); font-weight: var(--v1t-tipo-peso-medio);
+  letter-spacing: var(--v1t-tipo-entreletra-etiqueta); text-transform: uppercase; text-decoration: none; cursor: pointer;
+  color: var(--v1t-cor-texto-sobre-luz); background: var(--v1t-cor-luz-de-acao);
+  border: var(--v1t-dimensao-fio) solid var(--v1t-cor-luz-de-acao); border-radius: var(--v1t-dimensao-chanfro);
+  padding: var(--v1t-dimensao-grid) var(--v1t-dimensao-grid-3);
+}
+.v1t-rito__sair[aria-disabled="true"] { opacity: 0.5; pointer-events: none; }
+.v1t-rito__sair:focus-visible { outline: 2px solid var(--v1t-cor-luz-de-acao-forte); outline-offset: 3px; }
+.v1t-rito__pausa { font-size: var(--v1t-tipo-micro); color: var(--v1t-cor-texto-fraco); }
+.v1t-rito__voltar { background: none; border: none; color: var(--v1t-cor-texto-fraco); font-family: inherit; font-size: var(--v1t-tipo-label); cursor: pointer; text-decoration: underline; padding: var(--v1t-dimensao-grid); }
+.v1t-rito__voltar:focus-visible { outline: 2px solid var(--v1t-cor-estado-frio); outline-offset: 2px; }
+.v1t-rito__offline { margin-top: var(--v1t-dimensao-grid-2); font-size: var(--v1t-tipo-label); color: var(--v1t-cor-estado-atencao); display: none; }
+.v1t-rito[data-offline="true"] .v1t-rito__offline { display: block; }
+
+/* ---------- Nota de estado degradado / vazio / offline (inline, honesta) ---------- */
+.v1t-nota-estado {
+  font-size: var(--v1t-tipo-label);
+  color: var(--v1t-cor-texto-fraco);
+  border-left: var(--v1t-dimensao-fresta) solid var(--v1t-cor-estado-frio);
+  padding: var(--v1t-dimensao-grid) var(--v1t-dimensao-grid-2);
+  margin-bottom: var(--v1t-dimensao-grid-2);
+}
+.v1t-nota-estado[data-tom="atencao"] { color: var(--v1t-cor-estado-atencao); border-left-color: var(--v1t-cor-estado-atencao); }
+
+/* ---------- MOTION: entrada por corte de luz (Ando) ---------- */
+@keyframes v1t-corte-de-luz {
+  from { clip-path: inset(0 100% 0 0); opacity: 0.2; }
+  to   { clip-path: inset(0 0 0 0); opacity: 1; }
+}
+.v1t-anima-entrada .v1t-veredito {
+  animation: v1t-corte-de-luz var(--v1t-motion-corte-de-luz) cubic-bezier(0.2,0.7,0.2,1) both;
+}
+
+/* ---------- rodapé: switcher de demonstração (ferramenta, separado da tela provada) ---------- */
+.v1t-demo {
+  margin-top: var(--v1t-dimensao-grid-4);
+  padding-top: var(--v1t-dimensao-grid-3);
+  border-top: var(--v1t-dimensao-fio) dashed var(--v1t-cor-linha-estrutura);
+}
+.v1t-demo__rotulo { font-size: var(--v1t-tipo-micro); color: var(--v1t-cor-texto-fraco); letter-spacing: var(--v1t-tipo-entreletra-etiqueta); text-transform: uppercase; margin-bottom: var(--v1t-dimensao-grid); }
+.v1t-demo__nota { font-size: var(--v1t-tipo-micro); color: var(--v1t-cor-texto-fraco); margin-top: var(--v1t-dimensao-grid); }
+.v1t-demo__botoes { display: flex; flex-wrap: wrap; gap: var(--v1t-dimensao-grid); }
+.v1t-demo__botao {
+  font-family: var(--v1t-tipo-familia-numero);
+  font-size: var(--v1t-tipo-micro);
+  color: var(--v1t-cor-texto-medio);
+  background: var(--v1t-cor-massa-media);
+  border: var(--v1t-dimensao-fio) solid var(--v1t-cor-linha-estrutura);
+  border-radius: var(--v1t-dimensao-chanfro);
+  padding: 6px var(--v1t-dimensao-grid);
+  cursor: pointer;
+  letter-spacing: 0.04em;
+}
+.v1t-demo__botao[aria-pressed="true"] { color: var(--v1t-cor-texto-alto); border-color: var(--v1t-cor-estado-frio); background: var(--v1t-cor-massa-alta); }
+.v1t-demo__botao:focus-visible { outline: 2px solid var(--v1t-cor-estado-frio); outline-offset: 2px; }
+
+/* ---------- responsivo: degrada legível em telas estreitas ---------- */
+@media (max-width: 860px) {
+  .v1t-foreground, .v1t-midground { grid-template-columns: 1fr; }
+  .v1t-preco { font-size: 56px; }
+}
+
+/* ---------- prefers-reduced-motion: desliga pulso e transições, mantém tudo legível estático ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .v1t-selo__pulso::after { animation: none; opacity: 0.4; transform: none; }
+  .v1t-anima-entrada .v1t-veredito { animation: none; }
+  * { transition: none !important; }
+}
