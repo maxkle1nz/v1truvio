@@ -82,8 +82,16 @@ Checklist binário — qualquer SIM reprova e volta ao passo que o originou:
 | 11 | Alguma proibição do modo escolhido foi violada? | Modo |
 | 12 | Som/motion sem opção de desligar, ou `prefers-reduced-motion` ignorado? | Trava de sinestesia/entropia |
 
+## Protocolo do juiz frio (maker ≠ judge)
+
+O gate NUNCA é aplicado por quem gerou o brief. Um agente separado — que recebe APENAS o brief + esta mente (CONTRACT, VECTORS, MODES, MANIFESTO e os cards citados), sem o histórico do maker — julga os 12 itens com evidência citada do próprio brief. A auto-checagem do maker é rascunho interno, nunca veredito. Reprovação volta ao maker com item violado + passo de origem; **um único ciclo de correção** — se reprovar de novo, a falha é da mente ou do diagnóstico: pare e reporte, não itere até passar.
+
+## Anti-escopo (quando NÃO usar a mente)
+
+A mente gera FUNDAÇÕES: identidade nova, tela de fundação, revisão de direção. Ela NÃO re-roda para manutenção — produto com identidade já gerada segue o design system dele (tokens, lint, preset registrado). Micro-edit que parecer exigir os 9 passos é sinal de uso errado; a resposta certa é consultar o brief/preset da identidade existente.
+
 ## Formato de saída
 
-O Design Brief é um markdown com as 9 seções na ordem do pipeline + o resultado do gate (12 respostas). Perfil de vetores incompleto, seção faltando ou gate reprovado = geração inválida — não entregue, corrija.
+O Design Brief é um markdown com as 9 seções na ordem do pipeline. Perfil de vetores incompleto ou seção faltando = geração inválida antes mesmo do gate. O veredito do gate (12 respostas com evidência) é documento SEPARADO, assinado pelo juiz frio.
 
 Ao final de uma geração aprovada e provada, registre o perfil em `presets/` (nome, produto, vetores, modo, cards, link para a prova) — é assim que a mente aprende.
