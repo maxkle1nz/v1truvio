@@ -70,9 +70,10 @@ OUTPUT  Design Brief rastreável → sistema visual/tokens → PROVA mínima →
 - **RF5 — Três planos:** todo elemento atribuído a fore/mid/background (passo 6).
 - **RF6 — Mapa de atrito explícito:** atrito fora do mapa é bug (passo 7).
 - **RF7 — Rastreabilidade:** decisão visual não-óbvia carrega origem `[card|lei|vetor|modo]` (passo 8).
-- **RF8 — Gate anti-padrões binário de 12 itens** reprova a entrega (não é sugestão).
+- **RF8 — Gate anti-padrões binário** reprova a entrega (não é sugestão): 12 itens sobre o brief + 2 sobre o artefato (gate da prova: teste do template e anti-cosplay reverso — *verdict 001*).
 - **RF9 — Prova mínima obrigatória:** a identidade só existe com artefato julgável (passo 9).
 - **RF10 — Registro de preset:** geração aprovada vira preset versionado (o loop de aprendizado da mente).
+- **RF11 — Força formal estrutural** *(verdict 001)*: todo brief declara 2–3 gestos formais proprietários (assinatura); a aterrissagem começa por estudo formal (2–3 composições divergentes) e é obrigada a materializar a assinatura, verificada no gate da prova.
 
 ## 8. Requisitos não-funcionais
 

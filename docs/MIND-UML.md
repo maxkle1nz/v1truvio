@@ -20,9 +20,11 @@ flowchart LR
         G --> H{"GATE<br/>12 itens"}
     end
     subgraph OUTPUT
-        I["Design Brief rastreável"] --> J["Sistema visual / tokens"]
-        J --> K["PROVA mínima"]
-        K --> L["Preset registrado"]
+        I["Design Brief rastreável<br/>(com assinatura formal)"] --> J["Estudo formal<br/>2-3 composições"]
+        J --> K["Aterrissagem: tokens + specimen + lint"]
+        K --> K2{"GATE DA PROVA<br/>13: teste do template<br/>14: anti-cosplay reverso"}
+        K2 -- aprova --> L["Veredito do diretor<br/>→ verdicts/ → preset"]
+        K2 -- reprova --> J
     end
     A --> B
     H -- aprova --> I
@@ -175,6 +177,7 @@ classDiagram
 | I4 | Atrito fora do mapa é bug, não feature | Lei 2 + gate itens 3–4 |
 | I5 | Identidade sem prova não existe | Passo 9 |
 | I6 | Preset só nasce de geração aprovada E provada | CONTRACT (registro) |
+| I7 | Lei citada é lei materializada; identidade sem assinatura formal é inválida | Lei 3 estendida + gate da prova (verdict 001) |
 
 ---
 

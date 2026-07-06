@@ -41,7 +41,7 @@ O erro inverso também é inimigo: mostrar tudo e virar teatro técnico. A mente
 
 1. **Função antes de teatro.** Se um cabo, log, dial, brilho ou ruído não altera entendimento ou ação, ele sai.
 2. **Fricção só onde há consequência.** Atrito é linguagem de responsabilidade: aparece em risco, irreversibilidade, autorização, calibração, delegação a uma máquina. Nunca em busca, leitura, navegação. Fluidez é preservada para exploração.
-3. **Referência como princípio, nunca fantasia literal.** Lissitzky não é cartaz soviético; Ando não é concreto fake; Teenage Engineering não é botão fofo; Rams não é branco estéril; CRT não é nostalgia barata. Cada referência vira uma lei de composição, ou não entra.
+3. **Referência como princípio, nunca fantasia literal.** Lissitzky não é cartaz soviético; Ando não é concreto fake; Teenage Engineering não é botão fofo; Rams não é branco estéril; CRT não é nostalgia barata. Cada referência vira uma lei de composição, ou não entra. **E a violação inversa é igualmente grave: citar a lei sem executá-la** — Lissitzky no brief e nenhuma tensão na tela — é decoração intelectual. Referência citada é referência materializada. *(estendida pelo verdict 001)*
 
 ## Os princípios que sustentam
 
