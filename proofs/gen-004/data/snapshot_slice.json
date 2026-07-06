@@ -1,0 +1,854 @@
+{
+ "note": "verbatim slice of the live m1nd brain snapshot, captured 2026-07-06; tags are as-is (unpainted)",
+ "total_nodes_in_graph": 199,
+ "total_edges": 184,
+ "nodes": [
+  {
+   "change_frequency": 0.699999988079071,
+   "external_id": "light::light::file::livingtreegraphchangedbrowsersse-light-md",
+   "label": "livingtreegraphchangedbrowsersse.light.md",
+   "last_modified": 1783350644.3563414,
+   "node_type": 0,
+   "provenance": {
+    "canonical": true,
+    "line_end": null,
+    "line_start": null,
+    "namespace": "light",
+    "source_path": "livingtreegraphchangedbrowsersse.light.md"
+   },
+   "tags": [
+    "light",
+    "namespace:light",
+    "light:created:1783115076136",
+    "light:source_agent:living-tree-live",
+    "light:origin_brain:/Users/kle1nz/m1nd"
+   ]
+  },
+  {
+   "change_frequency": 0.550000011920929,
+   "external_id": "light::light::meta::livingtreegraphchangedbrowsersse-light-md::protocol",
+   "label": "L1GHT/1.0",
+   "last_modified": 1783350644.3563414,
+   "node_type": 9,
+   "provenance": {
+    "canonical": true,
+    "line_end": null,
+    "line_start": null,
+    "namespace": "light",
+    "source_path": "livingtreegraphchangedbrowsersse.light.md"
+   },
+   "tags": [
+    "light",
+    "light:protocol",
+    "light:created:1783115076136",
+    "light:source_agent:living-tree-live",
+    "light:origin_brain:/Users/kle1nz/m1nd"
+   ]
+  },
+  {
+   "change_frequency": 0.550000011920929,
+   "external_id": "light::light::meta::livingtreegraphchangedbrowsersse-light-md::node",
+   "label": "LivingTreeGraphChangedBrowserSSE",
+   "last_modified": 1783350644.3563414,
+   "node_type": 9,
+   "provenance": {
+    "canonical": true,
+    "line_end": null,
+    "line_start": null,
+    "namespace": "light",
+    "source_path": "livingtreegraphchangedbrowsersse.light.md"
+   },
+   "tags": [
+    "light",
+    "light:node",
+    "light:created:1783115076136",
+    "light:source_agent:living-tree-live",
+    "light:origin_brain:/Users/kle1nz/m1nd"
+   ]
+  },
+  {
+   "change_frequency": 0.550000011920929,
+   "external_id": "light::light::meta::livingtreegraphchangedbrowsersse-light-md::state",
+   "label": "authored",
+   "last_modified": 1783350644.3563414,
+   "node_type": 9,
+   "provenance": {
+    "canonical": true,
+    "line_end": null,
+    "line_start": null,
+    "namespace": "light",
+    "source_path": "livingtreegraphchangedbrowsersse.light.md"
+   },
+   "tags": [
+    "light",
+    "light:state",
+    "light:created:1783115076136",
+    "light:source_agent:living-tree-live",
+    "light:origin_brain:/Users/kle1nz/m1nd"
+   ]
+  },
+  {
+   "change_frequency": 0.5,
+   "external_id": "light::light::section::livingtreegraphchangedbrowsersse-light-md::shipped-graph-changed-browser-sse-vendored-fonts-1",
+   "label": "SHIPPED \u2014 graph_changed browser SSE + vendored fonts",
+   "last_modified": 1783350644.3563414,
+   "node_type": 7,
+   "provenance": {
+    "canonical": true,
+    "line_end": 13,
+    "line_start": 13,
+    "namespace": "light",
+    "source_path": "livingtreegraphchangedbrowsersse.light.md"
+   },
+   "tags": [
+    "light",
+    "light:section",
+    "light:created:1783115076136",
+    "light:source_agent:living-tree-live",
+    "light:origin_brain:/Users/kle1nz/m1nd"
+   ]
+  },
+  {
+   "change_frequency": 0.44999998807907104,
+   "external_id": "light::light::tag::livingtreegraphchangedbrowsersse-light-md::15::shipped-2026-07-03-pr-242-merge-f1d80f3",
+   "label": "SHIPPED 2026-07-03, PR #242, merge f1d80f3",
+   "last_modified": 1783350644.3563414,
+   "node_type": 9,
+   "provenance": {
+    "canonical": true,
+    "line_end": 15,
+    "line_start": 15,
+    "namespace": "light",
+    "source_path": "livingtreegraphchangedbrowsersse.light.md"
+   },
+   "tags": [
+    "light",
+    "light:declares_metadata",
+    "light:created:1783115076136",
+    "light:source_agent:living-tree-live",
+    "light:origin_brain:/Users/kle1nz/m1nd"
+   ]
+  },
+  {
+   "change_frequency": 0.44999998807907104,
+   "external_id": "light::light::tag::livingtreegraphchangedbrowsersse-light-md::17::event-graph-changed-browser-sse-relay-shipped-in-pr-242",
+   "label": "\u234c event: graph_changed browser SSE relay SHIPPED in PR 242",
+   "last_modified": 1783350644.3563414,
+   "node_type": 9,
+   "provenance": {
+    "canonical": true,
+    "line_end": 17,
+    "line_start": 17,
+    "namespace": "light",
+    "source_path": "livingtreegraphchangedbrowsersse.light.md"
+   },
+   "tags": [
+    "light",
+    "light:declares_event",
+    "light:created:1783115076136",
+    "light:source_agent:living-tree-live",
+    "light:origin_brain:/Users/kle1nz/m1nd"
+   ]
+  },
+  {
+   "change_frequency": 0.44999998807907104,
+   "external_id": "light::light::tag::livingtreegraphchangedbrowsersse-light-md::18::confidence-high",
+   "label": "\ud835\udd3b confidence: high",
+   "last_modified": 1783350644.3563414,
+   "node_type": 9,
+   "provenance": {
+    "canonical": true,
+    "line_end": 18,
+    "line_start": 18,
+    "namespace": "light",
+    "source_path": "livingtreegraphchangedbrowsersse.light.md"
+   },
+   "tags": [
+    "light",
+    "light:epistemic_confidence",
+    "light:confidence:0.80",
+    "light:created:1783115076136",
+    "light:source_agent:living-tree-live",
+    "light:origin_brain:/Users/kle1nz/m1nd"
+   ]
+  },
+  {
+   "change_frequency": 0.44999998807907104,
+   "external_id": "light::light::tag::livingtreegraphchangedbrowsersse-light-md::19::evidence-m1nd-mcp-src-http-server-rs",
+   "label": "\ud835\udd3b evidence: m1nd-mcp/src/http_server.rs",
+   "last_modified": 1783350644.3563414,
+   "node_type": 9,
+   "provenance": {
+    "canonical": true,
+    "line_end": 19,
+    "line_start": 19,
+    "namespace": "light",
+    "source_path": "livingtreegraphchangedbrowsersse.light.md"
+   },
+   "tags": [
+    "light",
+    "light:evidenced_by",
+    "light:created:1783115076136",
+    "light:source_agent:living-tree-live",
+    "light:origin_brain:/Users/kle1nz/m1nd"
+   ]
+  },
+  {
+   "change_frequency": 0.44999998807907104,
+   "external_id": "light::light::tag::livingtreegraphchangedbrowsersse-light-md::20::evidence-m1nd-mcp-src-mcp-http-rs",
+   "label": "\ud835\udd3b evidence: m1nd-mcp/src/mcp_http.rs",
+   "last_modified": 1783350644.3563414,
+   "node_type": 9,
+   "provenance": {
+    "canonical": true,
+    "line_end": 20,
+    "line_start": 20,
+    "namespace": "light",
+    "source_path": "livingtreegraphchangedbrowsersse.light.md"
+   },
+   "tags": [
+    "light",
+    "light:evidenced_by",
+    "light:created:1783115076136",
+    "light:source_agent:living-tree-live",
+    "light:origin_brain:/Users/kle1nz/m1nd"
+   ]
+  },
+  {
+   "change_frequency": 0.44999998807907104,
+   "external_id": "light::light::tag::livingtreegraphchangedbrowsersse-light-md::22::shipped-2026-07-03-pr-242",
+   "label": "SHIPPED 2026-07-03, PR #242",
+   "last_modified": 1783350644.3563414,
+   "node_type": 9,
+   "provenance": {
+    "canonical": true,
+    "line_end": 22,
+    "line_start": 22,
+    "namespace": "light",
+    "source_path": "livingtreegraphchangedbrowsersse.light.md"
+   },
+   "tags": [
+    "light",
+    "light:declares_metadata",
+    "light:created:1783115076136",
+    "light:source_agent:living-tree-live",
+    "light:origin_brain:/Users/kle1nz/m1nd"
+   ]
+  },
+  {
+   "change_frequency": 0.44999998807907104,
+   "external_id": "light::light::tag::livingtreegraphchangedbrowsersse-light-md::24::event-self-hosted-fonts-shipped-for-the-served-ui",
+   "label": "\u234c event: Self-hosted fonts SHIPPED for the served UI",
+   "last_modified": 1783350644.3563414,
+   "node_type": 9,
+   "provenance": {
+    "canonical": true,
+    "line_end": 24,
+    "line_start": 24,
+    "namespace": "light",
+    "source_path": "livingtreegraphchangedbrowsersse.light.md"
+   },
+   "tags": [
+    "light",
+    "light:declares_event",
+    "light:created:1783115076136",
+    "light:source_agent:living-tree-live",
+    "light:origin_brain:/Users/kle1nz/m1nd"
+   ]
+  },
+  {
+   "change_frequency": 0.44999998807907104,
+   "external_id": "light::light::tag::livingtreegraphchangedbrowsersse-light-md::25::confidence-high",
+   "label": "\ud835\udd3b confidence: high",
+   "last_modified": 1783350644.3563414,
+   "node_type": 9,
+   "provenance": {
+    "canonical": true,
+    "line_end": 25,
+    "line_start": 25,
+    "namespace": "light",
+    "source_path": "livingtreegraphchangedbrowsersse.light.md"
+   },
+   "tags": [
+    "light",
+    "light:epistemic_confidence",
+    "light:confidence:0.80",
+    "light:created:1783115076136",
+    "light:source_agent:living-tree-live",
+    "light:origin_brain:/Users/kle1nz/m1nd"
+   ]
+  },
+  {
+   "change_frequency": 0.44999998807907104,
+   "external_id": "light::light::tag::livingtreegraphchangedbrowsersse-light-md::26::evidence-m1nd-ui-src-index-css",
+   "label": "\ud835\udd3b evidence: m1nd-ui/src/index.css",
+   "last_modified": 1783350644.3563414,
+   "node_type": 9,
+   "provenance": {
+    "canonical": true,
+    "line_end": 26,
+    "line_start": 26,
+    "namespace": "light",
+    "source_path": "livingtreegraphchangedbrowsersse.light.md"
+   },
+   "tags": [
+    "light",
+    "light:evidenced_by",
+    "light:created:1783115076136",
+    "light:source_agent:living-tree-live",
+    "light:origin_brain:/Users/kle1nz/m1nd"
+   ]
+  },
+  {
+   "change_frequency": 0.44999998807907104,
+   "external_id": "light::light::tag::livingtreegraphchangedbrowsersse-light-md::27::evidence-m1nd-ui-index-html",
+   "label": "\ud835\udd3b evidence: m1nd-ui/index.html",
+   "last_modified": 1783350644.3563414,
+   "node_type": 9,
+   "provenance": {
+    "canonical": true,
+    "line_end": 27,
+    "line_start": 27,
+    "namespace": "light",
+    "source_path": "livingtreegraphchangedbrowsersse.light.md"
+   },
+   "tags": [
+    "light",
+    "light:evidenced_by",
+    "light:created:1783115076136",
+    "light:source_agent:living-tree-live",
+    "light:origin_brain:/Users/kle1nz/m1nd"
+   ]
+  },
+  {
+   "change_frequency": 0.44999998807907104,
+   "external_id": "light::light::tag::livingtreegraphchangedbrowsersse-light-md::31::state-human-layer-slice-0-residue-still-open",
+   "label": "\u2350 state: Human-layer Slice-0 residue still open",
+   "last_modified": 1783350644.3563414,
+   "node_type": 9,
+   "provenance": {
+    "canonical": true,
+    "line_end": 31,
+    "line_start": 31,
+    "namespace": "light",
+    "source_path": "livingtreegraphchangedbrowsersse.light.md"
+   },
+   "tags": [
+    "light",
+    "light:declares_state",
+    "light:created:1783115076136",
+    "light:source_agent:living-tree-live",
+    "light:origin_brain:/Users/kle1nz/m1nd"
+   ]
+  },
+  {
+   "change_frequency": 0.44999998807907104,
+   "external_id": "light::light::tag::livingtreegraphchangedbrowsersse-light-md::32::confidence-high",
+   "label": "\ud835\udd3b confidence: high",
+   "last_modified": 1783350644.3563414,
+   "node_type": 9,
+   "provenance": {
+    "canonical": true,
+    "line_end": 32,
+    "line_start": 32,
+    "namespace": "light",
+    "source_path": "livingtreegraphchangedbrowsersse.light.md"
+   },
+   "tags": [
+    "light",
+    "light:epistemic_confidence",
+    "light:confidence:0.80",
+    "light:created:1783115076136",
+    "light:source_agent:living-tree-live",
+    "light:origin_brain:/Users/kle1nz/m1nd"
+   ]
+  },
+  {
+   "change_frequency": 0.44999998807907104,
+   "external_id": "light::light::tag::livingtreegraphchangedbrowsersse-light-md::33::evidence-docs-human-layer-prd-md",
+   "label": "\ud835\udd3b evidence: docs/HUMAN-LAYER-PRD.md",
+   "last_modified": 1783350644.3563414,
+   "node_type": 9,
+   "provenance": {
+    "canonical": true,
+    "line_end": 33,
+    "line_start": 33,
+    "namespace": "light",
+    "source_path": "livingtreegraphchangedbrowsersse.light.md"
+   },
+   "tags": [
+    "light",
+    "light:evidenced_by",
+    "light:created:1783115076136",
+    "light:source_agent:living-tree-live",
+    "light:origin_brain:/Users/kle1nz/m1nd"
+   ]
+  },
+  {
+   "change_frequency": 0.699999988079071,
+   "external_id": "light::light::file::slice-2r-degraded-reception-design-light-md",
+   "label": "slice-2r-degraded-reception-design.light.md",
+   "last_modified": 1783350644.3581352,
+   "node_type": 0,
+   "provenance": {
+    "canonical": true,
+    "line_end": null,
+    "line_start": null,
+    "namespace": "light",
+    "source_path": "slice-2r-degraded-reception-design.light.md"
+   },
+   "tags": [
+    "light",
+    "namespace:light",
+    "light:created:1783160938475",
+    "light:source_agent:reception-2rd",
+    "light:origin_brain:/Users/kle1nz/m1nd"
+   ]
+  },
+  {
+   "change_frequency": 0.550000011920929,
+   "external_id": "light::light::meta::slice-2r-degraded-reception-design-light-md::protocol",
+   "label": "L1GHT/1.0",
+   "last_modified": 1783350644.3581352,
+   "node_type": 9,
+   "provenance": {
+    "canonical": true,
+    "line_end": null,
+    "line_start": null,
+    "namespace": "light",
+    "source_path": "slice-2r-degraded-reception-design.light.md"
+   },
+   "tags": [
+    "light",
+    "light:protocol",
+    "light:created:1783160938475",
+    "light:source_agent:reception-2rd",
+    "light:origin_brain:/Users/kle1nz/m1nd"
+   ]
+  },
+  {
+   "change_frequency": 0.550000011920929,
+   "external_id": "light::light::meta::slice-2r-degraded-reception-design-light-md::node",
+   "label": "Slice 2R degraded reception design",
+   "last_modified": 1783350644.3581352,
+   "node_type": 9,
+   "provenance": {
+    "canonical": true,
+    "line_end": null,
+    "line_start": null,
+    "namespace": "light",
+    "source_path": "slice-2r-degraded-reception-design.light.md"
+   },
+   "tags": [
+    "light",
+    "light:node",
+    "light:created:1783160938475",
+    "light:source_agent:reception-2rd",
+    "light:origin_brain:/Users/kle1nz/m1nd"
+   ]
+  },
+  {
+   "change_frequency": 0.550000011920929,
+   "external_id": "light::light::meta::slice-2r-degraded-reception-design-light-md::state",
+   "label": "authored",
+   "last_modified": 1783350644.3581352,
+   "node_type": 9,
+   "provenance": {
+    "canonical": true,
+    "line_end": null,
+    "line_start": null,
+    "namespace": "light",
+    "source_path": "slice-2r-degraded-reception-design.light.md"
+   },
+   "tags": [
+    "light",
+    "light:state",
+    "light:created:1783160938475",
+    "light:source_agent:reception-2rd",
+    "light:origin_brain:/Users/kle1nz/m1nd"
+   ]
+  },
+  {
+   "change_frequency": 0.5,
+   "external_id": "light::light::section::slice-2r-degraded-reception-design-light-md::slice-2r-degraded-reception-design-1",
+   "label": "Slice 2R degraded reception design",
+   "last_modified": 1783350644.3581352,
+   "node_type": 7,
+   "provenance": {
+    "canonical": true,
+    "line_end": 12,
+    "line_start": 12,
+    "namespace": "light",
+    "source_path": "slice-2r-degraded-reception-design.light.md"
+   },
+   "tags": [
+    "light",
+    "light:section",
+    "light:created:1783160938475",
+    "light:source_agent:reception-2rd",
+    "light:origin_brain:/Users/kle1nz/m1nd"
+   ]
+  },
+  {
+   "change_frequency": 0.44999998807907104,
+   "external_id": "light::light::tag::slice-2r-degraded-reception-design-light-md::16::entity-slice-2r-degraded-reception-wiring",
+   "label": "\u2342 entity: Slice 2R degraded reception wiring",
+   "last_modified": 1783350644.3581352,
+   "node_type": 9,
+   "provenance": {
+    "canonical": true,
+    "line_end": 16,
+    "line_start": 16,
+    "namespace": "light",
+    "source_path": "slice-2r-degraded-reception-design.light.md"
+   },
+   "tags": [
+    "light",
+    "light:declares_entity",
+    "light:created:1783160938475",
+    "light:source_agent:reception-2rd",
+    "light:origin_brain:/Users/kle1nz/m1nd"
+   ]
+  },
+  {
+   "change_frequency": 0.44999998807907104,
+   "external_id": "light::light::tag::slice-2r-degraded-reception-design-light-md::17::confidence-0-9",
+   "label": "\ud835\udd3b confidence: 0.9",
+   "last_modified": 1783350644.3581352,
+   "node_type": 9,
+   "provenance": {
+    "canonical": true,
+    "line_end": 17,
+    "line_start": 17,
+    "namespace": "light",
+    "source_path": "slice-2r-degraded-reception-design.light.md"
+   },
+   "tags": [
+    "light",
+    "light:epistemic_confidence",
+    "light:confidence:0.90",
+    "light:created:1783160938475",
+    "light:source_agent:reception-2rd",
+    "light:origin_brain:/Users/kle1nz/m1nd"
+   ]
+  },
+  {
+   "change_frequency": 0.44999998807907104,
+   "external_id": "light::light::tag::slice-2r-degraded-reception-design-light-md::18::evidence-m1nd-mcp-src-attach-client-rs",
+   "label": "\ud835\udd3b evidence: m1nd-mcp/src/attach_client.rs",
+   "last_modified": 1783350644.3581352,
+   "node_type": 9,
+   "provenance": {
+    "canonical": true,
+    "line_end": 18,
+    "line_start": 18,
+    "namespace": "light",
+    "source_path": "slice-2r-degraded-reception-design.light.md"
+   },
+   "tags": [
+    "light",
+    "light:evidenced_by",
+    "light:created:1783160938475",
+    "light:source_agent:reception-2rd",
+    "light:origin_brain:/Users/kle1nz/m1nd"
+   ]
+  },
+  {
+   "change_frequency": 0.44999998807907104,
+   "external_id": "light::light::tag::slice-2r-degraded-reception-design-light-md::19::evidence-m1nd-mcp-src-mcp-http-rs",
+   "label": "\ud835\udd3b evidence: m1nd-mcp/src/mcp_http.rs",
+   "last_modified": 1783350644.3581352,
+   "node_type": 9,
+   "provenance": {
+    "canonical": true,
+    "line_end": 19,
+    "line_start": 19,
+    "namespace": "light",
+    "source_path": "slice-2r-degraded-reception-design.light.md"
+   },
+   "tags": [
+    "light",
+    "light:evidenced_by",
+    "light:created:1783160938475",
+    "light:source_agent:reception-2rd",
+    "light:origin_brain:/Users/kle1nz/m1nd"
+   ]
+  },
+  {
+   "change_frequency": 0.44999998807907104,
+   "external_id": "light::light::tag::slice-2r-degraded-reception-design-light-md::20::evidence-m1nd-mcp-src-session-rs",
+   "label": "\ud835\udd3b evidence: m1nd-mcp/src/session.rs",
+   "last_modified": 1783350644.3581352,
+   "node_type": 9,
+   "provenance": {
+    "canonical": true,
+    "line_end": 20,
+    "line_start": 20,
+    "namespace": "light",
+    "source_path": "slice-2r-degraded-reception-design.light.md"
+   },
+   "tags": [
+    "light",
+    "light:evidenced_by",
+    "light:created:1783160938475",
+    "light:source_agent:reception-2rd",
+    "light:origin_brain:/Users/kle1nz/m1nd"
+   ]
+  },
+  {
+   "change_frequency": 0.699999988079071,
+   "external_id": "light::light::file::m1nd-day-2026-07-03-trilogy-light-md",
+   "label": "m1nd-day-2026-07-03-trilogy.light.md",
+   "last_modified": 1783350644.3566701,
+   "node_type": 0,
+   "provenance": {
+    "canonical": true,
+    "line_end": null,
+    "line_start": null,
+    "namespace": "light",
+    "source_path": "m1nd-day-2026-07-03-trilogy.light.md"
+   },
+   "tags": [
+    "light",
+    "namespace:light",
+    "light:created:1783085122016",
+    "light:source_agent:fable-orchestrator",
+    "light:origin_brain:/Users/kle1nz/m1nd"
+   ]
+  },
+  {
+   "change_frequency": 0.550000011920929,
+   "external_id": "light::light::meta::m1nd-day-2026-07-03-trilogy-light-md::protocol",
+   "label": "L1GHT/1.0",
+   "last_modified": 1783350644.3566701,
+   "node_type": 9,
+   "provenance": {
+    "canonical": true,
+    "line_end": null,
+    "line_start": null,
+    "namespace": "light",
+    "source_path": "m1nd-day-2026-07-03-trilogy.light.md"
+   },
+   "tags": [
+    "light",
+    "light:protocol",
+    "light:created:1783085122016",
+    "light:source_agent:fable-orchestrator",
+    "light:origin_brain:/Users/kle1nz/m1nd"
+   ]
+  },
+  {
+   "change_frequency": 0.550000011920929,
+   "external_id": "light::light::meta::m1nd-day-2026-07-03-trilogy-light-md::node",
+   "label": "m1nd-day-2026-07-03-trilogy",
+   "last_modified": 1783350644.3566701,
+   "node_type": 9,
+   "provenance": {
+    "canonical": true,
+    "line_end": null,
+    "line_start": null,
+    "namespace": "light",
+    "source_path": "m1nd-day-2026-07-03-trilogy.light.md"
+   },
+   "tags": [
+    "light",
+    "light:node",
+    "light:created:1783085122016",
+    "light:source_agent:fable-orchestrator",
+    "light:origin_brain:/Users/kle1nz/m1nd"
+   ]
+  },
+  {
+   "change_frequency": 0.550000011920929,
+   "external_id": "light::light::meta::m1nd-day-2026-07-03-trilogy-light-md::state",
+   "label": "verified",
+   "last_modified": 1783350644.3566701,
+   "node_type": 9,
+   "provenance": {
+    "canonical": true,
+    "line_end": null,
+    "line_start": null,
+    "namespace": "light",
+    "source_path": "m1nd-day-2026-07-03-trilogy.light.md"
+   },
+   "tags": [
+    "light",
+    "light:state",
+    "light:created:1783085122016",
+    "light:source_agent:fable-orchestrator",
+    "light:origin_brain:/Users/kle1nz/m1nd"
+   ]
+  },
+  {
+   "change_frequency": 0.5,
+   "external_id": "light::light::section::m1nd-day-2026-07-03-trilogy-light-md::2026-07-03-g1-dois-prds-fable-pranchas-next-living-tree-slice-0-1",
+   "label": "2026-07-03 - G1 + dois PRDs Fable + pranchas; next: Living Tree slice 0",
+   "last_modified": 1783350644.3566701,
+   "node_type": 7,
+   "provenance": {
+    "canonical": true,
+    "line_end": 12,
+    "line_start": 12,
+    "namespace": "light",
+    "source_path": "m1nd-day-2026-07-03-trilogy.light.md"
+   },
+   "tags": [
+    "light",
+    "light:section",
+    "light:created:1783085122016",
+    "light:source_agent:fable-orchestrator",
+    "light:origin_brain:/Users/kle1nz/m1nd"
+   ]
+  },
+  {
+   "change_frequency": 0.44999998807907104,
+   "external_id": "light::light::tag::m1nd-day-2026-07-03-trilogy-light-md::16::event-brand-gate-g1-closed",
+   "label": "\u234c event: brand-gate-G1-closed",
+   "last_modified": 1783350644.3566701,
+   "node_type": 9,
+   "provenance": {
+    "canonical": true,
+    "line_end": 16,
+    "line_start": 16,
+    "namespace": "light",
+    "source_path": "m1nd-day-2026-07-03-trilogy.light.md"
+   },
+   "tags": [
+    "light",
+    "light:declares_event",
+    "light:created:1783085122016",
+    "light:source_agent:fable-orchestrator",
+    "light:origin_brain:/Users/kle1nz/m1nd"
+   ]
+  },
+  {
+   "change_frequency": 0.44999998807907104,
+   "external_id": "light::light::tag::m1nd-day-2026-07-03-trilogy-light-md::17::confidence-0-95",
+   "label": "\ud835\udd3b confidence: 0.95",
+   "last_modified": 1783350644.3566701,
+   "node_type": 9,
+   "provenance": {
+    "canonical": true,
+    "line_end": 17,
+    "line_start": 17,
+    "namespace": "light",
+    "source_path": "m1nd-day-2026-07-03-trilogy.light.md"
+   },
+   "tags": [
+    "light",
+    "light:epistemic_confidence",
+    "light:confidence:0.95",
+    "light:created:1783085122016",
+    "light:source_agent:fable-orchestrator",
+    "light:origin_brain:/Users/kle1nz/m1nd"
+   ]
+  },
+  {
+   "change_frequency": 0.44999998807907104,
+   "external_id": "light::light::tag::m1nd-day-2026-07-03-trilogy-light-md::18::evidence-docs-wiki-src-changelog-md",
+   "label": "\ud835\udd3b evidence: docs/wiki/src/changelog.md",
+   "last_modified": 1783350644.3566701,
+   "node_type": 9,
+   "provenance": {
+    "canonical": true,
+    "line_end": 18,
+    "line_start": 18,
+    "namespace": "light",
+    "source_path": "m1nd-day-2026-07-03-trilogy.light.md"
+   },
+   "tags": [
+    "light",
+    "light:evidenced_by",
+    "light:created:1783085122016",
+    "light:source_agent:fable-orchestrator",
+    "light:origin_brain:/Users/kle1nz/m1nd"
+   ]
+  },
+  {
+   "change_frequency": 0.44999998807907104,
+   "external_id": "light::light::tag::m1nd-day-2026-07-03-trilogy-light-md::22::event-human-layer-prd-merged",
+   "label": "\u234c event: human-layer-prd-merged",
+   "last_modified": 1783350644.3566701,
+   "node_type": 9,
+   "provenance": {
+    "canonical": true,
+    "line_end": 22,
+    "line_start": 22,
+    "namespace": "light",
+    "source_path": "m1nd-day-2026-07-03-trilogy.light.md"
+   },
+   "tags": [
+    "light",
+    "light:declares_event",
+    "light:created:1783085122016",
+    "light:source_agent:fable-orchestrator",
+    "light:origin_brain:/Users/kle1nz/m1nd"
+   ]
+  },
+  {
+   "change_frequency": 0.44999998807907104,
+   "external_id": "light::light::tag::m1nd-day-2026-07-03-trilogy-light-md::23::confidence-0-95",
+   "label": "\ud835\udd3b confidence: 0.95",
+   "last_modified": 1783350644.3566701,
+   "node_type": 9,
+   "provenance": {
+    "canonical": true,
+    "line_end": 23,
+    "line_start": 23,
+    "namespace": "light",
+    "source_path": "m1nd-day-2026-07-03-trilogy.light.md"
+   },
+   "tags": [
+    "light",
+    "light:epistemic_confidence",
+    "light:confidence:0.95",
+    "light:created:1783085122016",
+    "light:source_agent:fable-orchestrator",
+    "light:origin_brain:/Users/kle1nz/m1nd"
+   ]
+  },
+  {
+   "change_frequency": 0.44999998807907104,
+   "external_id": "light::light::tag::m1nd-day-2026-07-03-trilogy-light-md::24::evidence-docs-human-layer-prd-md",
+   "label": "\ud835\udd3b evidence: docs/HUMAN-LAYER-PRD.md",
+   "last_modified": 1783350644.3566701,
+   "node_type": 9,
+   "provenance": {
+    "canonical": true,
+    "line_end": 24,
+    "line_start": 24,
+    "namespace": "light",
+    "source_path": "m1nd-day-2026-07-03-trilogy.light.md"
+   },
+   "tags": [
+    "light",
+    "light:evidenced_by",
+    "light:created:1783085122016",
+    "light:source_agent:fable-orchestrator",
+    "light:origin_brain:/Users/kle1nz/m1nd"
+   ]
+  },
+  {
+   "change_frequency": 0.44999998807907104,
+   "external_id": "light::light::tag::m1nd-day-2026-07-03-trilogy-light-md::28::event-delegation-layer-prd-merged",
+   "label": "\u234c event: delegation-layer-prd-merged",
+   "last_modified": 1783350644.3566701,
+   "node_type": 9,
+   "provenance": {
+    "canonical": true,
+    "line_end": 28,
+    "line_start": 28,
+    "namespace": "light",
+    "source_path": "m1nd-day-2026-07-03-trilogy.light.md"
+   },
+   "tags": [
+    "light",
+    "light:declares_event",
+    "light:created:1783085122016",
+    "light:source_agent:fable-orchestrator",
+    "light:origin_brain:/Users/kle1nz/m1nd"
+   ]
+  }
+ ],
+ "edges": []
+}

@@ -1,0 +1,170 @@
+/* MASSIF core.css — components + the full 5-state grammar + the three gestures'
+ * per-state behavior + accessibility. Consumes tokens.css (--mf-*).
+ *
+ * Doctrine encoded here (traceable to BRIEF §8):
+ *  - geometry is NEVER the sole carrier of meaning: every state has color + form
+ *    + an operator-language label (redundant channel).
+ *  - "nothing glows": depth is luminance/shadow, never emission.
+ *  - prefers-reduced-motion is a CONTRACT: the PERSISTENCE GLINT breath stops and
+ *    a static tick preserves the information; every transition is zeroed.
+ *  - read-only view => zero rite; the only "pause" is the Ando focus-cut transition.
+ */
+
+/* ---------- self-hosted faces (air-gapped; no remote webfonts) ----------
+ * The specimen relies on the system fallbacks declared in the token stacks
+ * (system-ui / Georgia / Menlo) so it renders identically offline. In the real
+ * m1nd-ui these @font-face rules point at the already-vendored files. */
+
+:root {
+  color-scheme: light;
+}
+
+* { box-sizing: border-box; }
+
+body.mf-body {
+  margin: 0;
+  background: var(--mf-color-field-ground);
+  color: var(--mf-color-mark-strong);
+  font-family: var(--mf-font-family-ui);
+  font-size: var(--mf-font-size-md);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ===== app frame ===== */
+.mf-app { display: grid; grid-template-rows: auto 1fr auto auto; height: 100vh; }
+
+.mf-topbar {
+  display: flex; align-items: baseline; gap: 16px;
+  padding: 12px 18px 10px;
+  border-bottom: 1px solid rgba(43, 40, 54, 0.10);
+  background: var(--mf-color-field-ground);
+}
+.mf-title { font-weight: 600; font-size: var(--mf-font-size-lg); letter-spacing: 0.01em; }
+.mf-title small { font-weight: 500; color: var(--mf-color-mark-quiet); font-size: var(--mf-font-size-sm); letter-spacing: 0; }
+.mf-cohab-note { margin-left: auto; color: var(--mf-color-mark-quiet); font-size: var(--mf-font-size-xs); }
+
+/* ===== scenario switcher (discreet — this is a lens change, cerimonialidade 0) ===== */
+.mf-switch { display: inline-flex; gap: 2px; border: 1px solid rgba(43,40,54,0.14); border-radius: var(--mf-dimension-radius); overflow: hidden; }
+.mf-switch button {
+  appearance: none; border: 0; background: transparent; cursor: pointer;
+  font-family: var(--mf-font-family-ui); font-size: var(--mf-font-size-xs); font-weight: 500;
+  color: var(--mf-color-mark-quiet); padding: 5px 11px;
+  transition: background var(--mf-duration-cut) ease-out, color var(--mf-duration-cut) ease-out;
+}
+.mf-switch button[aria-pressed="true"] { background: var(--mf-color-field-plate); color: var(--mf-color-mark-strong); }
+.mf-switch button:focus-visible { outline: 2px solid var(--mf-color-unpainted-accent); outline-offset: -2px; }
+
+/* ===== stage ===== */
+.mf-stage { position: relative; overflow: hidden; }
+#mf-canvas { display: block; width: 100%; height: 100%; }
+
+/* honest field-state line (Fraunces italic hedge voice) */
+.mf-fieldline {
+  position: absolute; left: 20px; top: 14px; max-width: 60ch;
+  font-family: var(--mf-font-family-hedge); font-style: italic;
+  font-size: var(--mf-font-size-md); color: var(--mf-color-mark-quiet);
+  pointer-events: none;
+}
+
+/* ===== legend (docked horizontal strip — discreet, persistent, never over blocks) ===== */
+#mf-legend {
+  display: flex; align-items: center; gap: 18px; flex-wrap: wrap;
+  padding: 8px 18px;
+  border-top: 1px solid rgba(43,40,54,0.10);
+  background: var(--mf-color-field-plate);
+}
+#mf-legend .mf-legend-title { font-weight: 600; font-size: var(--mf-font-size-xs); text-transform: uppercase; letter-spacing: 0.06em; color: var(--mf-color-mark-quiet); }
+.mf-legend-row { display: grid; grid-template-columns: 20px auto; grid-template-rows: auto auto; column-gap: 7px; align-items: center; }
+.mf-legend-op { font-size: var(--mf-font-size-sm); font-weight: 500; color: var(--mf-color-mark-strong); }
+.mf-legend-hedge { grid-column: 2; font-family: var(--mf-font-family-hedge); font-style: italic; font-size: var(--mf-font-size-xs); color: var(--mf-color-mark-quiet); line-height: 1.2; }
+
+/* legend swatches — each state gets color + FORM (not color alone) */
+.mf-swatch { grid-row: 1 / span 2; width: 18px; height: 18px; border-radius: 2px; position: relative; }
+.mf-swatch-bedrock { background: var(--mf-color-state-bedrock); border: 1px solid var(--mf-color-state-bedrock-edge); }
+.mf-swatch-unproven { background: var(--mf-color-state-unproven); border: 1px solid var(--mf-color-state-unproven-edge); }
+.mf-swatch-overgrowth { background: var(--mf-color-state-overgrowth); border: 1px solid var(--mf-color-state-overgrowth-edge); }
+/* erosion: hatched, never flat (candidate, not verdict) */
+.mf-swatch-erosion {
+  background:
+    repeating-linear-gradient(-45deg, var(--mf-color-state-erosion) 0 1.5px, transparent 1.5px 4px),
+    var(--mf-color-field-plate);
+  border: 1px solid var(--mf-color-state-erosion);
+}
+/* unpainted: empty porcelain + contour + the binary violet accent tick */
+.mf-swatch-unpainted {
+  background:
+    repeating-linear-gradient(-45deg, rgba(91,85,102,0.28) 0 1px, transparent 1px 5px),
+    var(--mf-color-unpainted-fill);
+  border: 1.25px solid var(--mf-color-mark-quiet);
+}
+.mf-swatch-unpainted::after { /* the violet accent, present because the rule is ON */
+  content: ""; position: absolute; top: -1px; right: -1px;
+  border-width: 0 6px 6px 0; border-style: solid;
+  border-color: transparent var(--mf-color-unpainted-accent) transparent transparent;
+}
+
+/* ===== field bar (docked, mono numbers, never floating over blocks) ===== */
+.mf-bottombar {
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  padding: 9px 18px; border-top: 1px solid rgba(43,40,54,0.10);
+  background: var(--mf-color-field-ground);
+}
+#mf-fieldbar { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+.mf-stat { display: inline-flex; align-items: baseline; gap: 5px; }
+.mf-stat-k { font-size: var(--mf-font-size-xs); color: var(--mf-color-mark-quiet); }
+.mf-stat-v { font-family: var(--mf-font-family-mono); font-weight: 500; font-size: var(--mf-font-size-sm); color: var(--mf-color-mark-strong); font-variant-numeric: tabular-nums; }
+.mf-stat-sep { color: rgba(43,40,54,0.3); }
+.mf-crumb { margin-left: auto; font-size: var(--mf-font-size-xs); color: var(--mf-color-mark-quiet); }
+
+/* ===== piece detail (foreground: the piece in focus; Ando aperture on the canvas) ===== */
+#mf-detail {
+  position: absolute; right: 16px; bottom: 16px; width: 320px; max-height: 62%;
+  overflow: auto; background: var(--mf-color-field-plate);
+  border: 1px solid rgba(43,40,54,0.16); border-radius: var(--mf-dimension-radius);
+  box-shadow: var(--mf-shadow-plate); padding: 14px 16px;
+  opacity: 0; transform: translateY(6px); pointer-events: none;
+  transition: opacity var(--mf-duration-cut) ease-out, transform var(--mf-duration-cut) ease-out;
+}
+#mf-detail.mf-open { opacity: 1; transform: none; pointer-events: auto; }
+.mf-detail-head { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 8px; }
+.mf-detail-label { font-weight: 600; font-size: var(--mf-font-size-md); line-height: 1.3; margin-bottom: 4px; word-break: break-word; }
+.mf-hedge { font-family: var(--mf-font-family-hedge); font-style: italic; color: var(--mf-color-mark-quiet); font-size: var(--mf-font-size-sm); margin-bottom: 10px; }
+.mf-meta { display: grid; grid-template-columns: auto 1fr; gap: 3px 10px; margin: 0; font-size: var(--mf-font-size-xs); }
+.mf-meta dt { color: var(--mf-color-mark-quiet); }
+.mf-meta dd { margin: 0; color: var(--mf-color-mark-strong); }
+.mf-mono { font-family: var(--mf-font-family-mono); font-variant-numeric: tabular-nums; }
+.mf-break { word-break: break-all; }
+.mf-detail-foot { margin-top: 12px; padding-top: 8px; border-top: 1px solid rgba(43,40,54,0.10); }
+.mf-hedge-note { font-family: var(--mf-font-family-hedge); font-style: italic; color: var(--mf-color-mark-quiet); font-size: var(--mf-font-size-xs); }
+
+/* state chips (detail) — color + operator-language TEXT (redundant channel) */
+.mf-chip { display: inline-block; font-size: var(--mf-font-size-xs); font-weight: 600; padding: 2px 8px; border-radius: 2px; letter-spacing: 0.01em; }
+.mf-chip-bedrock { background: var(--mf-color-state-bedrock); color: #14231b; }
+.mf-chip-unproven { background: var(--mf-color-state-unproven); color: #2a1f06; }
+.mf-chip-overgrowth { background: var(--mf-color-state-overgrowth); color: var(--mf-color-mark-strong); }
+.mf-chip-erosion { background: repeating-linear-gradient(-45deg, var(--mf-color-state-erosion) 0 2px, transparent 2px 5px), var(--mf-color-field-plate); color: var(--mf-color-mark-strong); border: 1px solid var(--mf-color-state-erosion); }
+.mf-chip-unpainted { background: var(--mf-color-unpainted-veil, var(--mf-color-unpainted-accent-veil)); color: var(--mf-color-unpainted-accent); border: 1px solid var(--mf-color-unpainted-accent); }
+.mf-chip-changed { background: transparent; color: var(--mf-color-unpainted-accent); border: 1px solid var(--mf-color-unpainted-accent); }
+
+/* ===== keyboard focus (geometry never the sole channel) ===== */
+:focus-visible { outline: 2px solid var(--mf-color-unpainted-accent); outline-offset: 2px; }
+
+/* ===== the PERSISTENCE GLINT reduced-motion CONTRACT =====
+ * When motion is reduced, the JS renders a static tick instead of the breath.
+ * We ALSO zero every CSS transition here so nothing animates — the information
+ * (that a block changed) survives via the tick; the motion does not. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ===== small screens: detail docks as a sheet; legend strip wraps ===== */
+@media (max-width: 720px) {
+  #mf-detail { position: static; width: auto; max-height: none; margin: 8px; opacity: 1; transform: none; pointer-events: auto; }
+  #mf-detail:empty { display: none; }
+  #mf-legend { gap: 12px 14px; }
+}

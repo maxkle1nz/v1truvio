@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MASSIF — Vista Organismo (m1nd Human View)</title>
+  <link rel="stylesheet" href="tokens.css">
+  <link rel="stylesheet" href="core.css">
+</head>
+<body class="mf-body">
+  <div class="mf-app">
+    <header class="mf-topbar">
+      <span class="mf-title">MASSIF <small>— m1nd · human view · organism</small></span>
+      <div class="mf-switch" role="group" aria-label="scenario">
+        <button type="button" data-mf-scenario="unpainted" aria-pressed="true">estreia · unpainted</button>
+        <button type="button" data-mf-scenario="painted" aria-pressed="false">organismo pintado</button>
+      </div>
+      <span class="mf-cohab-note">same porcelain / bone / ink as Hall · LivingTree · GraphCanvas</span>
+    </header>
+
+    <main class="mf-stage">
+      <canvas id="mf-canvas" aria-label="Code graph rendered as an isometric block field; each block is a code node, colored by evidence state. Use the detail panel to inspect a piece." role="img"></canvas>
+      <p class="mf-fieldline" id="mf-fieldline"></p>
+      <aside id="mf-detail" aria-live="polite"></aside>
+    </main>
+
+    <aside id="mf-legend" aria-label="evidence state legend"></aside>
+
+    <footer class="mf-bottombar">
+      <div id="mf-fieldbar" aria-label="field statistics"></div>
+      <span class="mf-crumb">organism → system → subsystem → piece · read-only</span>
+    </footer>
+  </div>
+
+  <script>
+    // Set the honest field-state line per scenario (Fraunces italic hedge voice).
+    window.addEventListener('DOMContentLoaded', () => {
+      const line = document.getElementById('mf-fieldline');
+      const update = () => {
+        const s = window.__MF ? window.__MF.state().scenario : 'unpainted';
+        line.textContent = s === 'painted'
+          ? 'young field — mostly overgrowth, four pieces used-but-unproven, proof_coverage 0.0. informative, not an alarm.'
+          : 'nothing scanned yet — every block is a reserved plot.';
+      };
+      document.querySelectorAll('[data-mf-scenario]').forEach((b) => b.addEventListener('click', () => setTimeout(update, 0)));
+      // initial (after boot)
+      setTimeout(update, 30);
+    });
+  </script>
+  <script src="specimen.js"></script>
+</body>
+</html>
