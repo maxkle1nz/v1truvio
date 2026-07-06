@@ -1,0 +1,373 @@
+/* core.css — gen-002 · MENISCUS (a janela do m1nd) · componentes + estados + as 3 assinaturas.
+ * Toda cor via var(--mns-*) (nenhum hex/rgb cru aqui). Origens rastreadas em [card:…]/[lei:…]/[vetor:…]/[modo].
+ *
+ * A ESCALA DO TRILHO (Assinatura 2) — FÓRMULA ÚNICA, o esqueleto do eixo do tempo [card:02-moholy-nagy]:
+ *   x(age_ms) = (log(age_ms) − log(MIN)) / (log(MAX) − log(MIN))          // 0 = agora/fresco (esq) · 1 = MAX/passado (dir)
+ *   com MIN = --mns-trilho-min-ms (1h) e MAX = --mns-trilho-max-ms (30d = STALE_AFTER_MS do produto: a borda direita É o limiar de staleness).
+ * CSS não computa log() em calc() de forma portável; a fórmula é EXECUTADA em specimen.js e o resultado
+ * chega como --mns-x (0..1). O CSS só aplica a posição (left: calc(var(--mns-x) * 100%)) — posição É dado,
+ * nunca comprimento de barra. Idade ausente/stale NÃO recebe --mns-x: cai na faixa-exílio fora do trilho.
+ * ANTI-COLISÃO (impl:lacuna resolvida na direção): dois claims quase-simultâneos (ex.: os reais de 271.0M e
+ * 272.6M ms, a 0.5% de idade) cravam a HASTE na posição fiel ao dado (a coordenada não mente), mas seus RÓTULOS
+ * empilham em faixas (--mns-lane) para não se sobreporem — o texto se esquiva, a posição permanece verdade.
+ */
+
+/* ============================ base / massa ============================ */
+*, *::before, *::after { box-sizing: border-box; }
+
+.mns {
+  --slit-y: 100%;              /* a fresta pousa na BASE do conteúdo (fundo do menisco) por padrão */
+  background:
+    radial-gradient(120% 90% at 18% 0%, var(--mns-massa-alta), var(--mns-massa-fundo) 62%);
+  color: var(--mns-tinta-alta);
+  font-family: var(--mns-fonte-sans);
+  font-size: var(--mns-fs-lg);
+  line-height: 1.5;
+  min-height: 100vh;
+  padding: calc(var(--mns-dim-grid) * 3.5) calc(var(--mns-dim-grid) * 4);
+  -webkit-font-smoothing: antialiased;
+}
+
+.mns__label {                  /* label de zona — sans, recuada, é etiqueta não conteúdo [card:04-rams] */
+  font-family: var(--mns-fonte-sans);
+  font-size: var(--mns-fs-xs);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--mns-tinta-fraca);
+  margin: 0 0 calc(var(--mns-dim-grid) * 1.25);
+}
+.mns__mono { font-family: var(--mns-fonte-mono); font-variant-numeric: tabular-nums; }
+.mns__prose {                  /* prosa epistêmica — caderno de laboratório [modo: acento editorial] */
+  font-family: var(--mns-fonte-serif);
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--mns-tinta-alta);
+}
+
+/* placa de vidro de instrumento genérica (midground) */
+.mns-glass {
+  position: relative;
+  background: var(--mns-massa-vidro);
+  border: var(--mns-dim-borda) solid var(--mns-linha-soft);
+  border-radius: var(--mns-dim-raio);
+  padding: calc(var(--mns-dim-grid) * 1.75) calc(var(--mns-dim-grid) * 2);
+}
+
+/* ===================================================================== */
+/* ASSINATURA 3 — PLACA DE TRUST (o veredito com peso físico) [card:01-lissitzky] */
+/* full_trust: assenta reta e estável, alinhada ao grid, sombra de contato curta.  */
+/* degraded/mismatch: desloca do alinhamento e inclina — a diagonal aponta o reparo.*/
+/* ===================================================================== */
+.mns-trust {
+  position: relative;
+  background: var(--mns-massa-vidro);
+  border: var(--mns-dim-borda) solid var(--mns-linha-forte);
+  border-left: 4px solid var(--mns-trust-full);
+  border-radius: var(--mns-dim-raio);
+  padding: calc(var(--mns-dim-grid) * 2.25) calc(var(--mns-dim-grid) * 2.5);
+  /* repouso confiável: sem deslocamento, sem rotação, sombra curta e firme */
+  transform: translateX(0) rotate(0deg);
+  box-shadow: var(--mns-placa-sombra-assento);
+  transform-origin: left top;
+  transition: transform var(--mns-t-assenta) cubic-bezier(.2,.7,.2,1),
+              box-shadow var(--mns-t-assenta) ease;
+}
+.mns-trust__verdict {          /* o veredito: alto contraste, AAA (o coração honesto) */
+  font-family: var(--mns-fonte-sans);
+  font-weight: 600;
+  font-size: var(--mns-fs-verdict);
+  letter-spacing: .04em;
+  color: var(--mns-trust-full-txt);
+  margin: 0;
+}
+.mns-trust__fp {               /* fingerprint resumido em mono (o vínculo binário↔grafo↔sessão) */
+  font-family: var(--mns-fonte-mono);
+  font-variant-numeric: tabular-nums;
+  font-size: var(--mns-fs-md);
+  color: var(--mns-tinta-soft);
+  margin: calc(var(--mns-dim-grid) * 0.75) 0 0;
+}
+
+/* estado: degraded — desloca + inclina, sombra longa, cor âmbar-latão (não alarme) [modo: proíbe alarme] */
+.mns-trust[data-trust="degraded"] {
+  border-left-color: var(--mns-trust-reverify);
+  transform: translateX(var(--mns-placa-desloc-x)) rotate(calc(var(--mns-placa-inclina) * 1deg));
+  box-shadow: var(--mns-placa-sombra-desloc);
+}
+.mns-trust[data-trust="degraded"] .mns-trust__verdict { color: var(--mns-trust-reverify-txt); }
+
+/* estado: abstain — a violeta reservada; IMÓVEL (regra INV: o "não sei" não performa) */
+.mns-trust[data-trust="abstain"] {
+  border-left-color: var(--mns-abstain-cor);
+  transform: translateX(0) rotate(0deg) !important;   /* nunca desloca, nunca inclina */
+  box-shadow: var(--mns-placa-sombra-assento);
+}
+.mns-trust[data-trust="abstain"] .mns-trust__verdict { color: var(--mns-abstain-cor); }
+
+/* a ABA DE RECONCILIAÇÃO: quando full_trust MAS a cobertura é mismatch, uma aba âmbar
+ * SAI da placa e sua diagonal aponta para a Linha de Reconciliação (a decisão de reparo).
+ * É a materialização da dualidade honesta: confio no binário/grafo (full) + este grafo NÃO cobre seu repo. */
+.mns-trust__tab {
+  display: none;
+  align-items: center;
+  gap: calc(var(--mns-dim-grid) * 0.75);
+  margin-top: calc(var(--mns-dim-grid) * 1.5);
+  padding: calc(var(--mns-dim-grid) * 0.75) calc(var(--mns-dim-grid) * 1.25);
+  border: var(--mns-dim-borda) solid var(--mns-trust-reverify);
+  border-radius: var(--mns-dim-raio);
+  background: color-mix(in srgb, var(--mns-trust-reverify) 8%, transparent);
+  color: var(--mns-trust-reverify-txt);
+  font-family: var(--mns-fonte-mono);
+  font-size: var(--mns-fs-sm);
+  /* a inclinação da aba é o vetor de leitura para o reparo — funcional, não decorativa [card:01/lei:1] */
+  transform: rotate(calc(var(--mns-placa-inclina) * -1deg)) translateX(calc(var(--mns-placa-desloc-x) * 0.5));
+  transform-origin: left center;
+}
+.mns-trust[data-coverage="mismatch"] .mns-trust__tab { display: inline-flex; }
+.mns-trust__tab-arrow { font-size: var(--mns-fs-md); }
+
+/* ===================================================================== */
+/* LINHA DE RECONCILIAÇÃO (a incerteza mostrada com dignidade) [card:06-stuart-hall] */
+/* ===================================================================== */
+.mns-recon { background: var(--mns-massa-vidro); border: var(--mns-dim-borda) solid var(--mns-linha-soft); border-left: 3px solid var(--mns-trust-reverify); border-radius: var(--mns-dim-raio); padding: calc(var(--mns-dim-grid) * 1.75) calc(var(--mns-dim-grid) * 2); }
+.mns-recon__honest { font-family: var(--mns-fonte-sans); font-size: var(--mns-fs-lg); color: var(--mns-trust-reverify-txt); margin: 0 0 calc(var(--mns-dim-grid) * 1.25); }
+.mns-recon__paths { display: grid; gap: calc(var(--mns-dim-grid) * 0.5); margin-bottom: calc(var(--mns-dim-grid) * 1.5); }
+.mns-recon__path { font-family: var(--mns-fonte-mono); font-size: var(--mns-fs-md); color: var(--mns-tinta-soft); }
+.mns-recon__path b { color: var(--mns-tinta-fraca); font-weight: 400; }        /* de-quem-é-o-número: os dois caminhos reais */
+.mns-recon__opts { display: flex; flex-wrap: wrap; gap: calc(var(--mns-dim-grid) * 1.25); }
+.mns-recon__opt {                 /* escolha consciente e acionável — focável (a11y) */
+  display: inline-flex; flex-direction: column; gap: 2px;
+  padding: calc(var(--mns-dim-grid) * 1) calc(var(--mns-dim-grid) * 1.5);
+  border: var(--mns-dim-borda) solid var(--mns-linha-forte); border-radius: var(--mns-dim-raio);
+  background: var(--mns-massa-alta); color: var(--mns-tinta-alta);
+  font-family: var(--mns-fonte-sans); font-size: var(--mns-fs-md);
+  cursor: pointer; text-align: left;
+  transition: border-color var(--mns-t-assenta) ease, background var(--mns-t-assenta) ease;
+}
+.mns-recon__opt:hover, .mns-recon__opt:focus-visible { border-color: var(--mns-trust-reverify); background: var(--mns-massa-vidro-foco); outline: none; }
+.mns-recon__opt[data-ceremony="3"] { border-left: 3px solid var(--mns-trust-reverify); }  /* escolher a opção = rito 3 (a execução do ingest herda o 5, ver §7) */
+.mns-recon__opt-note { font-family: var(--mns-fonte-mono); font-size: var(--mns-fs-xs); color: var(--mns-tinta-fraca); max-width: 42ch; }
+
+/* ===================================================================== */
+/* ASSINATURA 2 — TRILHO DE FRESHNESS (o tempo como eixo físico + dígito vivo) [card:02-moholy-nagy] */
+/* memory[] posicionado por log(age_ms); dígito de ms correndo (único número vivo); stale EXILADO. */
+/* ===================================================================== */
+.mns-rail { position: relative; padding-top: calc(var(--mns-dim-grid) * 2); }
+.mns-rail__scale {                /* rótulos do eixo: agora (esq) → passado (dir) */
+  display: flex; justify-content: space-between;
+  font-family: var(--mns-fonte-mono); font-size: var(--mns-fs-xs); color: var(--mns-tinta-fraca);
+  margin-bottom: calc(var(--mns-dim-grid) * 0.75);
+}
+.mns-rail__field {                /* a área do trilho + faixa-exílio, lado a lado (grid — nada faz overflow) */
+  display: grid;
+  grid-template-columns: 1fr 128px;
+  gap: calc(var(--mns-dim-grid) * 1.5);
+  align-items: stretch;
+}
+.mns-rail__track {                /* o eixo confiável: a linha física do tempo */
+  position: relative;
+  height: calc(var(--mns-trilho-marca-altura) + var(--mns-dim-grid) * 11);   /* espaço p/ haste + até 3 faixas de rótulo */
+  border-bottom: 2px solid var(--mns-linha-trilho);
+}
+/* a MARCA é um único container cravado em x (posição = dado, inviolável), ancorado na BASE do trilho.
+ * Dentro: a haste (embaixo, altura fixa) e o rótulo (empilhado ACIMA por faixa). Haste e rótulo vivem no
+ * mesmo elemento → a corrente é fisicamente contínua por construção (lição gen-001: jamais um órfão). */
+.mns-rail__mark {
+  position: absolute;
+  bottom: 2px;
+  left: calc(var(--mns-x) * 100%);
+  transform: translateX(-50%);
+  display: flex; flex-direction: column-reverse; align-items: center;  /* haste no fundo, rótulo sobe */
+  width: 168px;
+}
+.mns-rail__stem {                 /* o traço vertical: espessura = tier (medulla pesado / project fino) */
+  width: var(--mns-trilho-tier-project);
+  height: var(--mns-trilho-marca-altura);
+  background: var(--mns-tinta-soft);
+  flex: none;
+}
+.mns-rail__mark[data-tier="medulla"] .mns-rail__stem { width: var(--mns-trilho-tier-medulla); background: var(--mns-tinta-alta); }
+/* o rótulo empilha por faixa: a guia (margin-bottom) empurra o rótulo para cima do topo da haste,
+ * e ela mesma É a linha contínua que liga rótulo→haste (borda esquerda). */
+.mns-rail__labels {
+  display: flex; flex-direction: column; align-items: center;
+  margin-bottom: calc(var(--mns-lane, 0) * var(--mns-dim-grid) * 2.75);   /* faixa: empurra o rótulo para cima */
+  padding-bottom: calc(var(--mns-dim-grid) * 0.5);
+  position: relative;
+}
+.mns-rail__labels::before {        /* a guia contínua: preenche o vão criado pela faixa (nada órfão) */
+  content: ""; position: absolute; bottom: calc(-1 * var(--mns-lane, 0) * var(--mns-dim-grid) * 2.75); left: 50%;
+  width: 1px; height: calc(var(--mns-lane, 0) * var(--mns-dim-grid) * 2.75);
+  background: var(--mns-linha-soft);
+}
+.mns-rail__ms {                   /* O DÍGITO VIVO — mono, tabular, incremento monotônico real (só aqui) */
+  font-family: var(--mns-fonte-mono); font-variant-numeric: tabular-nums;
+  font-size: var(--mns-fs-sm); color: var(--mns-tinta-alta); white-space: nowrap;
+}
+.mns-rail__ms::after { content: " ms"; color: var(--mns-tinta-fraca); }
+.mns-rail__agent {                /* etiqueta-vetor apontando a marca [card:02-moholy-nagy] */
+  font-family: var(--mns-fonte-mono); font-size: var(--mns-fs-xs); color: var(--mns-tinta-soft);
+  margin-top: 2px; max-width: 160px; text-align: center; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.mns-rail__hit {                  /* abrir o claim (mergulho) — focável, cobre a marca */
+  all: unset; cursor: pointer; position: absolute; inset: 0; z-index: 2;
+}
+.mns-rail__mark:hover .mns-rail__stem { background: var(--mns-luz-foco-nucleo); }
+.mns-rail__hit:focus-visible { outline: 1px solid var(--mns-trust-reverify); outline-offset: 2px; }
+
+/* a FAIXA-EXÍLIO: fora do trilho confiável — onde stale/idade-ausente cai [lei do produto: absent age = unknown] */
+.mns-rail__exile {
+  border: 1px dashed var(--mns-linha-soft);
+  border-radius: var(--mns-dim-raio);
+  background: var(--mns-stale-faixa);
+  padding: calc(var(--mns-dim-grid) * 1);
+  display: flex; flex-direction: column; gap: calc(var(--mns-dim-grid) * 0.75);
+}
+.mns-rail__exile-label { font-family: var(--mns-fonte-sans); font-size: var(--mns-fs-xs); letter-spacing: .1em; text-transform: uppercase; color: var(--mns-stale-txt); }
+.mns-rail__exile:empty::after,                          /* vazio ENSINA onde o stale cairia (não é espaço morto) */
+.mns-rail__exile[data-empty="true"] .mns-rail__exile-hint {
+  content: "";
+}
+.mns-rail__exile-hint { font-family: var(--mns-fonte-mono); font-size: var(--mns-fs-xs); color: var(--mns-tinta-fraca); }
+.mns-exiled {                     /* um item stale exilado: cinza-neutro digno, IMÓVEL (não anima) */
+  font-family: var(--mns-fonte-mono); font-size: var(--mns-fs-sm); color: var(--mns-stale-txt);
+  padding: calc(var(--mns-dim-grid) * 0.75); border-left: 2px solid var(--mns-stale-cor);
+  background: var(--mns-massa-alta); border-radius: 2px;
+}
+.mns-exiled b { display: block; font-family: var(--mns-fonte-sans); font-size: var(--mns-fs-xs); letter-spacing: .08em; text-transform: uppercase; color: var(--mns-stale-cor); }
+
+/* ===================================================================== */
+/* ASSINATURA 1 — MENISCUS SLIT (o corte de foco que lê o nível de baixo) [card:03-tadao-ando] */
+/* no mergulho a bancada escurece para massa e a luz entra por UMA fresta que pousa na BASE do conteúdo. */
+/* ===================================================================== */
+.mns-dive {                       /* o overlay do mergulho: massa cobrindo a bancada */
+  position: fixed; inset: 0; z-index: 40;
+  background: color-mix(in srgb, var(--mns-massa-fundo) 92%, black);
+  display: none; align-items: center; justify-content: center;
+  padding: calc(var(--mns-dim-grid) * 6);
+}
+.mns-dive[data-open="true"] { display: flex; }
+.mns-dive__panel {                /* o painel do claim aberto (editorial, calmo) */
+  position: relative;
+  max-width: 720px; width: 100%;
+  background: var(--mns-massa-vidro);
+  border: var(--mns-dim-borda) solid var(--mns-linha-soft);
+  border-radius: var(--mns-dim-raio);
+  padding: calc(var(--mns-dim-grid) * 3) calc(var(--mns-dim-grid) * 3.5) calc(var(--mns-dim-grid) * 3.5);
+  overflow: hidden;
+}
+.mns-dive__claim { font-family: var(--mns-fonte-serif); font-size: 16px; line-height: 1.65; color: var(--mns-tinta-alta); margin: 0 0 calc(var(--mns-dim-grid) * 3); }
+.mns-dive__honest {               /* a linha mais honesta (source_agent + age_ms): a fresta pousa AQUI */
+  position: relative;
+  font-family: var(--mns-fonte-mono); font-variant-numeric: tabular-nums;
+  font-size: var(--mns-fs-md); color: var(--mns-tinta-soft);
+  padding-top: calc(var(--mns-dim-grid) * 1.5);
+}
+/* A FRESTA: linha horizontal fina cortando a base do conteúdo honesto.
+ * Borda SUPERIOR nítida (topo do gradiente), inferior desfoca para a massa. Luz ENTRA, não é emitida. */
+.mns-dive__honest::before {
+  content: ""; position: absolute; left: 0; right: 0;
+  top: 0;                          /* pousa na LINHA de base do conteúdo honesto (o fundo do menisco) */
+  height: var(--mns-dim-slit);
+  background: var(--mns-luz-foco-nucleo);
+  box-shadow: 0 0 0 0 transparent;
+}
+.mns-dive__honest::after {         /* o decaimento para a massa abaixo da fresta (borda inferior desfoca) */
+  content: ""; position: absolute; left: 0; right: 0;
+  top: var(--mns-dim-slit);
+  height: var(--mns-dim-slit-alcance);
+  background: linear-gradient(to bottom, color-mix(in srgb, var(--mns-luz-foco-nucleo) 22%, transparent), var(--mns-luz-foco-borda));
+  pointer-events: none;
+}
+.mns-dive__close { all: unset; position: absolute; top: calc(var(--mns-dim-grid)*1.5); right: calc(var(--mns-dim-grid)*2); cursor: pointer; color: var(--mns-tinta-fraca); font-family: var(--mns-fonte-mono); font-size: var(--mns-fs-lg); }
+.mns-dive__close:focus-visible { color: var(--mns-tinta-alta); outline: 1px solid var(--mns-linha-forte); }
+
+/* ===================================================================== */
+/* Bloco de Sufficiency — a máquina explicando a própria certeza */
+/* ===================================================================== */
+.mns-suff__state { display: flex; align-items: baseline; gap: calc(var(--mns-dim-grid) * 1.5); margin-bottom: calc(var(--mns-dim-grid) * 1.25); }
+.mns-suff__badge { font-family: var(--mns-fonte-sans); font-size: var(--mns-fs-md); font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--mns-trust-full-txt); }
+.mns-suff__nums { font-family: var(--mns-fonte-mono); font-variant-numeric: tabular-nums; font-size: var(--mns-fs-md); color: var(--mns-tinta-soft); }
+.mns-suff[data-state="gathering"] .mns-suff__badge { color: var(--mns-trust-reverify-txt); }
+.mns-suff[data-state="insufficient"] .mns-suff__badge { color: var(--mns-abstain-cor); }
+
+/* ===================================================================== */
+/* Contorno Negativo — non_claims[] + honest_gaps[] (o vazio que AFIRMA) */
+/* ===================================================================== */
+.mns-neg__list { list-style: none; margin: 0 0 calc(var(--mns-dim-grid) * 1.5); padding: 0; display: grid; gap: calc(var(--mns-dim-grid) * 0.75); }
+.mns-neg__list li { font-family: var(--mns-fonte-mono); font-size: var(--mns-fs-md); color: var(--mns-tinta-soft); padding-left: calc(var(--mns-dim-grid) * 1.5); position: relative; }
+.mns-neg__list li::before { content: "¬"; position: absolute; left: 0; color: var(--mns-tinta-fraca); }   /* contorno negativo do conhecimento */
+.mns-gaps--empty {                /* honest_gaps: [] renderizado como AFIRMAÇÃO, cor cinza digna */
+  font-family: var(--mns-fonte-serif); font-style: italic; font-size: 14px;
+  color: var(--mns-stale-txt);
+  padding: calc(var(--mns-dim-grid) * 1.25) calc(var(--mns-dim-grid) * 1.5);
+  border: 1px dashed var(--mns-linha-soft); border-radius: var(--mns-dim-raio);
+}
+
+/* ===================================================================== */
+/* Lista de Âncoras / Focus (zona de recuo — colunas calmas, fluida) */
+/* ===================================================================== */
+.mns-anchors__row { display: grid; grid-template-columns: 1fr 88px; align-items: center; gap: calc(var(--mns-dim-grid) * 1.5); padding: calc(var(--mns-dim-grid) * 0.75) 0; border-bottom: 1px solid var(--mns-linha-soft); }
+.mns-anchors__label { font-family: var(--mns-fonte-mono); font-size: var(--mns-fs-md); color: var(--mns-tinta-alta); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.mns-anchors__bar { height: 4px; background: var(--mns-linha-soft); border-radius: 2px; position: relative; overflow: hidden; }
+.mns-anchors__bar::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: calc(var(--mns-w) * 100%); background: var(--mns-tinta-soft); }  /* pagerank/activation: peso proporcional */
+.mns-anchors__pr { font-family: var(--mns-fonte-mono); font-variant-numeric: tabular-nums; font-size: var(--mns-fs-xs); color: var(--mns-tinta-fraca); text-align: right; }
+
+/* ===================================================================== */
+/* Dial de Tier — controle "físico" com paridade teclado + ARIA [vetor:tactilidade=4] */
+/* ===================================================================== */
+.mns-dial { display: inline-flex; border: var(--mns-dim-borda) solid var(--mns-linha-forte); border-radius: var(--mns-dim-raio); overflow: hidden; }
+.mns-dial__opt { all: unset; cursor: pointer; padding: calc(var(--mns-dim-grid) * 0.75) calc(var(--mns-dim-grid) * 1.5); font-family: var(--mns-fonte-mono); font-size: var(--mns-fs-sm); color: var(--mns-tinta-soft); border-right: 1px solid var(--mns-linha-soft); }
+.mns-dial__opt:last-child { border-right: none; }
+.mns-dial__opt[aria-pressed="true"] { background: var(--mns-massa-vidro-foco); color: var(--mns-tinta-alta); }
+.mns-dial__opt:focus-visible { outline: 1px solid var(--mns-trust-reverify); outline-offset: -1px; }
+
+/* ===================================================================== */
+/* Cartela X-RAY — a camada de auditoria estrutural (real-vs-planejado) */
+/* ===================================================================== */
+.mns-xray { display: flex; flex-wrap: wrap; gap: calc(var(--mns-dim-grid) * 0.75); }
+.mns-xray__cell { font-family: var(--mns-fonte-mono); font-size: var(--mns-fs-xs); letter-spacing: .06em; padding: calc(var(--mns-dim-grid)*0.5) calc(var(--mns-dim-grid)*1); border: 1px solid var(--mns-linha-soft); border-radius: 2px; color: var(--mns-tinta-fraca); }
+
+/* ===================================================================== */
+/* Layout da Bancada (estudo A escolhido): placa no canto de maior peso (topo-esq),  */
+/* trilho à direita, sufficiency+negativo empilhados, âncoras na base. Grid, sem overflow. */
+/* ===================================================================== */
+.mns-bench { display: grid; grid-template-columns: minmax(340px, 420px) 1fr; grid-template-areas: "trust rail" "recon suff" "neg anchors"; gap: calc(var(--mns-dim-grid) * 3); align-items: start; max-width: 1200px; margin: 0 auto; }
+.mns-bench__trust { grid-area: trust; }
+.mns-bench__rail  { grid-area: rail; }
+.mns-bench__recon { grid-area: recon; }
+.mns-bench__suff  { grid-area: suff; }
+.mns-bench__neg   { grid-area: neg; }
+.mns-bench__anchors { grid-area: anchors; }
+.mns-bench__head { grid-column: 1 / -1; display: flex; align-items: baseline; justify-content: space-between; margin-bottom: calc(var(--mns-dim-grid)*1.5); padding-bottom: calc(var(--mns-dim-grid)*1.5); border-bottom: 1px solid var(--mns-linha-soft); }
+.mns-bench__title { font-family: var(--mns-fonte-sans); font-size: var(--mns-fs-xl); font-weight: 600; letter-spacing: .02em; margin: 0; color: var(--mns-tinta-alta); }
+.mns-bench__sub { font-family: var(--mns-fonte-mono); font-size: var(--mns-fs-sm); color: var(--mns-tinta-fraca); margin: 4px 0 0; }
+
+/* Gaveta de Fingerprint — plumbing sob demanda (background), recolhida por padrão */
+.mns-fp { grid-column: 1 / -1; }
+.mns-fp summary { cursor: pointer; font-family: var(--mns-fonte-mono); font-size: var(--mns-fs-sm); color: var(--mns-tinta-fraca); list-style: none; }
+.mns-fp summary::-webkit-details-marker { display: none; }
+.mns-fp summary::before { content: "▸ "; }
+.mns-fp[open] summary::before { content: "▾ "; }
+.mns-fp__grid { display: grid; grid-template-columns: auto 1fr; gap: 4px calc(var(--mns-dim-grid)*2); margin-top: calc(var(--mns-dim-grid)*1.25); font-family: var(--mns-fonte-mono); font-size: var(--mns-fs-xs); }
+.mns-fp__grid dt { color: var(--mns-tinta-fraca); }
+.mns-fp__grid dd { color: var(--mns-tinta-soft); margin: 0; }
+
+/* switcher de estados (rodapé, discreto) */
+.mns-switch { position: fixed; left: 50%; bottom: calc(var(--mns-dim-grid)*2); transform: translateX(-50%); display: flex; gap: calc(var(--mns-dim-grid)); background: var(--mns-massa-alta); border: 1px solid var(--mns-linha-forte); border-radius: 999px; padding: calc(var(--mns-dim-grid)*0.75) calc(var(--mns-dim-grid)*1.25); z-index: 30; box-shadow: 0 6px 24px rgba(4,4,8,.5); }
+.mns-switch__btn { all: unset; cursor: pointer; padding: calc(var(--mns-dim-grid)*0.5) calc(var(--mns-dim-grid)*1.25); border-radius: 999px; font-family: var(--mns-fonte-mono); font-size: var(--mns-fs-xs); color: var(--mns-tinta-soft); }
+.mns-switch__btn[aria-pressed="true"] { background: var(--mns-massa-vidro-foco); color: var(--mns-tinta-alta); }
+.mns-switch__btn:focus-visible { outline: 1px solid var(--mns-trust-reverify); }
+
+/* ===================================================================== */
+/* prefers-reduced-motion — COMPLETO: nenhuma das três assinaturas anima; */
+/* a fresta vira corte estático; a placa muda de assento sem transição; o dígito */
+/* vivo continua incrementando (é DADO real, não animação) — o JS respeita a flag e */
+/* atualiza o texto sem transição. abstain já é imóvel por regra. [vetor:sinestesia=2] */
+/* ===================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .mns-trust,
+  .mns-recon__opt,
+  .mns-trust__tab { transition: none !important; }
+  .mns-dive__panel, .mns-dive__honest::before, .mns-dive__honest::after { transition: none !important; animation: none !important; }
+}

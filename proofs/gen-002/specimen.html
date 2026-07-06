@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MENISCUS · Bancada de Supervisão · m1nd</title>
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="core.css">
+</head>
+<body class="mns">
+
+  <!-- ============================ A BANCADA (estudo A) ============================ -->
+  <main class="mns-bench" id="bench">
+
+    <header class="mns-bench__head">
+      <div>
+        <!-- O título herda a PRECISÃO da nota honesta do gate: full_trust + mismatch de COBERTURA
+             (NÃO "trust degradado"). São duas verdades independentes. -->
+        <h1 class="mns-bench__title">Bancada de Supervisão</h1>
+        <p class="mns-bench__sub" id="head-sub">confiança plena no binário/grafo · cobertura ausente e honesta para este repo</p>
+      </div>
+      <div class="mns-dial" role="group" aria-label="Camada de memória (tier)">
+        <button class="mns-dial__opt" aria-pressed="false">project</button>
+        <button class="mns-dial__opt" aria-pressed="true">medulla</button>
+        <button class="mns-dial__opt" aria-pressed="false">project+medulla</button>
+        <button class="mns-dial__opt" aria-pressed="false">all-brains</button>
+      </div>
+    </header>
+
+    <!-- FOREGROUND 1 — Placa de Trust (assinatura 3) -->
+    <section class="mns-bench__trust" aria-labelledby="trust-h">
+      <p class="mns__label" id="trust-h">Veredito de confiança</p>
+      <div class="mns-trust" id="trust-plate" data-trust="full" data-coverage="mismatch">
+        <p class="mns-trust__verdict" id="trust-verdict">FULL TRUST</p>
+        <p class="mns-trust__fp" id="trust-fp">binário ef9c6e9 · grafo 521/500 · finalizado</p>
+        <span class="mns-trust__tab" id="trust-tab">
+          <span class="mns-trust__tab-arrow" aria-hidden="true">↘</span>
+          <span>cobertura em desacordo — reconciliar abaixo</span>
+        </span>
+      </div>
+    </section>
+
+    <!-- MIDGROUND 3 — Trilho de Freshness (assinatura 2) -->
+    <section class="mns-bench__rail" aria-labelledby="rail-h">
+      <p class="mns__label" id="rail-h">Trilho de freshness — memória por idade real</p>
+      <div class="mns-rail">
+        <div class="mns-rail__scale"><span>agora · fresco</span><span>passado →</span></div>
+        <div class="mns-rail__field">
+          <div class="mns-rail__track" id="rail-track" role="list" aria-label="Claims da memória posicionados por idade">
+            <!-- marcas injetadas por specimen.js a partir dos dados reais (posição = log(age_ms)) -->
+          </div>
+          <aside class="mns-rail__exile" id="rail-exile" data-empty="true" aria-label="Fora do trilho: idade ausente ou stale">
+            <span class="mns-rail__exile-label">fora do trilho</span>
+            <span class="mns-rail__exile-hint" id="exile-hint">nenhum claim stale — o trilho está cheio e confiável. É aqui que a idade ausente cairia.</span>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOREGROUND 2 — Linha de Reconciliação (Stuart Hall) -->
+    <section class="mns-bench__recon" aria-labelledby="recon-h">
+      <p class="mns__label" id="recon-h">Reconciliação de cobertura</p>
+      <div class="mns-recon" id="recon">
+        <p class="mns-recon__honest" id="recon-honest">this graph does NOT cover your repo</p>
+        <div class="mns-recon__paths">
+          <span class="mns-recon__path"><b>bound</b> /Users/kle1nz/.m1nd/runtimes/claude/agent-memory</span>
+          <span class="mns-recon__path"><b>caller</b> /Users/kle1nz</span>
+        </div>
+        <div class="mns-recon__opts">
+          <button class="mns-recon__opt" type="button">
+            <span>continue bound</span>
+            <span class="mns-recon__opt-note">segue neste grafo, mas trate as respostas como NÃO cobrindo este repo — verifique contra os arquivos locais</span>
+          </button>
+          <button class="mns-recon__opt" type="button" data-ceremony="3">
+            <span>ingerir este repo</span>
+            <span class="mns-recon__opt-note">ingest com project_root=/Users/kle1nz — UMA chamada: cria um brain por projeto (escolher = rito 3; a ingestão executa com rito 5)</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- MIDGROUND 4 — Bloco de Sufficiency -->
+    <section class="mns-bench__suff" aria-labelledby="suff-h">
+      <p class="mns__label" id="suff-h">Suficiência do contexto</p>
+      <div class="mns-glass mns-suff" id="suff" data-state="sufficient">
+        <div class="mns-suff__state">
+          <span class="mns-suff__badge" id="suff-badge">sufficient</span>
+          <span class="mns-suff__nums" id="suff-nums">captured 0.2638 · top 0.2426</span>
+        </div>
+        <p class="mns__prose" id="suff-why">the top match scores 0.24; everything left out scores at most 0.14 (weak tail) — the strongest context is in hand</p>
+      </div>
+    </section>
+
+    <!-- MIDGROUND 5 — Contorno Negativo -->
+    <section class="mns-bench__neg" aria-labelledby="neg-h">
+      <p class="mns__label" id="neg-h">Contorno negativo — o que a resposta NÃO afirma</p>
+      <div class="mns-glass">
+        <ul class="mns-neg__list">
+          <li>north compõe verbos read-only; não ingere, muta ou repara o grafo.</li>
+          <li>north não atualiza o vínculo do MCP hospedeiro.</li>
+          <li>north não substitui compilador, testes ou a verdade dos arquivos locais.</li>
+          <li>uma idade de memória ausente significa tempo de autoria desconhecido, nunca recém-escrito.</li>
+        </ul>
+        <p class="mns-gaps--empty" id="gaps">honest_gaps: [] — a mente não declara lacunas conhecidas para esta tarefa.</p>
+      </div>
+    </section>
+
+    <!-- MIDGROUND 6 — Âncoras / Focus (zona de recuo, colunas calmas) -->
+    <section class="mns-bench__anchors" aria-labelledby="anchors-h">
+      <p class="mns__label" id="anchors-h">Âncoras (pagerank) · focus nodes (activation)</p>
+      <div class="mns-glass" id="anchors">
+        <!-- linhas injetadas por specimen.js (peso proporcional real) -->
+      </div>
+      <div style="margin-top:calc(var(--mns-dim-grid)*2)">
+        <p class="mns__label">Auditoria estrutural (X-RAY)</p>
+        <div class="mns-xray" aria-label="Classes X-RAY (camada de auditoria)">
+          <span class="mns-xray__cell">BEDROCK</span>
+          <span class="mns-xray__cell">BLUEPRINT</span>
+          <span class="mns-xray__cell">OVERGROWTH</span>
+          <span class="mns-xray__cell">EROSION</span>
+          <span class="mns-xray__cell">UNPROVABLE</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- BACKGROUND — Gaveta de Fingerprint (plumbing sob demanda) -->
+    <details class="mns-fp">
+      <summary>fingerprint detalhado</summary>
+      <dl class="mns-fp__grid">
+        <dt>binary_version</dt><dd>1.3.2</dd>
+        <dt>binary_git_sha</dt><dd>ef9c6e9</dd>
+        <dt>node_count</dt><dd>521</dd>
+        <dt>edge_count</dt><dd>500</dd>
+        <dt>graph_finalized</dt><dd>true</dd>
+        <dt>runtime_root</dt><dd>/Users/kle1nz/.m1nd/runtimes/claude</dd>
+        <dt>process_id</dt><dd>32202</dd>
+        <dt>memory_exists</dt><dd>27</dd>
+        <dt>next_move</dt><dd>Call surgical_context on the top focus node to ground the task before editing.</dd>
+      </dl>
+    </details>
+
+  </main>
+
+  <!-- ============================ MERGULHO (assinatura 1 — Meniscus Slit) ============================ -->
+  <div class="mns-dive" id="dive" data-open="false" role="dialog" aria-modal="true" aria-labelledby="dive-claim" hidden>
+    <div class="mns-dive__panel">
+      <button class="mns-dive__close" id="dive-close" aria-label="Fechar mergulho">esc ✕</button>
+      <p class="mns-dive__claim" id="dive-claim">—</p>
+      <!-- a linha mais honesta: a fresta pousa AQUI (na base do conteúdo, o fundo do menisco) -->
+      <p class="mns-dive__honest" id="dive-honest">—</p>
+    </div>
+  </div>
+
+  <!-- ============================ SWITCHER DE ESTADOS (rodapé discreto) ============================ -->
+  <nav class="mns-switch" aria-label="Estados honestos da bancada">
+    <button class="mns-switch__btn" data-state="canonical" aria-pressed="true">canônico</button>
+    <button class="mns-switch__btn" data-state="degraded" aria-pressed="false">degraded</button>
+    <button class="mns-switch__btn" data-state="stale" aria-pressed="false">stale</button>
+    <button class="mns-switch__btn" data-state="abstain" aria-pressed="false">abstain</button>
+    <button class="mns-switch__btn" data-state="gathering" aria-pressed="false">gathering</button>
+    <button class="mns-switch__btn" data-state="empty" aria-pressed="false">vazio</button>
+  </nav>
+
+  <script src="specimen.js"></script>
+</body>
+</html>

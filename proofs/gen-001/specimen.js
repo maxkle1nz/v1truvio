@@ -1,6 +1,8 @@
 // specimen.js — JS vanilla mínimo (sem libs).
 // (1) rito de compra nível 3: clique → leitura de consequência → pausa deliberada → só então abre o link.
-// (2) switcher de demonstração dos edge states — ferramenta separada, o template nasce sabendo dos estados.
+// (2) switcher de demonstração dos edge states — ferramenta separada; o template nasce sabendo dos estados.
+//     Na assinatura formal os estados são GEOMETRIA: o pino re-crava em x(preço), o entalhe do piso
+//     desloca no novo piso, a fenda sela acima do alvo, a régua nasce mínima no vazio.
 'use strict';
 
 (function () {
@@ -15,7 +17,7 @@
   var ultimoFoco = null;
   var timer = null;
 
-  // ---- Rito de compra (Stuart Hall: consequência ANTES da ação; Détournement: o link vira passagem) ----
+  // ---- Rito de compra (Stuart Hall: consequência ANTES da ação; o link vira passagem) ----
   function abrirRito() {
     var preco = veredito.getAttribute('data-preco');
     var piso = parseInt(veredito.getAttribute('data-piso'), 10);
@@ -66,7 +68,6 @@
   document.addEventListener('keydown', function (ev) {
     if (ev.key === 'Escape' && rito.getAttribute('data-aberto') === 'true') { fecharRito(); }
   });
-  // saída consciente: quando o operador confirma, fecha o rito e deixa o link (target=_blank) abrir
   if (ritoSair) {
     ritoSair.addEventListener('click', function (ev) {
       if (ritoSair.getAttribute('aria-disabled') === 'true') { ev.preventDefault(); return; }
@@ -74,13 +75,14 @@
     });
   }
 
-  // ---- Switcher de demonstração dos edge states ----
+  // ---- Switcher de demonstração dos edge states (a geometria segue o dado) ----
+  var tela = document.getElementById('tela');
   var etiqueta = document.getElementById('veredito-etiqueta');
   var precoEl = document.getElementById('veredito-preco');
-  var tela = document.getElementById('tela');
+  var corredor = document.getElementById('veredito-corredor');
   var nota = document.getElementById('notaEstado');
-  var historico = document.getElementById('historico');
-  var distancia = document.getElementById('distancia');
+  var entalhePiso = document.getElementById('entalhe-piso');
+  var rotuloPiso = document.getElementById('rotulo-piso');
   var tendencia = document.getElementById('tendencia');
   var tendSeta = document.getElementById('tendencia-seta');
   var tendRotulo = document.getElementById('tendencia-rotulo');
@@ -88,30 +90,34 @@
   var selo = document.getElementById('selo');
   var seloEstado = document.getElementById('selo-estado');
 
-  // estado real de hoje, para restaurar
+  // estado real de hoje (a tela provada), para restaurar
   var BASE = {
-    veredito: 'em-alvo', etiqueta: 'Em alvo', preco: '€948', precoAttr: '948',
-    historico: 'acima-do-piso', distancia: '+€36',
+    vista: 'em-alvo', estado: 'em-alvo', etiqueta: 'Em alvo',
+    preco: '€948', precoNum: '948',
+    corredor: '<span class="v1t-num">+€36</span> do piso · <span class="v1t-num">€12</span> do alvo',
+    piso: '912', pisoRotulo: 'piso <span class="v1t-num">€912</span>',
     tendencia: 'estavel', seta: '→', tendRotulo: 'Estável',
-    tendNota: 'mercado agregado · +0,02 %/hora · não é a tendência desta rota específica',
-    confianca: 'confiavel', seloEstado: 'Confiável',
-    nota: null
+    tendNota: 'mercado agregado · +0,02 %/hora · não é a tendência desta rota',
+    confianca: 'confiavel', seloEstado: 'Confiável'
   };
 
-  function aplicarBase() {
-    veredito.setAttribute('data-estado', BASE.veredito);
-    etiqueta.textContent = BASE.etiqueta;
-    precoEl.textContent = BASE.preco;
-    veredito.setAttribute('data-preco', BASE.precoAttr);
-    historico.setAttribute('data-estado', BASE.historico);
-    distancia.textContent = BASE.distancia;
-    tendencia.setAttribute('data-estado', BASE.tendencia);
-    tendSeta.textContent = BASE.seta;
-    tendRotulo.textContent = BASE.tendRotulo;
-    tendNota.textContent = BASE.tendNota;
-    selo.setAttribute('data-confianca', BASE.confianca);
-    seloEstado.textContent = BASE.seloEstado;
-    setNota(null);
+  function aplicar(cfg) {
+    tela.setAttribute('data-vista', cfg.vista);
+    veredito.setAttribute('data-estado', cfg.estado);
+    veredito.style.setProperty('--preco', cfg.precoNum);
+    veredito.setAttribute('data-preco', cfg.precoNum);
+    etiqueta.textContent = cfg.etiqueta;
+    precoEl.textContent = cfg.preco;
+    corredor.innerHTML = cfg.corredor;
+    entalhePiso.style.setProperty('--preco', cfg.piso);
+    rotuloPiso.style.setProperty('--preco', cfg.piso);
+    rotuloPiso.innerHTML = cfg.pisoRotulo;
+    tendencia.setAttribute('data-estado', cfg.tendencia);
+    tendSeta.textContent = cfg.seta;
+    tendRotulo.textContent = cfg.tendRotulo;
+    tendNota.textContent = cfg.tendNota;
+    selo.setAttribute('data-confianca', cfg.confianca);
+    seloEstado.textContent = cfg.seloEstado;
   }
 
   function setNota(txt, tom) {
@@ -121,71 +127,68 @@
     if (tom) { nota.setAttribute('data-tom', tom); } else { nota.removeAttribute('data-tom'); }
   }
 
+  function clonar(over) {
+    var cfg = {};
+    for (var k in BASE) { cfg[k] = BASE[k]; }
+    for (var j in over) { cfg[j] = over[j]; }
+    return cfg;
+  }
+
   var ESTADOS = {
-    'em-alvo': function () { aplicarBase(); },
+    'em-alvo': function () { aplicar(BASE); setNota(null); },
 
     'acima-do-alvo': function () {
-      aplicarBase();
-      veredito.setAttribute('data-estado', 'acima-do-alvo');
-      etiqueta.textContent = 'Acima do alvo';
-      precoEl.textContent = '€988';
-      veredito.setAttribute('data-preco', '988');
-      distancia.textContent = '+€76';
-      setNota('Estado de demonstração: preço acima do alvo €960 — a fresta apaga, não é hora.');
+      aplicar(clonar({
+        vista: 'acima-do-alvo', estado: 'acima-do-alvo', etiqueta: 'Acima do alvo',
+        preco: '€988', precoNum: '988',
+        corredor: '<span class="v1t-num">+€76</span> do piso · <span class="v1t-num">€28</span> além do alvo'
+      }));
+      setNota('Estado de demonstração: €988 > alvo €960 — a fenda SELA, o pino cruza para o lado caro, a placa recua (rasa, sem sombra).');
     },
 
     'novo-piso': function () {
-      aplicarBase();
-      veredito.setAttribute('data-estado', 'novo-piso');
-      etiqueta.textContent = 'Novo piso';
-      precoEl.textContent = '€889';
-      veredito.setAttribute('data-preco', '889');
-      historico.setAttribute('data-estado', 'novo-piso');
-      distancia.textContent = '−€23 do piso anterior';
-      setNota('Estado de demonstração: preço abaixo da mínima histórica €912 — o achado raro que a bancada existe para pegar.');
+      aplicar(clonar({
+        vista: 'novo-piso', estado: 'novo-piso', etiqueta: 'Novo piso',
+        preco: '€889', precoNum: '889',
+        corredor: '<span class="v1t-num">−€23</span> do piso anterior · <span class="v1t-num">€71</span> do alvo',
+        piso: '889', pisoRotulo: 'piso <span class="v1t-num">€889</span>'
+      }));
+      setNota('Estado de demonstração: €889 < mínima €912 — o entalhe do piso DESLOCA junto com o pino; a luz máxima derrama mais fundo.');
     },
 
     'amostra-ruido': function () {
-      aplicarBase();
-      tendencia.setAttribute('data-estado', 'indefinida');
-      tendSeta.textContent = '·';
-      tendRotulo.textContent = 'Indefinida';
-      tendNota.textContent = 'padrão ainda é ruído — sinal confiável em ~5-7 dias';
-      selo.setAttribute('data-confianca', 'ruido');
-      seloEstado.textContent = 'Ruído — amostra curta';
-      setNota('Estado de demonstração: <48h de dados — o preço é real, mas a tendência e o piso ainda não têm sinal.');
+      aplicar(clonar({
+        tendencia: 'indefinida', seta: '·', tendRotulo: 'Indefinida',
+        tendNota: 'padrão ainda é ruído — sinal confiável em ~5-7 dias',
+        confianca: 'ruido', seloEstado: 'Ruído — amostra curta'
+      }));
+      setNota('Estado de demonstração: <48h de dados — o preço é real, mas tendência e piso ainda não têm sinal.');
     },
 
     'desatualizado': function () {
-      aplicarBase();
-      veredito.setAttribute('data-estado', 'acima-do-alvo');
-      etiqueta.textContent = 'Sem leitura atual';
-      selo.setAttribute('data-confianca', 'desatualizado');
-      seloEstado.textContent = 'Desatualizado';
-      tendencia.setAttribute('data-estado', 'indefinida');
-      tendSeta.textContent = '·';
-      tendRotulo.textContent = 'Indefinida';
-      tendNota.textContent = 'a varredura falhou — tendência não confiável';
-      setNota('Estado de demonstração: última leitura há 6h — a varredura falhou. O veredito fica neutro, nunca em alvo.', 'atencao');
+      aplicar(clonar({
+        vista: 'desatualizado', estado: 'acima-do-alvo', etiqueta: 'Sem leitura atual',
+        tendencia: 'indefinida', seta: '·', tendRotulo: 'Indefinida',
+        tendNota: 'a varredura falhou — tendência não confiável',
+        confianca: 'desatualizado', seloEstado: 'Desatualizado'
+      }));
+      setNota('Estado de demonstração: última leitura há 6h — a varredura falhou. Fenda selada, veredito neutro, pulso parado.', 'atencao');
     },
 
     'vazio': function () {
-      aplicarBase();
-      veredito.setAttribute('data-estado', 'sem-dado');
-      etiqueta.textContent = 'Sem dado';
-      precoEl.textContent = '— · —';
-      veredito.setAttribute('data-preco', '0');
-      selo.setAttribute('data-confianca', 'ruido');
-      seloEstado.textContent = 'Ruído — primeira varredura';
-      tendencia.setAttribute('data-estado', 'indefinida');
-      tendSeta.textContent = '·';
-      tendRotulo.textContent = 'Indefinida';
-      tendNota.textContent = 'a bancada ainda não coletou';
-      setNota('Estado de demonstração: primeira execução — a bancada ainda não coletou. Sem veredito falso.');
+      aplicar(clonar({
+        vista: 'vazio', estado: 'sem-dado', etiqueta: 'Sem dado',
+        preco: '— · —', precoNum: '0',
+        corredor: 'a bancada ainda não coletou — primeira varredura em curso',
+        tendencia: 'indefinida', seta: '·', tendRotulo: 'Indefinida',
+        tendNota: 'a bancada ainda não coletou',
+        confianca: 'ruido', seloEstado: 'Ruído — primeira varredura'
+      }));
+      setNota('Estado de demonstração: primeira execução — a régua nasce só com a config (sem fantasma/piso), a placa não finge coordenada. Sem veredito falso.');
     },
 
     'offline': function () {
-      aplicarBase();
+      aplicar(BASE);
       setNota('Estado de demonstração: sem rede — o relatório lê normal (arquivo local). Só o gesto de compra avisa que precisa de conexão.', 'atencao');
     }
   };

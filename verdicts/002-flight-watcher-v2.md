@@ -1,7 +1,7 @@
 # VERDICT 002 — gen-001 v2 (re-aterrissagem pós-correção formal) · flight-watcher
 
 - **veredito:** aprovado
-- **passou no gate?** gate do brief 12/12 (herdado); gate da prova (itens 13–14) em julgamento no momento do veredito — divergência, se houver, será registrada aqui.
+- **passou no gate?** gate do brief 12/12 (herdado). Gate da prova, julgado APÓS este veredito: item 13 PASSA; item 14 REPROVOU a materialização do G3 (haste órfã 56px; selo de frescor 100% engolido pelo lado-frio — defeitos que o olho do diretor não pegou no primeiro exame), ciclo único de correção executado, re-julgamento com medição independente: **13–14 PASSA (vão 0.00px, zero intrusos, selo visível)**. A divergência não contradiz este veredito — o diretor julgou a direção formal; o gate pegou bugs de execução. Registro: o gate da prova com medição é a rede que o olho humano em zoom de conversa não substitui.
 - **nas palavras do Max:** *"agora eu achei legal."*
 
 ## O que este veredito valida

@@ -1,7 +1,10 @@
-/* core.css — a identidade de gen-001 · flight-watcher.
-   Bancada em penumbra (Ando): massa escura mate; a luz (a fresta quente) é gasta só no ponto de ação.
-   Toda cor referencia var(--v1t-*) de tokens.css — nenhum hex cru aqui (lint R-i).
-   BRIEF.md §8. */
+/* core.css — a identidade de gen-001 · flight-watcher (re-aterrissagem pós-verdict 001).
+   ASSINATURA FORMAL (§8): o sistema de coordenadas do layout É o dado.
+   G1 .regua-mestra — o eixo de euros como esqueleto da tela;
+   G2 .corte-limiar — o alvo €960 como fenda física de luz atravessando a composição;
+   G3 .placa-pensil — o veredito suspenso por haste-pino em x(preço), sobrepondo a matriz com sombra real.
+   Toda cor referencia var(--v1t-*) de tokens.css — nenhum hex cru aqui (lint i).
+   A FÓRMULA ÚNICA DA ESCALA (lint n): x = (preço − min) / (max − min) × 100%. Distância na tela = distância em euros. */
 
 /* ---------- reset mínimo de bancada ---------- */
 *, *::before, *::after { box-sizing: border-box; }
@@ -18,35 +21,32 @@ body {
 }
 h1, h2, h3, p, figure { margin: 0; }
 
-/* números sempre tabulares e monoespaçados para varredura vertical (dinheiro) */
+/* números sempre tabulares e monoespaçados (dinheiro compara em coluna) */
 .v1t-num {
   font-family: var(--v1t-tipo-familia-numero);
   font-feature-settings: var(--v1t-tipo-trilha-tabular);
   font-variant-numeric: tabular-nums lining-nums;
 }
 
-/* ---------- BACKGROUND — a bancada ---------- */
+/* ---------- BACKGROUND — a bancada em penumbra ---------- */
 .v1t-bancada {
   min-height: 100vh;
-  /* penumbra: leve gradiente radial frio, sem textura decorativa — é massa que faz a luz significar */
   background:
     radial-gradient(120% 90% at 22% 8%, var(--v1t-cor-massa-alta) 0%, var(--v1t-cor-massa) 60%) fixed;
 }
 .v1t-tela {
   max-width: var(--v1t-dimensao-largura-tela);
   margin: 0 auto;
-  padding: var(--v1t-dimensao-grid-4) var(--v1t-dimensao-grid-3) var(--v1t-dimensao-grid-4);
+  padding: var(--v1t-dimensao-grid-3) var(--v1t-dimensao-grid-3) var(--v1t-dimensao-grid-4);
 }
 
-/* cabeçalho de bancada: instrumento que registra, não app de viagem */
 .v1t-cabecalho {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
   gap: var(--v1t-dimensao-grid-2);
-  padding-bottom: var(--v1t-dimensao-grid-2);
-  border-bottom: var(--v1t-dimensao-fio) solid var(--v1t-cor-linha-estrutura);
-  margin-bottom: var(--v1t-dimensao-grid-3);
+  padding-bottom: var(--v1t-dimensao-grid);
+  margin-bottom: var(--v1t-dimensao-grid);
 }
 .v1t-cabecalho__nome {
   font-size: var(--v1t-tipo-titulo);
@@ -57,36 +57,197 @@ h1, h2, h3, p, figure { margin: 0; }
 }
 .v1t-cabecalho__rota { color: var(--v1t-cor-texto-fraco); font-size: var(--v1t-tipo-label); }
 
-/* ---------- FOREGROUND — grid com tensão assimétrica (placa Lissitzky) ---------- */
-.v1t-foreground {
-  display: grid;
-  grid-template-columns: 1.9fr 1fr;  /* o veredito recebe mais área que sua vizinhança */
-  gap: var(--v1t-dimensao-grid-3);
-  align-items: stretch;
-  margin-bottom: var(--v1t-dimensao-grid-3);
+.v1t-nota-estado {
+  font-size: var(--v1t-tipo-label);
+  color: var(--v1t-cor-texto-fraco);
+  border-left: var(--v1t-dimensao-fresta) solid var(--v1t-cor-estado-frio);
+  padding: var(--v1t-dimensao-grid) var(--v1t-dimensao-grid-2);
+  margin-bottom: var(--v1t-dimensao-grid-2);
+}
+.v1t-nota-estado[data-tom="atencao"] { color: var(--v1t-cor-estado-atencao); border-left-color: var(--v1t-cor-estado-atencao); }
+
+/* ============================================================
+   O CAMPO DE ESCALA — wrapper de tudo que vive no eixo de euros
+   ============================================================ */
+.v1t-campo-escala { position: relative; }
+
+/* A FÓRMULA ÚNICA DA ESCALA (G1): elementos absolutos no eixo levam esta classe + style="--preco: N".
+   Nenhum left inline, nenhum valor mágico — a coordenada é o dado. */
+.v1t-escala-x {
+  left: calc((var(--preco) - var(--v1t-regua-min)) / (var(--v1t-regua-max) - var(--v1t-regua-min)) * 100%);
 }
 
-/* ===== Bloco-veredito — a placa pesada, único ponto luminoso ===== */
-.v1t-veredito {
+/* ============================================================
+   G1 — RÉGUA-MESTRA
+   ============================================================ */
+.regua-mestra {
   position: relative;
+  height: var(--v1t-regua-zona-altura);
+}
+.regua-mestra__linha {
+  position: absolute;
+  left: 0; right: 0;
+  top: 50%;
+  height: var(--v1t-dimensao-fio);
+  background: var(--v1t-cor-linha-estrutura);
+}
+/* graduação real de €10 — 27 passos na faixa (instrumento, não decoração: é a malha do eixo) */
+.regua-mestra__graduacao {
+  position: absolute;
+  left: 0; right: 0;
+  top: 50%;
+  height: var(--v1t-regua-entalhe-menor);
+  background-image: repeating-linear-gradient(
+    90deg,
+    var(--v1t-cor-linha-estrutura) 0,
+    var(--v1t-cor-linha-estrutura) var(--v1t-dimensao-fio),
+    transparent var(--v1t-dimensao-fio),
+    transparent calc(100% / var(--v1t-regua-graduacao-passos))
+  );
+}
+/* entalhes nomeados: config (alvos) apontam para CIMA; história (fantasma/piso/leituras) para BAIXO */
+.regua-mestra__entalhe {
+  position: absolute;
+  top: 50%;
+  width: var(--v1t-dimensao-fio);
+  height: var(--v1t-regua-entalhe);
+  background: var(--v1t-cor-texto-fraco);
+  transform: translateX(-50%);
+  transition: left var(--v1t-motion-deslocamento) cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.regua-mestra__entalhe[data-origem="config"] { transform: translate(-50%, -100%); background: var(--v1t-cor-texto-medio); }
+/* o entalhe do alvo só acende quando a fenda está aberta — a luz é evento, não ambiente */
+.regua-mestra__entalhe[data-tipo="alvo"] { width: var(--v1t-assinatura-fenda-espessura); }
+[data-vista="em-alvo"] .regua-mestra__entalhe[data-tipo="alvo"] { background: var(--v1t-cor-luz-de-acao); }
+[data-vista="novo-piso"] .regua-mestra__entalhe[data-tipo="alvo"] { background: var(--v1t-cor-luz-de-acao-forte); }
+.regua-mestra__rotulo {
+  position: absolute;
+  transform: translateX(-50%);
+  font-size: var(--v1t-tipo-micro);
+  color: var(--v1t-cor-texto-fraco);
+  white-space: nowrap;
+  transition: left var(--v1t-motion-deslocamento) cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.regua-mestra__rotulo .v1t-num { color: var(--v1t-cor-texto-medio); }
+.regua-mestra__rotulo[data-pos="cima"] { top: calc(50% - var(--v1t-regua-entalhe) - 20px); }
+.regua-mestra__rotulo[data-pos="baixo"] { top: calc(50% + var(--v1t-regua-entalhe) + 2px); }
+.regua-mestra__rotulo[data-tipo="alvo"] { color: var(--v1t-cor-texto-medio); }
+[data-vista="em-alvo"] .regua-mestra__rotulo[data-tipo="alvo"] .v1t-num { color: var(--v1t-cor-luz-de-acao); }
+[data-vista="novo-piso"] .regua-mestra__rotulo[data-tipo="alvo"] .v1t-num { color: var(--v1t-cor-luz-de-acao-forte); }
+/* bordas da faixa moram na linha de CIMA (a linha de baixo pertence à história — evita colisão com fantasma €796) */
+.regua-mestra__borda {
+  position: absolute;
+  top: calc(50% - var(--v1t-regua-entalhe) - 20px);
+  font-size: var(--v1t-tipo-micro);
+  color: var(--v1t-cor-texto-fraco);
+}
+.regua-mestra__borda[data-lado="min"] { left: 0; }
+.regua-mestra__borda[data-lado="max"] { right: 0; }
+
+/* no vazio a régua nasce só com a config — fantasma/piso/leituras só existem quando o histórico existe */
+[data-vista="vazio"] .regua-mestra__entalhe[data-origem="historia"],
+[data-vista="vazio"] .regua-mestra__rotulo[data-origem="historia"] { display: none; }
+
+/* ============================================================
+   G2 — CORTE DO LIMIAR
+   ============================================================ */
+/* nasce no entalhe do alvo e desce a composição inteira. O ELEMENTO é o segmento vivo
+   (da linha da régua à borda da matriz — ELÁSTICO com o campo): aberto = a única luz quente;
+   selado = hairline fria. Sobre a matriz, a MESMA fórmula desenha o hairline seco no fundo
+   do próprio bloco (o campo conhece o limiar) — continuidade sem altura mágica. */
+.corte-limiar {
+  position: absolute;
+  top: calc(var(--v1t-regua-zona-altura) / -2);
+  bottom: 0;
+  width: var(--v1t-assinatura-fenda-espessura);
+  transform: translateX(-50%);
+  background: var(--v1t-cor-luz-de-acao);
+  z-index: 1;
+  pointer-events: none;
+}
+/* o derramamento: a luz entra pela fenda e banha o lado barato — borda dura na fenda,
+   decaimento à esquerda. ESTÁTICO: arquitetura, não pulso. Elástico com a fenda. */
+.corte-limiar__derramamento {
+  position: absolute;
+  top: 0;
+  right: 100%;
+  height: 100%;
+  width: var(--v1t-assinatura-derramamento-alcance);
+  background: linear-gradient(to left, var(--v1t-cor-derramamento), transparent);
+}
+
+/* estados da fenda (a vista da tela governa) */
+[data-vista="acima-do-alvo"] .corte-limiar,
+[data-vista="desatualizado"] .corte-limiar,
+[data-vista="vazio"] .corte-limiar {
+  background: var(--v1t-cor-linha-estrutura);      /* SELADA: superfície de volta a massa contínua fria */
+  width: var(--v1t-dimensao-fio);
+}
+[data-vista="acima-do-alvo"] .corte-limiar__derramamento,
+[data-vista="desatualizado"] .corte-limiar__derramamento,
+[data-vista="vazio"] .corte-limiar__derramamento { display: none; }
+[data-vista="novo-piso"] .corte-limiar { background: var(--v1t-cor-luz-de-acao-forte); }
+[data-vista="novo-piso"] .corte-limiar__derramamento {
+  width: var(--v1t-assinatura-derramamento-alcance-forte);
+  background: linear-gradient(to left, var(--v1t-cor-derramamento-forte), transparent);
+}
+
+/* ---------- o campo do foreground — ELÁSTICO (correção do gate da prova): o lado frio em
+   FLUXO dimensiona o campo, então NADA além da placa acesa cruza a borda da matriz,
+   por construção. A placa acesa excede via bottom negativo derivado (token sobreposicao). ---------- */
+.v1t-campo {
+  position: relative;
+  min-height: var(--v1t-assinatura-campo-altura);
+  padding-bottom: var(--v1t-dimensao-grid-2);
+}
+
+/* ============================================================
+   G3 — PLACA PÊNSIL
+   ============================================================ */
+/* A CORRENTE DO PÊNDULO (correção do gate da prova): régua → haste → corpo, CONTÍNUA.
+   --haste-atual é a única fonte do comprimento do pino: a haste nasce na LINHA da régua
+   (top = −régua/2) e termina exatamente na borda superior do corpo (margin-top = --haste-atual).
+   Vão haste→corpo = 0 por derivação, nos dois regimes (haste 56px / recuo 20px). */
+.placa-pensil {
+  --haste-atual: var(--v1t-assinatura-haste);
+  position: absolute;
+  top: 0;
+  /* a placa ACESA estica até invadir a matriz: sobreposição = constante derivada, não altura mágica */
+  bottom: calc(-1 * var(--v1t-assinatura-sobreposicao));
+  width: var(--v1t-assinatura-placa-largura);
+  display: flex;
+  flex-direction: column;
+  /* o pino crava em x(preço) — a fórmula da escala; o corpo pende deslocado para o lado barato */
+  transform: translateX(calc(var(--v1t-assinatura-placa-pino) * -100%));
+  z-index: 2;
+  transition: left var(--v1t-motion-deslocamento) cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.placa-pensil__haste {
+  position: absolute;
+  top: calc(var(--v1t-regua-zona-altura) / -2);
+  left: calc(var(--v1t-assinatura-placa-pino) * 100%);
+  width: var(--v1t-dimensao-fio);
+  height: calc(var(--v1t-regua-zona-altura) / 2 + var(--haste-atual));
+  background: var(--v1t-cor-texto-medio);   /* haste-pino VISÍVEL (G3) — hairline, mas presente */
+}
+.placa-pensil__corpo {
+  margin-top: var(--haste-atual);
+  flex: 1 1 auto;
+  min-height: 0;
   background: var(--v1t-cor-massa-alta);
   border: var(--v1t-dimensao-fio) solid var(--v1t-cor-linha-estrutura);
   border-radius: var(--v1t-dimensao-chanfro);
-  padding: var(--v1t-dimensao-grid-3) var(--v1t-dimensao-grid-3) var(--v1t-dimensao-grid-2);
+  padding: var(--v1t-dimensao-grid-2) var(--v1t-dimensao-grid-3);
   display: flex;
   flex-direction: column;
-  gap: var(--v1t-dimensao-grid-2);
-  overflow: hidden;
+  gap: var(--v1t-dimensao-grid);
+  /* a sombra REAL projetada sobre o campo da matriz (G3: profundidade por sobreposição) */
+  box-shadow: var(--v1t-assinatura-sombra-projecao) var(--v1t-cor-sombra-placa);
 }
-/* a FRESTA: barra de luz vertical à esquerda — só acende em-alvo/novo-piso */
-.v1t-veredito::before {
-  content: "";
-  position: absolute;
-  left: 0; top: 0; bottom: 0;
-  width: var(--v1t-dimensao-fresta);
-  background: var(--v1t-cor-linha-estrutura);  /* apagada por padrão */
-}
-.v1t-veredito__topo {
+/* o gesto de compra ancora na borda de baixo da placa — o mais perto do campo que ela invade */
+.placa-pensil__corpo .v1t-compra { margin-top: auto; }
+
+.placa-pensil__topo {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -103,7 +264,7 @@ h1, h2, h3, p, figure { margin: 0; }
   color: var(--v1t-cor-texto-medio);
   white-space: nowrap;
 }
-.v1t-veredito__tipo { font-size: var(--v1t-tipo-label); color: var(--v1t-cor-texto-fraco); letter-spacing: var(--v1t-tipo-entreletra-etiqueta); text-transform: uppercase; }
+.placa-pensil__tipo { font-size: var(--v1t-tipo-micro); color: var(--v1t-cor-texto-fraco); letter-spacing: var(--v1t-tipo-entreletra-etiqueta); text-transform: uppercase; }
 
 .v1t-preco {
   font-family: var(--v1t-tipo-familia-numero);
@@ -115,41 +276,50 @@ h1, h2, h3, p, figure { margin: 0; }
   color: var(--v1t-cor-texto-alto);
   letter-spacing: -0.02em;
 }
-.v1t-veredito__meta { display: flex; flex-wrap: wrap; gap: var(--v1t-dimensao-grid) var(--v1t-dimensao-grid-2); color: var(--v1t-cor-texto-medio); font-size: var(--v1t-tipo-corpo); }
-.v1t-veredito__meta .v1t-rota { color: var(--v1t-cor-texto-alto); font-weight: var(--v1t-tipo-peso-medio); }
-.v1t-veredito__meta .v1t-sub { color: var(--v1t-cor-texto-fraco); }
+.placa-pensil__meta { display: flex; flex-wrap: wrap; gap: 4px var(--v1t-dimensao-grid-2); color: var(--v1t-cor-texto-medio); font-size: var(--v1t-tipo-corpo); }
+.placa-pensil__meta .v1t-rota { color: var(--v1t-cor-texto-alto); font-weight: var(--v1t-tipo-peso-medio); }
+.placa-pensil__meta .v1t-sub { color: var(--v1t-cor-texto-fraco); }
+/* o corredor: a posição do pino dita em texto (paridade sem geometria — a assinatura nunca é canal único) */
+.placa-pensil__corredor { font-size: var(--v1t-tipo-label); color: var(--v1t-cor-texto-fraco); }
+.placa-pensil__corredor .v1t-num { color: var(--v1t-cor-texto-medio); }
 
-/* ---- ESTADO em-alvo: a fresta acende (a única luz da tela) ---- */
-.v1t-veredito[data-estado="em-alvo"] { box-shadow: inset 0 0 0 var(--v1t-dimensao-fio) var(--v1t-cor-luz-de-acao-brasa), 0 0 var(--v1t-dimensao-grid-3) var(--v1t-cor-luz-de-acao-brasa); }
-.v1t-veredito[data-estado="em-alvo"]::before { background: var(--v1t-cor-luz-de-acao); }
-.v1t-veredito[data-estado="em-alvo"] .v1t-preco { color: var(--v1t-cor-luz-de-acao); }
-.v1t-veredito[data-estado="em-alvo"] .v1t-etiqueta {
+/* ---- estados da placa ---- */
+.placa-pensil[data-estado="em-alvo"] .v1t-preco { color: var(--v1t-cor-luz-de-acao); }
+.placa-pensil[data-estado="em-alvo"] .v1t-etiqueta {
   color: var(--v1t-cor-texto-sobre-luz);
   background: var(--v1t-cor-luz-de-acao);
   border-color: var(--v1t-cor-luz-de-acao);
 }
-
-/* ---- ESTADO novo-piso: a luz mais intensa + deslocamento com peso (evento raro real) ---- */
-.v1t-veredito[data-estado="novo-piso"] { box-shadow: inset 0 0 0 var(--v1t-dimensao-fio) var(--v1t-cor-luz-de-acao-brasa), 0 0 var(--v1t-dimensao-grid-4) var(--v1t-cor-luz-de-acao-brasa); }
-.v1t-veredito[data-estado="novo-piso"]::before { background: var(--v1t-cor-luz-de-acao-forte); width: calc(var(--v1t-dimensao-fresta) + 2px); }
-.v1t-veredito[data-estado="novo-piso"] .v1t-preco { color: var(--v1t-cor-luz-de-acao-forte); }
-.v1t-veredito[data-estado="novo-piso"] .v1t-etiqueta {
+.placa-pensil[data-estado="novo-piso"] .v1t-preco { color: var(--v1t-cor-luz-de-acao-forte); }
+.placa-pensil[data-estado="novo-piso"] .v1t-etiqueta {
   color: var(--v1t-cor-texto-sobre-luz);
   background: var(--v1t-cor-luz-de-acao-forte);
   border-color: var(--v1t-cor-luz-de-acao-forte);
 }
+.placa-pensil[data-estado="acima-do-alvo"] .v1t-preco { color: var(--v1t-cor-estado-frio); }
+.placa-pensil[data-estado="acima-do-alvo"] .v1t-etiqueta { color: var(--v1t-cor-estado-frio); border-color: var(--v1t-cor-estado-frio); }
+.placa-pensil[data-estado="sem-dado"] .v1t-preco { color: var(--v1t-cor-texto-fraco); font-size: var(--v1t-tipo-ow); }
+.placa-pensil[data-estado="sem-dado"] .v1t-etiqueta { color: var(--v1t-cor-texto-fraco); }
 
-/* ---- ESTADO acima-do-alvo: frio, apagado. Significa 'não é hora' pela AUSÊNCIA de luz ---- */
-.v1t-veredito[data-estado="acima-do-alvo"]::before { background: var(--v1t-cor-estado-frio); }
-.v1t-veredito[data-estado="acima-do-alvo"] .v1t-preco { color: var(--v1t-cor-estado-frio); }
-.v1t-veredito[data-estado="acima-do-alvo"] .v1t-etiqueta { color: var(--v1t-cor-estado-frio); border-color: var(--v1t-cor-estado-frio); }
+/* estados FRIOS: a placa pende rasa (--haste-atual = recuo, corrente CONTÍNUA por derivação)
+   e NÃO sobrepõe a matriz (bottom: auto) — massa recua quando não é hora (Ando);
+   a interrupção de planos é privilégio do estado aceso */
+[data-vista="acima-do-alvo"] .placa-pensil,
+[data-vista="desatualizado"] .placa-pensil {
+  --haste-atual: var(--v1t-assinatura-haste-recuo);
+  bottom: auto;
+}
+[data-vista="acima-do-alvo"] .placa-pensil__corpo,
+[data-vista="desatualizado"] .placa-pensil__corpo { box-shadow: none; }
+/* quando o pino cruza para o lado caro, o lado frio espelha para o lado barato (agora vazio) */
+[data-vista="acima-do-alvo"] .v1t-lado-frio { margin-left: 0; margin-right: 70%; }
 
-/* ---- ESTADO sem-dado: sem veredito falso ---- */
-.v1t-veredito[data-estado="sem-dado"] .v1t-preco { color: var(--v1t-cor-texto-fraco); font-size: var(--v1t-tipo-ow); }
-.v1t-veredito[data-estado="sem-dado"] .v1t-etiqueta { color: var(--v1t-cor-texto-fraco); }
-.v1t-veredito[data-estado="sem-dado"] .v1t-veredito__meta { color: var(--v1t-cor-texto-fraco); }
+/* vazio: sem preço não há pino — a placa não finge coordenada */
+[data-vista="vazio"] .placa-pensil { position: static; transform: none; bottom: auto; margin-bottom: var(--v1t-dimensao-grid-2); }
+[data-vista="vazio"] .placa-pensil__haste { display: none; }
+[data-vista="vazio"] .placa-pensil__corpo { margin-top: 0; box-shadow: none; }
 
-/* ===== Gesto de compra — o único ponto de consequência (acento médico: clareza total) ===== */
+/* ===== Gesto de compra — único ponto de consequência (acento médico: clareza total) ===== */
 .v1t-compra {
   display: inline-flex;
   align-items: center;
@@ -171,25 +341,39 @@ h1, h2, h3, p, figure { margin: 0; }
 }
 .v1t-compra:focus-visible { outline: 2px solid var(--v1t-cor-luz-de-acao-forte); outline-offset: 3px; }
 .v1t-compra__seta { font-family: var(--v1t-tipo-familia-numero); }
-/* fora de alvo, o gesto perde a luz quente e vira ação fria e sóbria (não convida, mas existe) */
-.v1t-veredito[data-estado="acima-do-alvo"] .v1t-compra,
-.v1t-veredito[data-estado="sem-dado"] .v1t-compra {
+.placa-pensil[data-estado="acima-do-alvo"] .v1t-compra,
+.placa-pensil[data-estado="sem-dado"] .v1t-compra {
+  color: var(--v1t-cor-texto-medio);
+  background: transparent;
+  border-color: var(--v1t-cor-estado-frio);
+}
+/* no lado frio o gesto existe mas SEM a luz — toda luz quente aponta para a decisão dominante (§9) */
+.v1t-lado-frio .v1t-compra {
   color: var(--v1t-cor-texto-medio);
   background: transparent;
   border-color: var(--v1t-cor-estado-frio);
 }
 
-/* ===== Cartão OW — irmão secundário, sem a luz quente ===== */
-.v1t-ow {
-  background: var(--v1t-cor-massa-alta);
-  border: var(--v1t-dimensao-fio) solid var(--v1t-cor-linha-estrutura);
-  border-radius: var(--v1t-dimensao-chanfro);
-  padding: var(--v1t-dimensao-grid-3);
+/* ---------- o lado frio: OW + instrumentos (sem luz quente, nunca) ----------
+   Em FLUXO (correção do gate da prova): é ele quem dimensiona o campo — o selo de frescor
+   fica sempre integralmente visível e nada aqui interpenetra a matriz. */
+.v1t-lado-frio {
+  width: 30%;
+  margin-left: 70%;
   display: flex;
   flex-direction: column;
   gap: var(--v1t-dimensao-grid);
 }
-.v1t-ow__rotulo { font-size: var(--v1t-tipo-label); color: var(--v1t-cor-texto-fraco); letter-spacing: var(--v1t-tipo-entreletra-etiqueta); text-transform: uppercase; }
+.v1t-ow {
+  background: var(--v1t-cor-massa-alta);
+  border: var(--v1t-dimensao-fio) solid var(--v1t-cor-linha-estrutura);
+  border-radius: var(--v1t-dimensao-chanfro);
+  padding: var(--v1t-dimensao-grid-2);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.v1t-ow__rotulo { font-size: var(--v1t-tipo-micro); color: var(--v1t-cor-texto-fraco); letter-spacing: var(--v1t-tipo-entreletra-etiqueta); text-transform: uppercase; }
 .v1t-ow__preco {
   font-family: var(--v1t-tipo-familia-numero);
   font-feature-settings: var(--v1t-tipo-trilha-tabular);
@@ -199,78 +383,38 @@ h1, h2, h3, p, figure { margin: 0; }
   color: var(--v1t-cor-texto-alto);
   line-height: 1;
 }
-.v1t-ow__meta { font-size: var(--v1t-tipo-label); color: var(--v1t-cor-texto-medio); }
+.v1t-ow__meta { font-size: var(--v1t-tipo-micro); color: var(--v1t-cor-texto-medio); }
 .v1t-ow__meta .v1t-sub { color: var(--v1t-cor-texto-fraco); }
-.v1t-ow .v1t-compra { margin-top: var(--v1t-dimensao-grid); color: var(--v1t-cor-texto-medio); background: transparent; border-color: var(--v1t-cor-estado-frio); }
+.v1t-ow__estado { font-size: var(--v1t-tipo-micro); color: var(--v1t-cor-texto-fraco); letter-spacing: 0.04em; text-transform: uppercase; }
 
-/* ---------- MIDGROUND — trilha de contexto (peso médio, sem luz de alarme) ---------- */
-.v1t-midground {
-  display: grid;
-  grid-template-columns: 1.6fr 1fr;
-  gap: var(--v1t-dimensao-grid-3);
-  margin-bottom: var(--v1t-dimensao-grid-3);
-}
-
-/* ===== Barra de posição histórica ===== */
-.v1t-historico {
+.v1t-instrumentos {
   background: var(--v1t-cor-massa-media);
   border: var(--v1t-dimensao-fio) solid var(--v1t-cor-linha-estrutura);
   border-radius: var(--v1t-dimensao-chanfro);
-  padding: var(--v1t-dimensao-grid-3);
+  padding: var(--v1t-dimensao-grid-2);
+  display: flex;
+  flex-direction: column;
+  gap: var(--v1t-dimensao-grid);
 }
-.v1t-historico__titulo,
 .v1t-painel__titulo {
-  font-size: var(--v1t-tipo-label);
+  font-size: var(--v1t-tipo-micro);
   color: var(--v1t-cor-texto-fraco);
   letter-spacing: var(--v1t-tipo-entreletra-etiqueta);
   text-transform: uppercase;
-  margin-bottom: var(--v1t-dimensao-grid-2);
+  margin-bottom: 2px;
 }
-/* trilho: fantasma → piso → atual, marcadores em posição real da escala */
-.v1t-trilho { position: relative; height: 6px; background: var(--v1t-cor-massa-alta); border-radius: var(--v1t-dimensao-chanfro); margin: var(--v1t-dimensao-grid-3) 0 var(--v1t-dimensao-grid-2); }
-.v1t-trilho__marca { position: absolute; top: -5px; width: var(--v1t-dimensao-fio); height: 16px; background: var(--v1t-cor-texto-fraco); transform: translateX(-50%); }
-.v1t-trilho__marca[data-tipo="fantasma"] { background: var(--v1t-cor-estado-frio); }
-.v1t-trilho__marca[data-tipo="piso"] { background: var(--v1t-cor-texto-medio); }
-.v1t-trilho__marca[data-tipo="atual"] { background: var(--v1t-cor-luz-de-acao); height: 20px; top: -7px; width: calc(var(--v1t-dimensao-fio) + 1px); }
-.v1t-trilho__legenda { position: absolute; top: 18px; transform: translateX(-50%); font-size: var(--v1t-tipo-micro); color: var(--v1t-cor-texto-fraco); white-space: nowrap; }
-.v1t-trilho__legenda .v1t-num { color: var(--v1t-cor-texto-medio); }
-.v1t-trilho__legenda[data-tipo="atual"] .v1t-num { color: var(--v1t-cor-luz-de-acao); }
-
-.v1t-historico__leitura { display: flex; flex-wrap: wrap; gap: var(--v1t-dimensao-grid-3); margin-top: var(--v1t-dimensao-grid-4); }
-.v1t-dado { display: flex; flex-direction: column; gap: 2px; }
-.v1t-dado__rotulo { font-size: var(--v1t-tipo-micro); color: var(--v1t-cor-texto-fraco); letter-spacing: 0.04em; text-transform: uppercase; }
-.v1t-dado__valor { font-family: var(--v1t-tipo-familia-numero); font-variant-numeric: tabular-nums lining-nums; font-size: var(--v1t-tipo-titulo); color: var(--v1t-cor-texto-alto); }
-.v1t-dado__valor.v1t-distancia { color: var(--v1t-cor-texto-medio); }
-
-/* estados da barra histórica */
-.v1t-historico[data-estado="no-piso"] .v1t-dado__valor.v1t-distancia { color: var(--v1t-cor-luz-de-acao); }
-.v1t-historico[data-estado="novo-piso"] { box-shadow: inset 0 0 0 var(--v1t-dimensao-fio) var(--v1t-cor-luz-de-acao-brasa); }
-.v1t-historico[data-estado="novo-piso"] .v1t-dado__valor.v1t-distancia { color: var(--v1t-cor-luz-de-acao-forte); }
-
-/* ===== Painel de leitura (tendência + selo frescor/confiança) ===== */
-.v1t-painel {
-  background: var(--v1t-cor-massa-media);
-  border: var(--v1t-dimensao-fio) solid var(--v1t-cor-linha-estrutura);
-  border-radius: var(--v1t-dimensao-chanfro);
-  padding: var(--v1t-dimensao-grid-3);
-  display: flex;
-  flex-direction: column;
-  gap: var(--v1t-dimensao-grid-3);
-}
-
-/* Indicador de tendência — seta mínima como vetor (Moholy-Nagy) */
 .v1t-tendencia { display: flex; align-items: baseline; gap: var(--v1t-dimensao-grid); }
-.v1t-tendencia__seta { font-family: var(--v1t-tipo-familia-numero); font-size: var(--v1t-tipo-titulo); color: var(--v1t-cor-texto-medio); width: 1.2em; text-align: center; }
-.v1t-tendencia__rotulo { font-size: var(--v1t-tipo-corpo); color: var(--v1t-cor-texto-alto); text-transform: uppercase; letter-spacing: var(--v1t-tipo-entreletra-etiqueta); }
+.v1t-tendencia__seta { font-family: var(--v1t-tipo-familia-numero); font-size: var(--v1t-tipo-corpo); color: var(--v1t-cor-texto-medio); width: 1.2em; text-align: center; }
+.v1t-tendencia__rotulo { font-size: var(--v1t-tipo-label); color: var(--v1t-cor-texto-alto); text-transform: uppercase; letter-spacing: var(--v1t-tipo-entreletra-etiqueta); }
 .v1t-tendencia__nota { font-size: var(--v1t-tipo-micro); color: var(--v1t-cor-texto-fraco); }
 .v1t-tendencia[data-estado="indefinida"] .v1t-tendencia__rotulo { color: var(--v1t-cor-texto-fraco); }
 
-/* Selo de frescor + confiança — o único elemento que respira (pulso de frescor) */
-.v1t-selo { display: flex; align-items: flex-start; gap: var(--v1t-dimensao-grid-2); }
+/* Selo de frescor + confiança — o ÚNICO elemento que respira (o daemon vivo) */
+.v1t-selo { display: flex; align-items: flex-start; gap: var(--v1t-dimensao-grid); }
 .v1t-selo__pulso {
   flex: none;
   width: 9px; height: 9px;
-  margin-top: 5px;
+  margin-top: 4px;
   border-radius: 50%;
   background: var(--v1t-cor-texto-medio);
   position: relative;
@@ -284,16 +428,14 @@ h1, h2, h3, p, figure { margin: 0; }
   animation: v1t-respira var(--v1t-motion-pulso-frescor) ease-in-out infinite;
 }
 .v1t-selo__texto { display: flex; flex-direction: column; gap: 2px; }
-.v1t-selo__linha { font-size: var(--v1t-tipo-label); color: var(--v1t-cor-texto-medio); }
+.v1t-selo__linha { font-size: var(--v1t-tipo-micro); color: var(--v1t-cor-texto-medio); }
 .v1t-selo__linha .v1t-num { color: var(--v1t-cor-texto-alto); }
 .v1t-selo__estado { font-size: var(--v1t-tipo-micro); letter-spacing: var(--v1t-tipo-entreletra-etiqueta); text-transform: uppercase; }
-/* confiança: confiavel / parcial / ruido / desatualizado — nunca só cor, sempre rótulo */
 .v1t-selo[data-confianca="confiavel"] .v1t-selo__estado { color: var(--v1t-cor-texto-medio); }
 .v1t-selo[data-confianca="parcial"] .v1t-selo__estado { color: var(--v1t-cor-texto-fraco); }
 .v1t-selo[data-confianca="ruido"] .v1t-selo__estado { color: var(--v1t-cor-texto-fraco); }
 .v1t-selo[data-confianca="ruido"] .v1t-selo__pulso { background: var(--v1t-cor-texto-fraco); }
 .v1t-selo[data-confianca="ruido"] .v1t-selo__pulso::after { border-color: var(--v1t-cor-texto-fraco); }
-/* desatualizado: falha visível, âmbar sóbrio (jamais sirene) + pulso PARADO (o daemon não bateu) */
 .v1t-selo[data-confianca="desatualizado"] .v1t-selo__estado { color: var(--v1t-cor-estado-atencao); }
 .v1t-selo[data-confianca="desatualizado"] .v1t-selo__pulso { background: var(--v1t-cor-estado-atencao); }
 .v1t-selo[data-confianca="desatualizado"] .v1t-selo__pulso::after { animation: none; }
@@ -304,14 +446,42 @@ h1, h2, h3, p, figure { margin: 0; }
   100% { opacity: 0; transform: scale(1.6); }
 }
 
-/* ---------- MIDGROUND — matriz de cenários (tabela honesta) ---------- */
+/* ============================================================
+   MIDGROUND — matriz com trilhos-DNA (G1 descendo ao campo)
+   ============================================================ */
+/* PADDING HORIZONTAL ZERO (correção de coerência G1): o sistema de coordenadas das linhas
+   é o MESMO da régua — "distância na tela = distância em euros" vale também na matriz.
+   O bloco desenha no próprio fundo o hairline seco do corte, com a MESMA fórmula (--preco
+   herdado da seção = o alvo): o campo conhece o limiar, sem altura mágica. */
 .v1t-matriz-bloco {
-  background: var(--v1t-cor-massa-media);
-  border: var(--v1t-dimensao-fio) solid var(--v1t-cor-linha-estrutura);
+  position: relative;
+  background-color: var(--v1t-cor-massa-media);
+  background-image: linear-gradient(var(--v1t-cor-linha-estrutura), var(--v1t-cor-linha-estrutura));
+  background-repeat: no-repeat;
+  background-size: var(--v1t-dimensao-fio) 100%;
+  background-position:
+    calc((var(--preco) - var(--v1t-regua-min)) / (var(--v1t-regua-max) - var(--v1t-regua-min)) * 100%) 0;
+  border-top: var(--v1t-dimensao-fio) solid var(--v1t-cor-linha-estrutura);
+  border-bottom: var(--v1t-dimensao-fio) solid var(--v1t-cor-linha-estrutura);
   border-radius: var(--v1t-dimensao-chanfro);
-  padding: var(--v1t-dimensao-grid-3);
+  padding: var(--v1t-dimensao-grid-2) 0 var(--v1t-dimensao-grid-3);
 }
-.v1t-matriz-bloco__cabecalho { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: var(--v1t-dimensao-grid-2); }
+.v1t-matriz-bloco__cabecalho {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--v1t-dimensao-grid-2);
+  margin-bottom: var(--v1t-dimensao-grid-2);
+  padding: 0 var(--v1t-dimensao-grid-3);
+}
+.v1t-matriz-bloco__titulo {
+  font-size: var(--v1t-tipo-micro);
+  color: var(--v1t-cor-texto-fraco);
+  letter-spacing: var(--v1t-tipo-entreletra-etiqueta);
+  text-transform: uppercase;
+}
+/* a legenda mora ABAIXO da tabela (rodapé do campo) — o cabeçalho direito fica sob a placa pênsil */
+.v1t-matriz-bloco__legenda { font-size: var(--v1t-tipo-micro); color: var(--v1t-cor-texto-fraco); margin-top: var(--v1t-dimensao-grid-2); text-align: right; padding: 0 var(--v1t-dimensao-grid-3); }
 .v1t-matriz-scroll { overflow-x: auto; }
 .v1t-matriz {
   width: 100%;
@@ -320,7 +490,7 @@ h1, h2, h3, p, figure { margin: 0; }
 }
 .v1t-matriz thead th {
   text-align: left;
-  padding: var(--v1t-dimensao-grid) var(--v1t-dimensao-grid-2);
+  padding: var(--v1t-dimensao-grid) var(--v1t-dimensao-grid-2) var(--v1t-dimensao-grid) 0;
   color: var(--v1t-cor-texto-fraco);
   font-weight: var(--v1t-tipo-peso-medio);
   letter-spacing: 0.04em;
@@ -328,15 +498,32 @@ h1, h2, h3, p, figure { margin: 0; }
   border-bottom: var(--v1t-dimensao-fio) solid var(--v1t-cor-linha-estrutura);
   white-space: nowrap;
 }
-.v1t-matriz tbody td {
-  padding: var(--v1t-dimensao-grid) var(--v1t-dimensao-grid-2);
-  border-bottom: var(--v1t-dimensao-fio) solid var(--v1t-cor-linha-tenue);
+/* primeira e última coluna ganham o respiro que o bloco perdeu (coordenada > moldura) */
+.v1t-matriz thead th:first-child,
+.v1t-matriz tbody th[scope="row"] { padding-left: var(--v1t-dimensao-grid-3); }
+.v1t-matriz thead th:last-child,
+.v1t-matriz tbody td:last-child { padding-right: var(--v1t-dimensao-grid-3); }
+
+/* CADA LINHA É UM TRILHO: fio-DNA + tick do preço na MESMA escala da régua (fórmula única).
+   Tick por POSIÇÃO na escala compartilhada — nunca comprimento de barra. */
+.v1t-matriz tbody tr {
+  background-image:
+    linear-gradient(var(--v1t-cor-texto-fraco), var(--v1t-cor-texto-fraco)),   /* o tick */
+    linear-gradient(var(--v1t-cor-linha-tenue), var(--v1t-cor-linha-tenue));   /* o trilho */
+  background-repeat: no-repeat;
+  background-size: var(--v1t-assinatura-fenda-espessura) var(--v1t-regua-tick-matriz), 100% var(--v1t-dimensao-fio);
+  background-position:
+    calc((var(--preco) - var(--v1t-regua-min)) / (var(--v1t-regua-max) - var(--v1t-regua-min)) * 100%) bottom,
+    0 bottom;
+}
+.v1t-matriz tbody td,
+.v1t-matriz tbody th[scope="row"] {
+  padding: var(--v1t-dimensao-grid) var(--v1t-dimensao-grid-2) calc(var(--v1t-dimensao-grid) + var(--v1t-regua-tick-matriz)) 0;
   color: var(--v1t-cor-texto-medio);
   white-space: nowrap;
+  background: none;
 }
 .v1t-matriz tbody th[scope="row"] {
-  padding: var(--v1t-dimensao-grid) var(--v1t-dimensao-grid-2);
-  border-bottom: var(--v1t-dimensao-fio) solid var(--v1t-cor-linha-tenue);
   text-align: left;
   font-family: var(--v1t-tipo-familia-numero);
   font-variant-numeric: tabular-nums lining-nums;
@@ -344,12 +531,28 @@ h1, h2, h3, p, figure { margin: 0; }
   color: var(--v1t-cor-texto-alto);
 }
 .v1t-matriz .v1t-col-num { font-family: var(--v1t-tipo-familia-numero); font-variant-numeric: tabular-nums lining-nums; }
-.v1t-matriz .v1t-marca { color: var(--v1t-cor-texto-fraco); }
 .v1t-matriz a { color: var(--v1t-cor-texto-medio); text-decoration: none; border-bottom: var(--v1t-dimensao-fio) solid var(--v1t-cor-estado-frio); }
 .v1t-matriz a:focus-visible { outline: 2px solid var(--v1t-cor-luz-de-acao); outline-offset: 2px; }
 
-/* linha em-alvo: marcador DISCRETO — fresta fina na borda, não fundo gritante */
-.v1t-matriz tr[data-marca="em-alvo"] th[scope="row"] { color: var(--v1t-cor-luz-de-acao); box-shadow: inset var(--v1t-dimensao-fresta) 0 0 0 var(--v1t-cor-luz-de-acao); }
+/* estouro da faixa: o tick encosta na borda com entalhe DUPLO (honesto, sem esconder) */
+.v1t-matriz tbody tr.v1t-estouro {
+  background-image:
+    linear-gradient(var(--v1t-cor-texto-fraco), var(--v1t-cor-texto-fraco)),
+    linear-gradient(var(--v1t-cor-texto-fraco), var(--v1t-cor-texto-fraco)),
+    linear-gradient(var(--v1t-cor-linha-tenue), var(--v1t-cor-linha-tenue));
+  background-size:
+    var(--v1t-assinatura-fenda-espessura) var(--v1t-regua-tick-matriz),
+    var(--v1t-assinatura-fenda-espessura) var(--v1t-regua-tick-matriz),
+    100% var(--v1t-dimensao-fio);
+  background-position: 100% bottom, calc(100% - 5px) bottom, 0 bottom;
+}
+/* linha em alvo: o tick acende — marcador discreto; o corte hairline já dá o limiar espacial */
+.v1t-matriz tbody tr[data-marca="em-alvo"] {
+  background-image:
+    linear-gradient(var(--v1t-cor-luz-de-acao), var(--v1t-cor-luz-de-acao)),
+    linear-gradient(var(--v1t-cor-linha-tenue), var(--v1t-cor-linha-tenue));
+}
+.v1t-matriz tr[data-marca="em-alvo"] th[scope="row"] { color: var(--v1t-cor-luz-de-acao); }
 .v1t-matriz tr[data-marca="em-alvo"] .v1t-marca { color: var(--v1t-cor-luz-de-acao); }
 
 /* ---------- Rito de compra (nível 3) — leitura de consequência ---------- */
@@ -364,7 +567,8 @@ h1, h2, h3, p, figure { margin: 0; }
   border: var(--v1t-dimensao-fio) solid var(--v1t-cor-luz-de-acao);
   border-radius: var(--v1t-dimensao-chanfro);
   padding: var(--v1t-dimensao-grid-4);
-  box-shadow: 0 0 var(--v1t-dimensao-grid-4) var(--v1t-cor-luz-de-acao-brasa);
+  /* foco por borda + elevação NEUTRA — aura/glow ao redor de caixa é proibição do G2 */
+  box-shadow: var(--v1t-assinatura-sombra-projecao) var(--v1t-cor-sombra-placa);
 }
 .v1t-rito__rotulo { font-size: var(--v1t-tipo-micro); color: var(--v1t-cor-luz-de-acao); letter-spacing: var(--v1t-tipo-entreletra-etiqueta); text-transform: uppercase; margin-bottom: var(--v1t-dimensao-grid-2); }
 .v1t-rito__consequencia { font-size: var(--v1t-tipo-titulo); color: var(--v1t-cor-texto-alto); line-height: 1.5; }
@@ -387,26 +591,23 @@ h1, h2, h3, p, figure { margin: 0; }
 .v1t-rito__offline { margin-top: var(--v1t-dimensao-grid-2); font-size: var(--v1t-tipo-label); color: var(--v1t-cor-estado-atencao); display: none; }
 .v1t-rito[data-offline="true"] .v1t-rito__offline { display: block; }
 
-/* ---------- Nota de estado degradado / vazio / offline (inline, honesta) ---------- */
-.v1t-nota-estado {
-  font-size: var(--v1t-tipo-label);
-  color: var(--v1t-cor-texto-fraco);
-  border-left: var(--v1t-dimensao-fresta) solid var(--v1t-cor-estado-frio);
-  padding: var(--v1t-dimensao-grid) var(--v1t-dimensao-grid-2);
-  margin-bottom: var(--v1t-dimensao-grid-2);
+/* ---------- MOTION: a entrada É o corte de luz — a fenda abre e a luz revela a placa ---------- */
+@keyframes v1t-abre-fenda {
+  from { clip-path: inset(0 0 100% 0); }
+  to   { clip-path: inset(0 0 0 0); }
 }
-.v1t-nota-estado[data-tom="atencao"] { color: var(--v1t-cor-estado-atencao); border-left-color: var(--v1t-cor-estado-atencao); }
-
-/* ---------- MOTION: entrada por corte de luz (Ando) ---------- */
-@keyframes v1t-corte-de-luz {
-  from { clip-path: inset(0 100% 0 0); opacity: 0.2; }
+@keyframes v1t-revela-pela-luz {
+  from { clip-path: inset(0 0 0 100%); opacity: 0.25; }
   to   { clip-path: inset(0 0 0 0); opacity: 1; }
 }
-.v1t-anima-entrada .v1t-veredito {
-  animation: v1t-corte-de-luz var(--v1t-motion-corte-de-luz) cubic-bezier(0.2,0.7,0.2,1) both;
+.v1t-anima-entrada .corte-limiar {
+  animation: v1t-abre-fenda var(--v1t-motion-corte-de-luz) cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+.v1t-anima-entrada .placa-pensil__corpo {
+  animation: v1t-revela-pela-luz var(--v1t-motion-corte-de-luz) cubic-bezier(0.2, 0.7, 0.2, 1) both;
 }
 
-/* ---------- rodapé: switcher de demonstração (ferramenta, separado da tela provada) ---------- */
+/* ---------- rodapé: switcher de demonstração (ferramenta, separada da tela provada) ---------- */
 .v1t-demo {
   margin-top: var(--v1t-dimensao-grid-4);
   padding-top: var(--v1t-dimensao-grid-3);
@@ -429,15 +630,23 @@ h1, h2, h3, p, figure { margin: 0; }
 .v1t-demo__botao[aria-pressed="true"] { color: var(--v1t-cor-texto-alto); border-color: var(--v1t-cor-estado-frio); background: var(--v1t-cor-massa-alta); }
 .v1t-demo__botao:focus-visible { outline: 2px solid var(--v1t-cor-estado-frio); outline-offset: 2px; }
 
-/* ---------- responsivo: degrada legível em telas estreitas ---------- */
-@media (max-width: 860px) {
-  .v1t-foreground, .v1t-midground { grid-template-columns: 1fr; }
+/* ---------- responsivo: assinatura plena é desktop-primeiro (§1); em tela estreita a
+   composição desce ao fluxo LEGÍVEL — placa estática, fenda recolhida, trilhos mantidos ---------- */
+@media (max-width: 900px) {
+  .corte-limiar { display: none; }
+  .v1t-matriz-bloco { background-image: none; }
+  .v1t-campo { min-height: 0; display: flex; flex-direction: column; gap: var(--v1t-dimensao-grid-2); }
+  .placa-pensil { position: static; transform: none; width: 100%; bottom: auto; }
+  .placa-pensil__haste { display: none; }
+  .placa-pensil__corpo { margin-top: 0; box-shadow: none; }
+  .v1t-lado-frio { width: 100%; margin-left: 0; margin-right: 0; }
   .v1t-preco { font-size: 56px; }
 }
 
-/* ---------- prefers-reduced-motion: desliga pulso e transições, mantém tudo legível estático ---------- */
+/* ---------- prefers-reduced-motion: desliga pulso, entrada e deslocamentos; tudo legível estático ---------- */
 @media (prefers-reduced-motion: reduce) {
   .v1t-selo__pulso::after { animation: none; opacity: 0.4; transform: none; }
-  .v1t-anima-entrada .v1t-veredito { animation: none; }
+  .v1t-anima-entrada .corte-limiar,
+  .v1t-anima-entrada .placa-pensil__corpo { animation: none; }
   * { transition: none !important; }
 }

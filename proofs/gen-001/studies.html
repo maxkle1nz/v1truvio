@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>gen-001 — estudo formal (3 composições divergentes)</title>
+<style>
+/* ESBOÇOS ESTRUTURAIS CRUS — não é o specimen; sem polimento, hex soltos permitidos aqui.
+   Os três materializam os MESMOS 3 gestos (G1 régua-mestra / G2 corte do limiar / G3 placa pênsil)
+   de formas divergentes. Escala real 780–1050 em todos. */
+body { background:#0E0F12; color:#B9BCC4; font-family:-apple-system,system-ui,sans-serif; margin:24px; }
+h1 { font-size:14px; text-transform:uppercase; letter-spacing:.08em; color:#F2EFE9; }
+p.nota { font-size:12px; color:#868B94; max-width:70ch; }
+.estudo { margin:28px 0; }
+.estudo h2 { font-size:12px; text-transform:uppercase; letter-spacing:.08em; color:#F2EFE9; }
+.estudo p { font-size:11px; color:#868B94; max-width:80ch; }
+.tela { position:relative; width:960px; height:420px; background:#101116; border:1px solid #2A2E35; overflow:hidden;
+  --min:780; --max:1050; }
+.tela * { position:absolute; box-sizing:border-box; }
+/* fórmula única da escala (a mesma dos 3) */
+.px { left: calc((var(--preco) - var(--min)) / (var(--max) - var(--min)) * 100%); }
+.regua { left:0; right:0; height:1px; background:#2A2E35; }
+.ent { width:1px; background:#868B94; }
+.ent.alvo { background:#F4A24C; }
+.lbl { font-size:9px; color:#868B94; transform:translateX(-50%); white-space:nowrap; }
+.fenda { width:2px; background:#F4A24C; }
+.derrame { background:linear-gradient(to left, rgba(244,162,76,.16), transparent); }
+.placa { background:#16181C; border:1px solid #2A2E35; box-shadow:0 22px 44px rgba(4,5,7,.62); }
+.placa .p { position:static; display:block; font:700 28px ui-monospace,monospace; color:#F4A24C; padding:10px 12px 0; }
+.placa .e { position:static; display:inline-block; font-size:8px; letter-spacing:.08em; color:#1B120A; background:#F4A24C; padding:2px 6px; margin:10px 0 0 12px; }
+.haste { width:1px; background:#868B94; }
+.campo { left:0; right:0; background:#1C1F24; border-top:1px solid #2A2E35; }
+.linha-m { left:0; right:0; height:1px; background:rgba(230,232,238,.08); }
+.tick { width:2px; height:8px; background:#868B94; transform:translateX(-50%); }
+.frio { background:#16181C; border:1px solid #2A2E35; }
+.frio span { position:static; display:block; font-size:9px; color:#868B94; padding:6px 8px 0; }
+</style>
+</head>
+<body>
+<h1>Estudo formal — gen-001 re-aterrissagem</h1>
+<p class="nota">Três estruturas divergentes para os mesmos três gestos obrigatórios (§8 Assinatura formal). Escala única €780–1050 em todos; posições reais (fantasma 5.9% · alvo-OW 44.4% · piso 48.9% · pino €948 62.2% · fenda €960 66.7% · OW €1004 83%). Escolha e rejeições registradas em NOTES.md.</p>
+
+<!-- ================= ESTUDO A ================= -->
+<div class="estudo">
+<h2>A — régua no alto · pêndulo curto · derramamento médio</h2>
+<p>Régua na zona alta (ordem de leitura de instrumento: escala → veredito → campo). Haste curta (56px), pino a 92% do corpo (assimetria Lissitzky), placa sobrepõe a matriz ~56px. Derramamento médio (260px) morre antes do lado frio.</p>
+<div class="tela">
+  <div class="regua" style="top:56px"></div>
+  <div class="ent px" style="--preco:796; top:56px; height:10px"></div><div class="lbl px" style="--preco:796; top:70px">fantasma €796</div>
+  <div class="ent px" style="--preco:900; top:46px; height:10px"></div><div class="lbl px" style="--preco:900; top:34px">alvo OW €900</div>
+  <div class="ent px" style="--preco:912; top:56px; height:10px"></div><div class="lbl px" style="--preco:912; top:70px">piso €912</div>
+  <div class="ent alvo px" style="--preco:960; top:46px; height:10px"></div><div class="lbl px" style="--preco:960; top:34px">alvo €960</div>
+  <div class="ent px" style="--preco:1004; top:56px; height:8px"></div><div class="lbl px" style="--preco:1004; top:70px">OW €1004</div>
+  <div class="fenda px" style="--preco:960; top:56px; height:364px"></div>
+  <div class="derrame" style="top:57px; height:230px; width:260px; left:calc((960 - var(--min)) / (var(--max) - var(--min)) * 100% - 260px)"></div>
+  <div class="haste px" style="--preco:948; top:57px; height:56px"></div>
+  <div class="placa px" style="--preco:948; top:113px; width:380px; height:210px; transform:translateX(-92%)">
+    <span class="e">EM ALVO</span><span class="p">€948</span>
+  </div>
+  <div class="frio" style="left:calc((960 - var(--min)) / (var(--max) - var(--min)) * 100% + 24px); right:16px; top:113px; height:150px"><span>lado frio: OW €1004 · tendência · selo</span></div>
+  <div class="campo" style="top:288px; height:132px"></div>
+  <div class="linha-m" style="top:320px"></div><div class="tick px" style="--preco:948; top:314px; background:#F4A24C"></div>
+  <div class="linha-m" style="top:346px"></div><div class="tick px" style="--preco:1004; top:340px"></div>
+  <div class="linha-m" style="top:372px"></div><div class="tick px" style="--preco:1014; top:366px"></div>
+  <div class="linha-m" style="top:398px"></div><div class="tick" style="right:2px; top:392px"></div>
+</div>
+</div>
+
+<!-- ================= ESTUDO B ================= -->
+<div class="estudo">
+<h2>B — régua como espinha central · derramamento forte</h2>
+<p>Régua no meio vertical; lado frio ACIMA dela; a placa pende da espinha para baixo, mergulhando na matriz. Derramamento forte (400px, .22) banha a placa inteira — a luz vira ambiente do quadrante.</p>
+<div class="tela">
+  <div class="frio" style="left:calc((960 - var(--min)) / (var(--max) - var(--min)) * 100% + 24px); right:16px; top:24px; height:130px"><span>lado frio: OW · tendência · selo</span></div>
+  <div class="regua" style="top:180px"></div>
+  <div class="ent px" style="--preco:796; top:180px; height:10px"></div><div class="lbl px" style="--preco:796; top:194px">fantasma €796</div>
+  <div class="ent px" style="--preco:900; top:170px; height:10px"></div><div class="lbl px" style="--preco:900; top:158px">alvo OW €900</div>
+  <div class="ent px" style="--preco:912; top:180px; height:10px"></div><div class="lbl px" style="--preco:912; top:194px">piso €912</div>
+  <div class="ent alvo px" style="--preco:960; top:170px; height:10px"></div><div class="lbl px" style="--preco:960; top:158px">alvo €960</div>
+  <div class="fenda px" style="--preco:960; top:0; height:420px"></div>
+  <div class="derrame" style="top:181px; height:180px; width:400px; left:calc((960 - var(--min)) / (var(--max) - var(--min)) * 100% - 400px); background:linear-gradient(to left, rgba(244,162,76,.22), transparent)"></div>
+  <div class="haste px" style="--preco:948; top:181px; height:44px"></div>
+  <div class="placa px" style="--preco:948; top:225px; width:380px; height:150px; transform:translateX(-92%)">
+    <span class="e">EM ALVO</span><span class="p">€948</span>
+  </div>
+  <div class="campo" style="top:340px; height:80px"></div>
+  <div class="linha-m" style="top:368px"></div><div class="tick px" style="--preco:948; top:362px; background:#F4A24C"></div>
+  <div class="linha-m" style="top:396px"></div><div class="tick px" style="--preco:1004; top:390px"></div>
+</div>
+</div>
+
+<!-- ================= ESTUDO C ================= -->
+<div class="estudo">
+<h2>C — haste longa · placa inclinada (pêndulo físico) · derramamento-fio</h2>
+<p>Régua no alto; haste longa (120px) e corpo com leve rotação (−0.7°: pino descentrado sugere pêndulo real — a única diagonal da tela). Derramamento mínimo: um fio de 120px. A placa mergulha fundo na matriz (~90px).</p>
+<div class="tela">
+  <div class="regua" style="top:48px"></div>
+  <div class="ent px" style="--preco:796; top:48px; height:10px"></div><div class="lbl px" style="--preco:796; top:62px">fantasma €796</div>
+  <div class="ent px" style="--preco:900; top:38px; height:10px"></div><div class="lbl px" style="--preco:900; top:26px">alvo OW €900</div>
+  <div class="ent px" style="--preco:912; top:48px; height:10px"></div><div class="lbl px" style="--preco:912; top:62px">piso €912</div>
+  <div class="ent alvo px" style="--preco:960; top:38px; height:10px"></div><div class="lbl px" style="--preco:960; top:26px">alvo €960</div>
+  <div class="fenda px" style="--preco:960; top:48px; height:372px"></div>
+  <div class="derrame" style="top:49px; height:280px; width:120px; left:calc((960 - var(--min)) / (var(--max) - var(--min)) * 100% - 120px)"></div>
+  <div class="haste px" style="--preco:948; top:49px; height:120px"></div>
+  <div class="placa px" style="--preco:948; top:169px; width:380px; height:170px; transform:translateX(-92%) rotate(-0.7deg)">
+    <span class="e">EM ALVO</span><span class="p">€948</span>
+  </div>
+  <div class="frio" style="left:calc((960 - var(--min)) / (var(--max) - var(--min)) * 100% + 24px); right:16px; top:80px; height:150px"><span>lado frio: OW · tendência · selo</span></div>
+  <div class="campo" style="top:250px; height:170px"></div>
+  <div class="linha-m" style="top:300px"></div><div class="tick px" style="--preco:948; top:294px; background:#F4A24C"></div>
+  <div class="linha-m" style="top:330px"></div><div class="tick px" style="--preco:1004; top:324px"></div>
+  <div class="linha-m" style="top:360px"></div><div class="tick" style="right:2px; top:354px"></div>
+</div>
+</div>
+</body>
+</html>

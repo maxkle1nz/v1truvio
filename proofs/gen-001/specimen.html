@@ -9,7 +9,7 @@
 </head>
 <body>
 <div class="v1t-bancada">
-<main class="v1t-tela v1t-anima-entrada" id="tela">
+<main class="v1t-tela v1t-anima-entrada" id="tela" data-vista="em-alvo">
 
   <header class="v1t-cabecalho">
     <h1 class="v1t-cabecalho__nome">Watcher · MXP ⇄ GRU</h1>
@@ -19,213 +19,227 @@
   <!-- Nota de estado só aparece em edge-states (degradado/vazio/offline); some no estado feliz. -->
   <p class="v1t-nota-estado" id="notaEstado" hidden></p>
 
-  <!-- ========== FOREGROUND: bloco-veredito (placa Lissitzky, assimétrico) + cartão OW ========== -->
-  <section class="v1t-foreground" aria-label="Melhor oferta e veredito">
+  <!-- ============================================================
+       O CAMPO DE ESCALA — a tela inteira governada pelo eixo de euros.
+       G1 régua-mestra · G2 corte do limiar · G3 placa pênsil.
+       ============================================================ -->
+  <section class="v1t-campo-escala" aria-label="Painel do watcher na escala de euros">
 
-    <article class="v1t-veredito" id="veredito" data-estado="em-alvo"
-             data-preco="948" data-piso="912"
-             data-rota="MXP ⇄ GRU · 13/07 → 27/07 · LATAM direto"
-             data-link="https://www.google.com/travel/flights?tfs=GhwSCjIwMjYtMDctMTMoAGoFEgNNWFByBRIDR1JVGhwSCjIwMjYtMDctMjcoAGoFEgNHUlVyBRIDTVhQQgEBSAGYAQE%3D&hl=en-US&curr=EUR">
-      <div class="v1t-veredito__topo">
-        <span class="v1t-etiqueta" id="veredito-etiqueta">Em alvo</span>
-        <span class="v1t-veredito__tipo">Ida e volta · melhor da varredura</span>
-      </div>
-      <div class="v1t-preco" id="veredito-preco">€948</div>
-      <div class="v1t-veredito__meta">
-        <span class="v1t-rota">MXP ⇄ GRU</span>
-        <span class="v1t-num">13/07 → 27/07</span>
-        <span class="v1t-sub">LATAM · direto</span>
-      </div>
-      <a class="v1t-compra" id="btnCompra" href="#" role="button">
-        Comprar <span class="v1t-compra__seta" aria-hidden="true">→</span>
-      </a>
-    </article>
+    <!-- G1 — RÉGUA-MESTRA: faixa de decisão €780–1050; config aponta para cima, história para baixo -->
+    <div class="regua-mestra">
+      <div class="regua-mestra__linha" aria-hidden="true"></div>
+      <div class="regua-mestra__graduacao" aria-hidden="true"></div>
+      <span class="regua-mestra__borda" data-lado="min">€780</span>
+      <span class="regua-mestra__borda" data-lado="max">€1050</span>
 
-    <article class="v1t-ow" aria-label="Melhor oferta só-ida">
-      <span class="v1t-ow__rotulo">Só ida · melhor da varredura</span>
-      <div class="v1t-ow__preco v1t-num">€1004</div>
-      <div class="v1t-ow__meta">
-        MXP → GRU · <span class="v1t-num">10/07</span> <span class="v1t-sub">(e 13/07)</span> · LATAM
-      </div>
-      <a class="v1t-compra"
-         href="https://www.google.com/travel/flights?tfs=GhwSCjIwMjYtMDctMTAoAGoFEgNNWFByBRIDR1JVQgEBSAGYAQI%3D&hl=en-US&curr=EUR"
-         data-link-ow role="button">
-        Comprar <span class="v1t-compra__seta" aria-hidden="true">→</span>
-      </a>
-    </article>
+      <span class="regua-mestra__entalhe v1t-escala-x" data-origem="historia" data-tipo="fantasma" style="--preco: 796" aria-hidden="true"></span>
+      <span class="regua-mestra__rotulo v1t-escala-x" data-pos="baixo" data-origem="historia" style="--preco: 796">fantasma <span class="v1t-num">€796</span></span>
 
-  </section>
+      <span class="regua-mestra__entalhe v1t-escala-x" data-origem="config" data-tipo="alvo-ow" style="--preco: 900" aria-hidden="true"></span>
+      <span class="regua-mestra__rotulo v1t-escala-x" data-pos="cima" data-origem="config" style="--preco: 900">alvo OW <span class="v1t-num">€900</span></span>
 
-  <!-- ========== MIDGROUND: posição histórica + painel (tendência + selo) ========== -->
-  <section class="v1t-midground" aria-label="Contexto histórico e confiança">
+      <span class="regua-mestra__entalhe v1t-escala-x" data-origem="historia" data-tipo="piso" id="entalhe-piso" style="--preco: 912" aria-hidden="true"></span>
+      <span class="regua-mestra__rotulo v1t-escala-x" data-pos="baixo" data-origem="historia" id="rotulo-piso" style="--preco: 912">piso <span class="v1t-num">€912</span></span>
 
-    <div class="v1t-historico" id="historico" data-estado="acima-do-piso">
-      <h2 class="v1t-historico__titulo">Posição contra o próprio histórico</h2>
-      <div class="v1t-trilho" role="img" aria-label="Escala: promoção fantasma €796, piso de sempre €912, atual €948, alvo €960.">
-        <span class="v1t-trilho__marca" data-tipo="fantasma" style="left:0.0%"></span>
-        <span class="v1t-trilho__marca" data-tipo="piso" style="left:70.7%"></span>
-        <span class="v1t-trilho__marca" data-tipo="atual" style="left:92.7%"></span>
-        <span class="v1t-trilho__legenda" data-tipo="fantasma" style="left:0.0%">fantasma <span class="v1t-num">€796</span></span>
-        <span class="v1t-trilho__legenda" data-tipo="piso" style="left:70.7%">piso <span class="v1t-num">€912</span></span>
-        <span class="v1t-trilho__legenda" data-tipo="atual" style="left:92.7%">atual <span class="v1t-num">€948</span></span>
-      </div>
-      <div class="v1t-historico__leitura">
-        <div class="v1t-dado">
-          <span class="v1t-dado__rotulo">Atual</span>
-          <span class="v1t-dado__valor">€948</span>
-        </div>
-        <div class="v1t-dado">
-          <span class="v1t-dado__rotulo">Piso de sempre</span>
-          <span class="v1t-dado__valor">€912</span>
-        </div>
-        <div class="v1t-dado">
-          <span class="v1t-dado__rotulo">Promoção fantasma</span>
-          <span class="v1t-dado__valor">€796</span>
-        </div>
-        <div class="v1t-dado">
-          <span class="v1t-dado__rotulo">Distância do piso</span>
-          <span class="v1t-dado__valor v1t-distancia" id="distancia">+€36</span>
-        </div>
-      </div>
+      <span class="regua-mestra__entalhe v1t-escala-x" data-origem="config" data-tipo="alvo" style="--preco: 960" aria-hidden="true"></span>
+      <span class="regua-mestra__rotulo v1t-escala-x" data-pos="cima" data-tipo="alvo" data-origem="config" style="--preco: 960">alvo <span class="v1t-num">€960</span></span>
+
+      <span class="regua-mestra__entalhe v1t-escala-x" data-origem="historia" data-tipo="ow-atual" style="--preco: 1004" aria-hidden="true"></span>
+      <span class="regua-mestra__rotulo v1t-escala-x" data-pos="baixo" data-origem="historia" style="--preco: 1004">OW <span class="v1t-num">€1004</span></span>
     </div>
 
-    <div class="v1t-painel">
-      <div>
-        <h2 class="v1t-painel__titulo">Direção do mercado</h2>
-        <div class="v1t-tendencia" id="tendencia" data-estado="estavel">
-          <span class="v1t-tendencia__seta" id="tendencia-seta" aria-hidden="true">→</span>
-          <span class="v1t-tendencia__rotulo" id="tendencia-rotulo">Estável</span>
-        </div>
-        <p class="v1t-tendencia__nota" id="tendencia-nota">mercado agregado · +0,02 %/hora · não é a tendência desta rota específica</p>
+    <!-- O campo do foreground (elástico): corte do limiar + placa pênsil + lado frio em fluxo -->
+    <div class="v1t-campo">
+
+      <!-- G2 — CORTE DO LIMIAR: a fenda nasce no entalhe do alvo (linha da régua) e desce até a
+           borda da matriz; sobre a matriz o próprio campo desenha o hairline seco na mesma fórmula.
+           Hoje (em-alvo) está ABERTA: a única luz quente entra e derrama sobre o lado barato. -->
+      <div class="corte-limiar v1t-escala-x" style="--preco: 960" aria-hidden="true">
+        <span class="corte-limiar__derramamento"></span>
       </div>
-      <div>
-        <h2 class="v1t-painel__titulo">Frescor e confiança da leitura</h2>
-        <div class="v1t-selo" id="selo" data-confianca="confiavel">
-          <span class="v1t-selo__pulso" aria-hidden="true"></span>
-          <span class="v1t-selo__texto">
-            <span class="v1t-selo__linha">leitura <span class="v1t-num">06/07 10:17</span> · há <span class="v1t-num">0h</span></span>
-            <span class="v1t-selo__linha">amostra <span class="v1t-num">10 dias</span> · <span class="v1t-num">371</span> varreduras</span>
-            <span class="v1t-selo__estado" id="selo-estado">Confiável</span>
-          </span>
+
+      <!-- G3 — PLACA PÊNSIL: o veredito suspenso pela haste-pino cravada em x(€948),
+           corpo pendendo para o lado barato, sobrepondo a matriz com sombra real. -->
+      <article class="placa-pensil v1t-escala-x" id="veredito" data-estado="em-alvo"
+               style="--preco: 948"
+               data-preco="948" data-piso="912"
+               data-rota="MXP ⇄ GRU · 13/07 → 27/07 · LATAM direto"
+               data-link="https://www.google.com/travel/flights?tfs=GhwSCjIwMjYtMDctMTMoAGoFEgNNWFByBRIDR1JVGhwSCjIwMjYtMDctMjcoAGoFEgNHUlVyBRIDTVhQQgEBSAGYAQE%3D&hl=en-US&curr=EUR">
+        <span class="placa-pensil__haste" aria-hidden="true"></span>
+        <div class="placa-pensil__corpo">
+          <div class="placa-pensil__topo">
+            <span class="v1t-etiqueta" id="veredito-etiqueta">Em alvo</span>
+            <span class="placa-pensil__tipo">Ida e volta · melhor da varredura</span>
+          </div>
+          <div class="v1t-preco" id="veredito-preco">€948</div>
+          <div class="placa-pensil__meta">
+            <span class="v1t-rota">MXP ⇄ GRU</span>
+            <span class="v1t-num">13/07 → 27/07</span>
+            <span class="v1t-sub">LATAM · direto</span>
+          </div>
+          <p class="placa-pensil__corredor" id="veredito-corredor"><span class="v1t-num">+€36</span> do piso · <span class="v1t-num">€12</span> do alvo</p>
+          <a class="v1t-compra" id="btnCompra" href="#" role="button">
+            Comprar <span class="v1t-compra__seta" aria-hidden="true">→</span>
+          </a>
         </div>
-      </div>
+      </article>
+
+      <!-- O lado frio: OW + instrumentos (sem luz quente) -->
+      <aside class="v1t-lado-frio" aria-label="Só-ida e instrumentos de leitura">
+        <div class="v1t-ow">
+          <span class="v1t-ow__rotulo">Só ida · melhor da varredura</span>
+          <div class="v1t-ow__preco v1t-num">€1004</div>
+          <div class="v1t-ow__meta">
+            MXP → GRU · <span class="v1t-num">10/07</span> <span class="v1t-sub">(e 13/07)</span> · LATAM
+          </div>
+          <span class="v1t-ow__estado">acima do alvo OW €900</span>
+          <a class="v1t-compra"
+             href="https://www.google.com/travel/flights?tfs=GhwSCjIwMjYtMDctMTAoAGoFEgNNWFByBRIDR1JVQgEBSAGYAQI%3D&hl=en-US&curr=EUR"
+             data-link-ow role="button">
+            Comprar <span class="v1t-compra__seta" aria-hidden="true">→</span>
+          </a>
+        </div>
+        <div class="v1t-instrumentos">
+          <div>
+            <h2 class="v1t-painel__titulo">Direção do mercado</h2>
+            <div class="v1t-tendencia" id="tendencia" data-estado="estavel">
+              <span class="v1t-tendencia__seta" id="tendencia-seta" aria-hidden="true">→</span>
+              <span class="v1t-tendencia__rotulo" id="tendencia-rotulo">Estável</span>
+            </div>
+            <p class="v1t-tendencia__nota" id="tendencia-nota">mercado agregado · +0,02 %/hora · não é a tendência desta rota</p>
+          </div>
+          <div>
+            <h2 class="v1t-painel__titulo">Frescor e confiança</h2>
+            <div class="v1t-selo" id="selo" data-confianca="confiavel">
+              <span class="v1t-selo__pulso" aria-hidden="true"></span>
+              <span class="v1t-selo__texto">
+                <span class="v1t-selo__linha">leitura <span class="v1t-num">06/07 10:17</span> · há <span class="v1t-num">0h</span></span>
+                <span class="v1t-selo__linha">amostra <span class="v1t-num">10 dias</span> · <span class="v1t-num">371</span> varreduras</span>
+                <span class="v1t-selo__estado" id="selo-estado">Confiável</span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </aside>
+
     </div>
 
-  </section>
+    <!-- MIDGROUND: a matriz — cada linha carrega seu trilho-DNA na MESMA escala da régua;
+         o bloco carrega a coordenada do alvo (--preco: 960) e desenha o hairline seco do corte -->
+    <section class="v1t-matriz-bloco" style="--preco: 960" aria-label="Matriz de cenários">
+      <div class="v1t-matriz-bloco__cabecalho">
+        <h2 class="v1t-matriz-bloco__titulo">Matriz · 18 cenários da varredura</h2>
+      </div>
+      <div class="v1t-matriz-scroll">
+      <table class="v1t-matriz">
+        <thead>
+          <tr>
+            <th scope="col">Preço</th>
+            <th scope="col">Trecho</th>
+            <th scope="col">Datas</th>
+            <th scope="col">Cia</th>
+            <th scope="col">Paradas</th>
+            <th scope="col">Mín. já visto</th>
+            <th scope="col">Ação</th>
+          </tr>
+        </thead>
+        <tbody id="matriz-corpo">
+          <tr data-marca="em-alvo" style="--preco: 948">
+            <th scope="row">€948 <span class="v1t-marca" title="em alvo">·</span></th>
+            <td>MXP ⇄ GRU</td><td class="v1t-col-num">13/07 → 27/07</td><td>LATAM</td><td class="v1t-col-num">0</td><td class="v1t-col-num">€948</td>
+            <td><a href="https://www.google.com/travel/flights?tfs=GhwSCjIwMjYtMDctMTMoAGoFEgNNWFByBRIDR1JVGhwSCjIwMjYtMDctMjcoAGoFEgNHUlVyBRIDTVhQQgEBSAGYAQE%3D&hl=en-US&curr=EUR" target="_blank" rel="noopener">abrir</a></td>
+          </tr>
+          <tr style="--preco: 1004">
+            <th scope="row">€1004</th>
+            <td>MXP → GRU</td><td class="v1t-col-num">10/07 (ida)</td><td>LATAM</td><td class="v1t-col-num">0</td><td class="v1t-col-num">€1004</td>
+            <td><a href="https://www.google.com/travel/flights?tfs=GhwSCjIwMjYtMDctMTAoAGoFEgNNWFByBRIDR1JVQgEBSAGYAQI%3D&hl=en-US&curr=EUR" target="_blank" rel="noopener">abrir</a></td>
+          </tr>
+          <tr style="--preco: 1004">
+            <th scope="row">€1004</th>
+            <td>MXP → GRU</td><td class="v1t-col-num">13/07 (ida)</td><td>LATAM</td><td class="v1t-col-num">0</td><td class="v1t-col-num">€1004</td>
+            <td><a href="https://www.google.com/travel/flights?tfs=GhwSCjIwMjYtMDctMTMoAGoFEgNNWFByBRIDR1JVQgEBSAGYAQI%3D&hl=en-US&curr=EUR" target="_blank" rel="noopener">abrir</a></td>
+          </tr>
+          <tr style="--preco: 1014">
+            <th scope="row">€1014</th>
+            <td>MXP ⇄ GRU</td><td class="v1t-col-num">13/07 → 03/08</td><td>LATAM</td><td class="v1t-col-num">0</td><td class="v1t-col-num">€1014</td>
+            <td><a href="https://www.google.com/travel/flights?tfs=GhwSCjIwMjYtMDctMTMoAGoFEgNNWFByBRIDR1JVGhwSCjIwMjYtMDgtMDMoAGoFEgNHUlVyBRIDTVhQQgEBSAGYAQE%3D&hl=en-US&curr=EUR" target="_blank" rel="noopener">abrir</a></td>
+          </tr>
+          <tr class="v1t-estouro" style="--preco: 1150">
+            <th scope="row">€1150</th>
+            <td>MXP ⇄ GRU</td><td class="v1t-col-num">10/07 → 24/07</td><td>LATAM</td><td class="v1t-col-num">0</td><td class="v1t-col-num">€948</td>
+            <td><a href="https://www.google.com/travel/flights?tfs=GhwSCjIwMjYtMDctMTAoAGoFEgNNWFByBRIDR1JVGhwSCjIwMjYtMDctMjQoAGoFEgNHUlVyBRIDTVhQQgEBSAGYAQE%3D&hl=en-US&curr=EUR" target="_blank" rel="noopener">abrir</a></td>
+          </tr>
+          <tr class="v1t-estouro" style="--preco: 1200">
+            <th scope="row">€1200</th>
+            <td>MXP → GRU</td><td class="v1t-col-num">16/07 (ida)</td><td>LATAM</td><td class="v1t-col-num">0</td><td class="v1t-col-num">€1004</td>
+            <td><a href="https://www.google.com/travel/flights?tfs=GhwSCjIwMjYtMDctMTYoAGoFEgNNWFByBRIDR1JVQgEBSAGYAQI%3D&hl=en-US&curr=EUR" target="_blank" rel="noopener">abrir</a></td>
+          </tr>
+          <tr class="v1t-estouro" style="--preco: 1342">
+            <th scope="row">€1342</th>
+            <td>MXP → GRU</td><td class="v1t-col-num">19/07 (ida)</td><td>LATAM</td><td class="v1t-col-num">0</td><td class="v1t-col-num">€1200</td>
+            <td><a href="https://www.google.com/travel/flights?tfs=GhwSCjIwMjYtMDctMTkoAGoFEgNNWFByBRIDR1JVQgEBSAGYAQI%3D&hl=en-US&curr=EUR" target="_blank" rel="noopener">abrir</a></td>
+          </tr>
+          <tr class="v1t-estouro" style="--preco: 1374">
+            <th scope="row">€1374</th>
+            <td>MXP ⇄ GRU</td><td class="v1t-col-num">10/07 → 31/07</td><td>LATAM</td><td class="v1t-col-num">0</td><td class="v1t-col-num">€1014</td>
+            <td><a href="https://www.google.com/travel/flights?tfs=GhwSCjIwMjYtMDctMTAoAGoFEgNNWFByBRIDR1JVGhwSCjIwMjYtMDctMzEoAGoFEgNHUlVyBRIDTVhQQgEBSAGYAQE%3D&hl=en-US&curr=EUR" target="_blank" rel="noopener">abrir</a></td>
+          </tr>
+          <tr class="v1t-estouro" style="--preco: 1446">
+            <th scope="row">€1446</th>
+            <td>MXP ⇄ GRU</td><td class="v1t-col-num">16/07 → 30/07</td><td>LATAM</td><td class="v1t-col-num">0</td><td class="v1t-col-num">€1051</td>
+            <td><a href="https://www.google.com/travel/flights?tfs=GhwSCjIwMjYtMDctMTYoAGoFEgNNWFByBRIDR1JVGhwSCjIwMjYtMDctMzAoAGoFEgNHUlVyBRIDTVhQQgEBSAGYAQE%3D&hl=en-US&curr=EUR" target="_blank" rel="noopener">abrir</a></td>
+          </tr>
+          <tr class="v1t-estouro" style="--preco: 1446">
+            <th scope="row">€1446</th>
+            <td>MXP ⇄ GRU</td><td class="v1t-col-num">16/07 → 06/08</td><td>LATAM</td><td class="v1t-col-num">0</td><td class="v1t-col-num">€1051</td>
+            <td><a href="https://www.google.com/travel/flights?tfs=GhwSCjIwMjYtMDctMTYoAGoFEgNNWFByBRIDR1JVGhwSCjIwMjYtMDgtMDYoAGoFEgNHUlVyBRIDTVhQQgEBSAGYAQE%3D&hl=en-US&curr=EUR" target="_blank" rel="noopener">abrir</a></td>
+          </tr>
+          <tr class="v1t-estouro" style="--preco: 1491">
+            <th scope="row">€1491</th>
+            <td>MXP → GRU</td><td class="v1t-col-num">22/07 (ida)</td><td>LATAM</td><td class="v1t-col-num">0</td><td class="v1t-col-num">€1004</td>
+            <td><a href="https://www.google.com/travel/flights?tfs=GhwSCjIwMjYtMDctMjIoAGoFEgNNWFByBRIDR1JVQgEBSAGYAQI%3D&hl=en-US&curr=EUR" target="_blank" rel="noopener">abrir</a></td>
+          </tr>
+          <tr class="v1t-estouro" style="--preco: 1564">
+            <th scope="row">€1564</th>
+            <td>MXP ⇄ GRU</td><td class="v1t-col-num">19/07 → 02/08</td><td>LATAM</td><td class="v1t-col-num">0</td><td class="v1t-col-num">€1446</td>
+            <td><a href="https://www.google.com/travel/flights?tfs=GhwSCjIwMjYtMDctMTkoAGoFEgNNWFByBRIDR1JVGhwSCjIwMjYtMDgtMDIoAGoFEgNHUlVyBRIDTVhQQgEBSAGYAQE%3D&hl=en-US&curr=EUR" target="_blank" rel="noopener">abrir</a></td>
+          </tr>
+          <tr class="v1t-estouro" style="--preco: 1564">
+            <th scope="row">€1564</th>
+            <td>MXP ⇄ GRU</td><td class="v1t-col-num">19/07 → 09/08</td><td>LATAM</td><td class="v1t-col-num">0</td><td class="v1t-col-num">€1446</td>
+            <td><a href="https://www.google.com/travel/flights?tfs=GhwSCjIwMjYtMDctMTkoAGoFEgNNWFByBRIDR1JVGhwSCjIwMjYtMDgtMDkoAGoFEgNHUlVyBRIDTVhQQgEBSAGYAQE%3D&hl=en-US&curr=EUR" target="_blank" rel="noopener">abrir</a></td>
+          </tr>
+          <tr class="v1t-estouro" style="--preco: 1596">
+            <th scope="row">€1596</th>
+            <td>MXP → GRU</td><td class="v1t-col-num">25/07 (ida)</td><td>LATAM</td><td class="v1t-col-num">0</td><td class="v1t-col-num">€1596</td>
+            <td><a href="https://www.google.com/travel/flights?tfs=GhwSCjIwMjYtMDctMjUoAGoFEgNNWFByBRIDR1JVQgEBSAGYAQI%3D&hl=en-US&curr=EUR" target="_blank" rel="noopener">abrir</a></td>
+          </tr>
+          <tr class="v1t-estouro" style="--preco: 1689">
+            <th scope="row">€1689</th>
+            <td>MXP ⇄ GRU</td><td class="v1t-col-num">22/07 → 05/08</td><td>LATAM</td><td class="v1t-col-num">0</td><td class="v1t-col-num">€1283</td>
+            <td><a href="https://www.google.com/travel/flights?tfs=GhwSCjIwMjYtMDctMjIoAGoFEgNNWFByBRIDR1JVGhwSCjIwMjYtMDgtMDUoAGoFEgNHUlVyBRIDTVhQQgEBSAGYAQE%3D&hl=en-US&curr=EUR" target="_blank" rel="noopener">abrir</a></td>
+          </tr>
+          <tr class="v1t-estouro" style="--preco: 1689">
+            <th scope="row">€1689</th>
+            <td>MXP ⇄ GRU</td><td class="v1t-col-num">22/07 → 12/08</td><td>LATAM</td><td class="v1t-col-num">0</td><td class="v1t-col-num">€1283</td>
+            <td><a href="https://www.google.com/travel/flights?tfs=GhwSCjIwMjYtMDctMjIoAGoFEgNNWFByBRIDR1JVGhwSCjIwMjYtMDgtMTIoAGoFEgNHUlVyBRIDTVhQQgEBSAGYAQE%3D&hl=en-US&curr=EUR" target="_blank" rel="noopener">abrir</a></td>
+          </tr>
+          <tr class="v1t-estouro" style="--preco: 1776">
+            <th scope="row">€1776</th>
+            <td>MXP ⇄ GRU</td><td class="v1t-col-num">25/07 → 08/08</td><td>LATAM</td><td class="v1t-col-num">0</td><td class="v1t-col-num">€1776</td>
+            <td><a href="https://www.google.com/travel/flights?tfs=GhwSCjIwMjYtMDctMjUoAGoFEgNNWFByBRIDR1JVGhwSCjIwMjYtMDgtMDgoAGoFEgNHUlVyBRIDTVhQQgEBSAGYAQE%3D&hl=en-US&curr=EUR" target="_blank" rel="noopener">abrir</a></td>
+          </tr>
+          <tr class="v1t-estouro" style="--preco: 1847">
+            <th scope="row">€1847</th>
+            <td>MXP ⇄ GRU</td><td class="v1t-col-num">25/07 → 15/08</td><td>LATAM</td><td class="v1t-col-num">0</td><td class="v1t-col-num">€1847</td>
+            <td><a href="https://www.google.com/travel/flights?tfs=GhwSCjIwMjYtMDctMjUoAGoFEgNNWFByBRIDR1JVGhwSCjIwMjYtMDgtMTUoAGoFEgNHUlVyBRIDTVhQQgEBSAGYAQE%3D&hl=en-US&curr=EUR" target="_blank" rel="noopener">abrir</a></td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+      <p class="v1t-matriz-bloco__legenda">trilhos na faixa <span class="v1t-num">€780–1050</span> · preço além da faixa encosta na borda com entalhe duplo</p>
+    </section>
 
-  <!-- ========== MIDGROUND: matriz dos 18 cenários (tabela honesta) ========== -->
-  <section class="v1t-matriz-bloco" aria-label="Matriz de cenários">
-    <div class="v1t-matriz-bloco__cabecalho">
-      <h2 class="v1t-painel__titulo" style="margin:0">Matriz · 18 cenários da varredura</h2>
-      <span class="v1t-cabecalho__rota">referência de consulta</span>
-    </div>
-    <div class="v1t-matriz-scroll">
-    <table class="v1t-matriz">
-      <thead>
-        <tr>
-          <th scope="col">Preço</th>
-          <th scope="col">Trecho</th>
-          <th scope="col">Datas</th>
-          <th scope="col">Cia</th>
-          <th scope="col">Paradas</th>
-          <th scope="col">Mín. já visto</th>
-          <th scope="col">Ação</th>
-        </tr>
-      </thead>
-      <tbody id="matriz-corpo">
-        <tr data-marca="em-alvo">
-          <th scope="row">€948 <span class="v1t-marca" title="em alvo">·</span></th>
-          <td>MXP ⇄ GRU</td><td class="v1t-col-num">13/07 → 27/07</td><td>LATAM</td><td class="v1t-col-num">0</td><td class="v1t-col-num">€948</td>
-          <td><a href="https://www.google.com/travel/flights?tfs=GhwSCjIwMjYtMDctMTMoAGoFEgNNWFByBRIDR1JVGhwSCjIwMjYtMDctMjcoAGoFEgNHUlVyBRIDTVhQQgEBSAGYAQE%3D&hl=en-US&curr=EUR" target="_blank" rel="noopener">abrir</a></td>
-        </tr>
-        <tr>
-          <th scope="row">€1004</th>
-          <td>MXP → GRU</td><td class="v1t-col-num">10/07 (ida)</td><td>LATAM</td><td class="v1t-col-num">0</td><td class="v1t-col-num">€1004</td>
-          <td><a href="https://www.google.com/travel/flights?tfs=GhwSCjIwMjYtMDctMTAoAGoFEgNNWFByBRIDR1JVQgEBSAGYAQI%3D&hl=en-US&curr=EUR" target="_blank" rel="noopener">abrir</a></td>
-        </tr>
-        <tr>
-          <th scope="row">€1004</th>
-          <td>MXP → GRU</td><td class="v1t-col-num">13/07 (ida)</td><td>LATAM</td><td class="v1t-col-num">0</td><td class="v1t-col-num">€1004</td>
-          <td><a href="https://www.google.com/travel/flights?tfs=GhwSCjIwMjYtMDctMTMoAGoFEgNNWFByBRIDR1JVQgEBSAGYAQI%3D&hl=en-US&curr=EUR" target="_blank" rel="noopener">abrir</a></td>
-        </tr>
-        <tr>
-          <th scope="row">€1014</th>
-          <td>MXP ⇄ GRU</td><td class="v1t-col-num">13/07 → 03/08</td><td>LATAM</td><td class="v1t-col-num">0</td><td class="v1t-col-num">€1014</td>
-          <td><a href="https://www.google.com/travel/flights?tfs=GhwSCjIwMjYtMDctMTMoAGoFEgNNWFByBRIDR1JVGhwSCjIwMjYtMDgtMDMoAGoFEgNHUlVyBRIDTVhQQgEBSAGYAQE%3D&hl=en-US&curr=EUR" target="_blank" rel="noopener">abrir</a></td>
-        </tr>
-        <tr>
-          <th scope="row">€1150</th>
-          <td>MXP ⇄ GRU</td><td class="v1t-col-num">10/07 → 24/07</td><td>LATAM</td><td class="v1t-col-num">0</td><td class="v1t-col-num">€948</td>
-          <td><a href="https://www.google.com/travel/flights?tfs=GhwSCjIwMjYtMDctMTAoAGoFEgNNWFByBRIDR1JVGhwSCjIwMjYtMDctMjQoAGoFEgNHUlVyBRIDTVhQQgEBSAGYAQE%3D&hl=en-US&curr=EUR" target="_blank" rel="noopener">abrir</a></td>
-        </tr>
-        <tr>
-          <th scope="row">€1200</th>
-          <td>MXP → GRU</td><td class="v1t-col-num">16/07 (ida)</td><td>LATAM</td><td class="v1t-col-num">0</td><td class="v1t-col-num">€1004</td>
-          <td><a href="https://www.google.com/travel/flights?tfs=GhwSCjIwMjYtMDctMTYoAGoFEgNNWFByBRIDR1JVQgEBSAGYAQI%3D&hl=en-US&curr=EUR" target="_blank" rel="noopener">abrir</a></td>
-        </tr>
-        <tr>
-          <th scope="row">€1342</th>
-          <td>MXP → GRU</td><td class="v1t-col-num">19/07 (ida)</td><td>LATAM</td><td class="v1t-col-num">0</td><td class="v1t-col-num">€1200</td>
-          <td><a href="https://www.google.com/travel/flights?tfs=GhwSCjIwMjYtMDctMTkoAGoFEgNNWFByBRIDR1JVQgEBSAGYAQI%3D&hl=en-US&curr=EUR" target="_blank" rel="noopener">abrir</a></td>
-        </tr>
-        <tr>
-          <th scope="row">€1374</th>
-          <td>MXP ⇄ GRU</td><td class="v1t-col-num">10/07 → 31/07</td><td>LATAM</td><td class="v1t-col-num">0</td><td class="v1t-col-num">€1014</td>
-          <td><a href="https://www.google.com/travel/flights?tfs=GhwSCjIwMjYtMDctMTAoAGoFEgNNWFByBRIDR1JVGhwSCjIwMjYtMDctMzEoAGoFEgNHUlVyBRIDTVhQQgEBSAGYAQE%3D&hl=en-US&curr=EUR" target="_blank" rel="noopener">abrir</a></td>
-        </tr>
-        <tr>
-          <th scope="row">€1446</th>
-          <td>MXP ⇄ GRU</td><td class="v1t-col-num">16/07 → 30/07</td><td>LATAM</td><td class="v1t-col-num">0</td><td class="v1t-col-num">€1051</td>
-          <td><a href="https://www.google.com/travel/flights?tfs=GhwSCjIwMjYtMDctMTYoAGoFEgNNWFByBRIDR1JVGhwSCjIwMjYtMDctMzAoAGoFEgNHUlVyBRIDTVhQQgEBSAGYAQE%3D&hl=en-US&curr=EUR" target="_blank" rel="noopener">abrir</a></td>
-        </tr>
-        <tr>
-          <th scope="row">€1446</th>
-          <td>MXP ⇄ GRU</td><td class="v1t-col-num">16/07 → 06/08</td><td>LATAM</td><td class="v1t-col-num">0</td><td class="v1t-col-num">€1051</td>
-          <td><a href="https://www.google.com/travel/flights?tfs=GhwSCjIwMjYtMDctMTYoAGoFEgNNWFByBRIDR1JVGhwSCjIwMjYtMDgtMDYoAGoFEgNHUlVyBRIDTVhQQgEBSAGYAQE%3D&hl=en-US&curr=EUR" target="_blank" rel="noopener">abrir</a></td>
-        </tr>
-        <tr>
-          <th scope="row">€1491</th>
-          <td>MXP → GRU</td><td class="v1t-col-num">22/07 (ida)</td><td>LATAM</td><td class="v1t-col-num">0</td><td class="v1t-col-num">€1004</td>
-          <td><a href="https://www.google.com/travel/flights?tfs=GhwSCjIwMjYtMDctMjIoAGoFEgNNWFByBRIDR1JVQgEBSAGYAQI%3D&hl=en-US&curr=EUR" target="_blank" rel="noopener">abrir</a></td>
-        </tr>
-        <tr>
-          <th scope="row">€1564</th>
-          <td>MXP ⇄ GRU</td><td class="v1t-col-num">19/07 → 02/08</td><td>LATAM</td><td class="v1t-col-num">0</td><td class="v1t-col-num">€1446</td>
-          <td><a href="https://www.google.com/travel/flights?tfs=GhwSCjIwMjYtMDctMTkoAGoFEgNNWFByBRIDR1JVGhwSCjIwMjYtMDgtMDIoAGoFEgNHUlVyBRIDTVhQQgEBSAGYAQE%3D&hl=en-US&curr=EUR" target="_blank" rel="noopener">abrir</a></td>
-        </tr>
-        <tr>
-          <th scope="row">€1564</th>
-          <td>MXP ⇄ GRU</td><td class="v1t-col-num">19/07 → 09/08</td><td>LATAM</td><td class="v1t-col-num">0</td><td class="v1t-col-num">€1446</td>
-          <td><a href="https://www.google.com/travel/flights?tfs=GhwSCjIwMjYtMDctMTkoAGoFEgNNWFByBRIDR1JVGhwSCjIwMjYtMDgtMDkoAGoFEgNHUlVyBRIDTVhQQgEBSAGYAQE%3D&hl=en-US&curr=EUR" target="_blank" rel="noopener">abrir</a></td>
-        </tr>
-        <tr>
-          <th scope="row">€1596</th>
-          <td>MXP → GRU</td><td class="v1t-col-num">25/07 (ida)</td><td>LATAM</td><td class="v1t-col-num">0</td><td class="v1t-col-num">€1596</td>
-          <td><a href="https://www.google.com/travel/flights?tfs=GhwSCjIwMjYtMDctMjUoAGoFEgNNWFByBRIDR1JVQgEBSAGYAQI%3D&hl=en-US&curr=EUR" target="_blank" rel="noopener">abrir</a></td>
-        </tr>
-        <tr>
-          <th scope="row">€1689</th>
-          <td>MXP ⇄ GRU</td><td class="v1t-col-num">22/07 → 05/08</td><td>LATAM</td><td class="v1t-col-num">0</td><td class="v1t-col-num">€1283</td>
-          <td><a href="https://www.google.com/travel/flights?tfs=GhwSCjIwMjYtMDctMjIoAGoFEgNNWFByBRIDR1JVGhwSCjIwMjYtMDgtMDUoAGoFEgNHUlVyBRIDTVhQQgEBSAGYAQE%3D&hl=en-US&curr=EUR" target="_blank" rel="noopener">abrir</a></td>
-        </tr>
-        <tr>
-          <th scope="row">€1689</th>
-          <td>MXP ⇄ GRU</td><td class="v1t-col-num">22/07 → 12/08</td><td>LATAM</td><td class="v1t-col-num">0</td><td class="v1t-col-num">€1283</td>
-          <td><a href="https://www.google.com/travel/flights?tfs=GhwSCjIwMjYtMDctMjIoAGoFEgNNWFByBRIDR1JVGhwSCjIwMjYtMDgtMTIoAGoFEgNHUlVyBRIDTVhQQgEBSAGYAQE%3D&hl=en-US&curr=EUR" target="_blank" rel="noopener">abrir</a></td>
-        </tr>
-        <tr>
-          <th scope="row">€1776</th>
-          <td>MXP ⇄ GRU</td><td class="v1t-col-num">25/07 → 08/08</td><td>LATAM</td><td class="v1t-col-num">0</td><td class="v1t-col-num">€1776</td>
-          <td><a href="https://www.google.com/travel/flights?tfs=GhwSCjIwMjYtMDctMjUoAGoFEgNNWFByBRIDR1JVGhwSCjIwMjYtMDgtMDgoAGoFEgNHUlVyBRIDTVhQQgEBSAGYAQE%3D&hl=en-US&curr=EUR" target="_blank" rel="noopener">abrir</a></td>
-        </tr>
-        <tr>
-          <th scope="row">€1847</th>
-          <td>MXP ⇄ GRU</td><td class="v1t-col-num">25/07 → 15/08</td><td>LATAM</td><td class="v1t-col-num">0</td><td class="v1t-col-num">€1847</td>
-          <td><a href="https://www.google.com/travel/flights?tfs=GhwSCjIwMjYtMDctMjUoAGoFEgNNWFByBRIDR1JVGhwSCjIwMjYtMDgtMTUoAGoFEgNHUlVyBRIDTVhQQgEBSAGYAQE%3D&hl=en-US&curr=EUR" target="_blank" rel="noopener">abrir</a></td>
-        </tr>
-      </tbody>
-    </table>
-    </div>
   </section>
 
   <!-- ========== Switcher de demonstração dos edge states (ferramenta, separada da tela provada) ========== -->
@@ -240,7 +254,7 @@
       <button class="v1t-demo__botao" data-estado="vazio" aria-pressed="false">vazio</button>
       <button class="v1t-demo__botao" data-estado="offline" aria-pressed="false">offline</button>
     </div>
-    <p class="v1t-demo__nota">A tela provada é <strong>em-alvo</strong> (estado real de hoje). Os demais são o mesmo template reagindo — o gate exige que ele nasça sabendo dos estados.</p>
+    <p class="v1t-demo__nota">A tela provada é <strong>em-alvo</strong> (estado real de hoje). Os demais são o mesmo template reagindo — a fenda sela acima do alvo, o entalhe do piso desloca no novo piso, a régua nasce mínima no vazio.</p>
   </section>
 
 </main>

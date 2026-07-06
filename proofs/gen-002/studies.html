@@ -1,0 +1,161 @@
+<!-- studies.html — gen-002 · MENISCUS (a janela do m1nd) -->
+<!-- PROTOCOLO DE ATERRISSAGEM, passo 1: três composições estruturais DIVERGENTES da Bancada de Supervisão,
+     materializando os mesmos 3 gestos (Meniscus Slit · Trilho de Freshness · Placa de Trust) de formas diferentes.
+     ESBOÇOS rápidos rotulados A/B/C — hex cru e posições literais de propósito (rascunho estrutural).
+     Isento das regras de assinatura do lint (é estudo, não o artefato julgado). A escolha justificada mora no NOTES.md.
+     RENDERIZAR os três antes de escolher (a gen-001 provou que julgar renderizado muda a decisão). -->
+<meta charset="utf-8">
+<title>studies · gen-002 MENISCUS</title>
+<style>
+  :root { color-scheme: dark; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: #100f14; color: #e8e4dc;
+    font: 13px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace;
+    padding: 32px 40px 80px;
+  }
+  h1 { font: 600 15px ui-sans-serif, system-ui, sans-serif; letter-spacing: .12em; text-transform: uppercase; color: #b7b2c4; margin: 0 0 4px; }
+  .sub { color: #86808f; margin: 0 0 40px; max-width: 70ch; }
+  .study { margin-bottom: 56px; }
+  .cap { display: flex; align-items: baseline; gap: 14px; margin-bottom: 14px; border-bottom: 1px solid rgba(235,235,240,.14); padding-bottom: 8px; }
+  .cap b { font: 600 20px ui-sans-serif, system-ui, sans-serif; }
+  .cap .verdict { margin-left: auto; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; }
+  .chosen { color: #9fd65a; }
+  .reject { color: #86808f; }
+  .cap .why { color: #a9a3b3; font-size: 12px; }
+
+  /* massa mineral escura (background dos frames) */
+  .frame { position: relative; height: 340px; background: #16151c; border: 1px solid rgba(235,235,240,.10); overflow: hidden; }
+  .lab { font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: #6d6878; position: absolute; z-index: 5; }
+
+  /* ---- componentes esboçados (formas grosseiras, só estrutura) ---- */
+  .plate { background: #211f28; border: 1px solid rgba(235,235,240,.20); }
+  .glass { background: #1c1a23; border: 1px solid rgba(235,235,240,.13); }
+  .trust-full { border-left: 3px solid #8aa06a; }
+  .trust-amber { border-left: 3px solid #c89b3c; }
+  .mono-sm { font-size: 10px; color: #a9a3b3; }
+  .rail-track { position: absolute; height: 2px; background: rgba(235,235,240,.24); }
+  .mark { position: absolute; width: 2px; background: #cfcadb; }
+  .mark.thick { width: 4px; }
+  .exile { position: absolute; background: rgba(235,235,240,.05); border: 1px dashed rgba(235,235,240,.16); }
+  .slit { position: absolute; height: 3px; background: linear-gradient(to bottom, #cdd6e0 0%, #cdd6e0 40%, rgba(205,214,224,0) 100%); }
+
+  /* ============ STUDY A ============ */
+  #A .plate-trust { position: absolute; left: 24px; top: 24px; width: 300px; height: 116px; padding: 14px; }
+  #A .recon { position: absolute; left: 24px; top: 150px; width: 300px; height: 60px; padding: 10px; }
+  #A .rail { position: absolute; left: 348px; right: 24px; top: 40px; height: 120px; }
+  #A .rail .rail-track { left: 0; right: 90px; top: 60px; }
+  #A .rail .exile { right: 0; width: 80px; top: 30px; height: 60px; }
+  #A .suff { position: absolute; left: 348px; right: 24px; top: 180px; height: 60px; padding: 10px; }
+  #A .neg { position: absolute; left: 24px; right: 24px; top: 254px; height: 62px; padding: 10px; }
+
+  /* ============ STUDY B ============ */
+  #B .rail { position: absolute; left: 24px; right: 24px; top: 28px; height: 96px; }
+  #B .rail .rail-track { left: 40px; right: 130px; top: 54px; }
+  #B .rail .exile { right: 24px; width: 96px; top: 24px; height: 60px; }
+  #B .plate-trust { position: absolute; left: 24px; top: 140px; width: 340px; height: 110px; padding: 14px; transform: rotate(-1.2deg); transform-origin: left top; }
+  #B .recon { position: absolute; left: 384px; right: 24px; top: 150px; height: 90px; padding: 10px; }
+  #B .suff { position: absolute; left: 24px; width: 340px; top: 262px; height: 56px; padding: 10px; }
+  #B .neg { position: absolute; left: 384px; right: 24px; top: 262px; height: 56px; padding: 10px; }
+
+  /* ============ STUDY C ============ */
+  #C .plate-trust { position: absolute; left: 50%; top: 24px; width: 360px; margin-left: -180px; height: 108px; padding: 14px; }
+  #C .recon { position: absolute; left: 50%; top: 140px; width: 360px; margin-left: -180px; height: 54px; padding: 10px; }
+  #C .rail { position: absolute; left: 24px; right: 24px; top: 208px; height: 108px; }
+  #C .rail .rail-track { left: 20px; right: 110px; top: 40px; }
+  #C .rail .exile { right: 20px; width: 84px; top: 12px; height: 60px; }
+  #C .suff { position: absolute; left: 24px; top: 208px; width: 220px; height: 108px; padding: 10px; opacity: .5; }
+</style>
+
+<h1>gen-002 · MENISCUS — estudos de composição</h1>
+<p class="sub">Três arranjos estruturais da Bancada de Supervisão. Mesmos 3 gestos, geometria divergente. Massa mineral escura em todos; a decisão é ONDE a Placa de Trust pesa, POR ONDE o Trilho de Freshness corre, e onde o mergulho (Meniscus Slit) faz sentido. Julgar renderizado.</p>
+
+<!-- ========================================================= A -->
+<div class="study" id="A">
+  <div class="cap">
+    <b>A</b>
+    <span class="why">Placa no canto de maior peso (topo-esq) deslocada · Trilho horizontal à direita da placa · Sufficiency+Negativo empilhados. Ordem de auditor: veredito → cobertura → memória → contorno.</span>
+    <span class="verdict chosen">ESCOLHIDO</span>
+  </div>
+  <div class="frame">
+    <span class="lab" style="left:12px;top:8px">FOREGROUND</span>
+    <div class="plate plate-trust trust-full">
+      <div>FULL TRUST</div>
+      <div class="mono-sm">binário ef9c6e9 · grafo 521/500 finalizado</div>
+      <div class="mono-sm" style="margin-top:20px;color:#c89b3c">↘ aba de reconciliação (mismatch de cobertura)</div>
+    </div>
+    <div class="glass recon trust-amber">
+      <div class="mono-sm">this graph does NOT cover your repo</div>
+      <div class="mono-sm">bound ≠ caller · [continuar] [ingerir]</div>
+    </div>
+    <div class="rail">
+      <span class="lab" style="left:0;top:0">TRILHO DE FRESHNESS →</span>
+      <div class="rail-track"></div>
+      <div class="mark thick" style="left:8%;top:34px;height:52px"></div>
+      <div class="mark thick" style="left:62%;top:38px;height:44px"></div>
+      <div class="mark thick" style="left:70%;top:38px;height:44px"></div>
+      <div class="exile"><span class="lab" style="left:6px;top:4px">fora do trilho</span></div>
+    </div>
+    <div class="glass suff">
+      <span class="lab" style="left:8px;top:2px">SUFFICIENCY</span>
+      <div class="mono-sm" style="margin-top:14px;font-family:Georgia,serif;font-style:italic">"the strongest context is in hand"</div>
+    </div>
+    <div class="glass neg">
+      <span class="lab" style="left:8px;top:2px">CONTORNO NEGATIVO · honest_gaps: [] (afirma)</span>
+      <div class="mono-sm" style="margin-top:16px">non_claims · âncoras/focus (colunas calmas)</div>
+    </div>
+  </div>
+</div>
+
+<!-- ========================================================= B -->
+<div class="study" id="B">
+  <div class="cap">
+    <b>B</b>
+    <span class="why">Trilho como faixa superior de ponta a ponta (o tempo primeiro) · Placa inclinada abaixo, à esquerda · Reconciliação ao lado. O tempo domina a leitura antes do veredito.</span>
+    <span class="verdict reject">rejeitado</span>
+  </div>
+  <div class="frame">
+    <div class="rail">
+      <span class="lab" style="left:0;top:0">TRILHO (espinha superior)</span>
+      <div class="rail-track"></div>
+      <div class="mark thick" style="left:12%;top:28px;height:52px"></div>
+      <div class="mark thick" style="left:64%;top:32px;height:44px"></div>
+      <div class="mark thick" style="left:72%;top:32px;height:44px"></div>
+      <div class="exile"><span class="lab" style="left:6px;top:4px">fora</span></div>
+    </div>
+    <div class="plate plate-trust trust-amber">
+      <div>FULL TRUST (inclinada?)</div>
+      <div class="mono-sm">a inclinação aqui não aponta nada — decorativa</div>
+    </div>
+    <div class="glass recon">
+      <div class="mono-sm">reconciliação solta do veredito</div>
+    </div>
+    <div class="glass suff"><span class="lab" style="left:8px;top:2px">SUFFICIENCY</span></div>
+    <div class="glass neg"><span class="lab" style="left:8px;top:2px">NEGATIVO</span></div>
+  </div>
+</div>
+
+<!-- ========================================================= C -->
+<div class="study" id="C">
+  <div class="cap">
+    <b>C</b>
+    <span class="why">Placa centrada e simétrica no topo · Trilho na base · Sufficiency esmaecida ao lado. Simetria = repouso institucional.</span>
+    <span class="verdict reject">rejeitado</span>
+  </div>
+  <div class="frame">
+    <div class="plate plate-trust trust-full" style="text-align:center">
+      <div>FULL TRUST</div>
+      <div class="mono-sm">centrada, alinhada — sem tensão, sem vetor para a reconciliação</div>
+    </div>
+    <div class="glass recon" style="text-align:center"><div class="mono-sm">reconciliação centrada (para onde a placa aponta? nenhum lugar)</div></div>
+    <div class="rail">
+      <span class="lab" style="left:20px;top:0">TRILHO (base)</span>
+      <div class="rail-track"></div>
+      <div class="mark thick" style="left:14%;top:24px;height:52px"></div>
+      <div class="mark thick" style="left:66%;top:28px;height:44px"></div>
+      <div class="mark thick" style="left:73%;top:28px;height:44px"></div>
+      <div class="exile"><span class="lab" style="left:6px;top:4px">fora</span></div>
+    </div>
+    <div class="glass suff"><span class="lab" style="left:8px;top:2px">SUFFICIENCY (comprimida)</span></div>
+  </div>
+</div>
