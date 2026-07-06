@@ -1,0 +1,60 @@
+{
+  "_provenance": "north packet REAL capturado 2026-07-06 via mcp__m1nd__north (agent fable-v1truvio-gen002); dado vivo para a prova da gen-002 — não inventado",
+  "binding": {
+    "trust_mode": "full_trust",
+    "ok": true,
+    "fingerprint": {
+      "binary_version": "1.3.2",
+      "binary_git_sha": "ef9c6e9",
+      "node_count": 521,
+      "edge_count": 500,
+      "graph_finalized": true,
+      "ingest_roots": ["/Users/kle1nz/almus", "/Users/kle1nz/.m1nd/runtimes/claude/agent-memory"],
+      "runtime_root": "/Users/kle1nz/.m1nd/runtimes/claude",
+      "process_id": 32202
+    }
+  },
+  "context": {
+    "anchors": [
+      {"label": "walk", "node_id": "file::scripts/build-tokens.mjs::fn::walk", "pagerank": 1.0},
+      {"label": "collect", "node_id": "file::skill/scripts/almus-lint.mjs::fn::collect", "pagerank": 0.8191},
+      {"label": "README.md", "node_id": "file::README.md", "pagerank": 0.5485},
+      {"label": "_observeTargets", "node_id": "file::js/alm-cable.js::fn::_observeTargets", "pagerank": 0.1972},
+      {"label": "draw", "node_id": "file::js/alm-cable.js::fn::draw", "pagerank": 0.1972}
+    ],
+    "coverage": {"total": 521, "visited": 23, "unvisited_high_value": ["scripts/build-tokens.mjs::fn::walk", "skill/scripts/almus-lint.mjs::fn::collect", "README.md", "js/alm-cable.js::fn::_plug", "js/alm-cable.js::fn::_route"]},
+    "focus_nodes": [
+      {"label": "O olho do Max — 6 movimentos analíticos, agora checklist obrigatório de quem desenvolve o m1nd", "kind": "Module", "activation": 0.8122, "pagerank": 0.1161, "path": "maxeyedoctrine.light.md"},
+      {"label": "Brand visual audit 2026-07 — live visuals are cyberpunk/neon, violating Max's anti-cyberpunk doctrine", "kind": "Module", "activation": 0.7873, "pagerank": 0.1161, "path": "m1nd-brand-visuals-violate-aesthetic-doctrine.light.md"},
+      {"label": "m1nd brand critique 2026-07 — verified overclaim risks in positioning/creative", "kind": "Module", "activation": 0.6746, "pagerank": 0.1161, "path": "m1nd-brand-critique-2026-07-verified-overclaim-risks-in-positioning-creative.light.md"},
+      {"label": "m1nd OMEGA era — doctrine + state for attached agents (2026-07-02)", "kind": "Module", "activation": 0.6696, "pagerank": 0.1161, "path": "m1nd-omega-era-agent-doctrine.light.md"},
+      {"label": "m1nd hosts CLI location", "kind": "Module", "activation": 0.6695, "pagerank": 0.1161, "path": "m1nd-hosts-cli-location.light.md"}
+    ]
+  },
+  "memory": [
+    {"claim": "O olho do Max — 6 movimentos analíticos, agora checklist obrigatório de quem desenvolve o m1nd", "tier": "medulla", "origin_brain": "medulla", "source_agent": "claude:main:fable-orchestrator", "age_ms": 133637855, "stale": false},
+    {"claim": "m1nd-brand-visuals-violate-aesthetic-doctrine.light.md", "tier": "medulla", "origin_brain": "medulla", "source_agent": "brand-audit", "age_ms": 272592718, "stale": false},
+    {"claim": "m1nd-brand-critique-2026-07-verified-overclaim-risks-in-positioning-creative.light.md", "tier": "medulla", "origin_brain": "medulla", "source_agent": "fable-brand-critic", "age_ms": 271032997, "stale": false}
+  ],
+  "memory_exists": 27,
+  "sufficiency": {"state": "sufficient", "captured": 0.2638, "top_score": 0.2426, "why": "the top match scores 0.24; everything left out scores at most 0.14 (weak tail) — the strongest context is in hand"},
+  "honest_gaps": [],
+  "next_move": "Call `surgical_context` on the top focus node to ground the task before editing.",
+  "proof_state": "triaging",
+  "non_claims": [
+    "north composes existing read-only verbs; it does not ingest, mutate, or repair the graph.",
+    "north does not refresh the host MCP binding.",
+    "north does not replace compiler, tests, or local file truth.",
+    "an absent memory age means unknown authored time, never freshly authored."
+  ],
+  "reception": {
+    "match": "caller_root_mismatch",
+    "honest": "this graph does NOT cover your repo",
+    "bound_workspace": "/Users/kle1nz/.m1nd/runtimes/claude/agent-memory",
+    "caller_root": "/Users/kle1nz",
+    "options": [
+      {"action": "continue_bound", "note": "keep using this graph, but treat its answers as NOT covering your current repo — verify against local files"},
+      {"action": "ingest_your_repo", "call": "ingest with project_root=/Users/kle1nz — ONE call: creates a per-project brain..."}
+    ]
+  }
+}
