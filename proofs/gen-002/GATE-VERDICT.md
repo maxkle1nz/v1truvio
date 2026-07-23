@@ -4,7 +4,7 @@
 **Data:** 2026-07-06
 **Documento julgado:** `proofs/gen-002/BRIEF.md`
 **Mente carregada:** `mind/CONTRACT.md` (gate de 12 itens + Assinatura formal §8 + precedência Leis > Modo > Vetores > Cards) · `mind/MANIFESTO.md` (3 leis, Lei 3 estendida pelo verdict 001) · `mind/VECTORS.md` (travas) · `mind/MODES.md` (proibições de modo) · cards citados: `rag/01-lissitzky.md`, `rag/02-moholy-nagy.md`, `rag/03-tadao-ando.md`, `rag/04-rams.md`, `rag/06-stuart-hall.md`.
-**Verificação factual (read-only, por amostragem):** `proofs/gen-002/north-packet-sample.json` (payload real de referência) e o repo `/Users/kle1nz/m1nd` (`m1nd-ui/tailwind.config.ts`, `m1nd-ui/src/lib/softProof.ts`, `m1nd-ui/src/lib/preflight.ts`, `m1nd-ui/src/components/soft/VerdictChip.tsx`, `m1nd-ui/scripts/violet-lint.mjs`, `m1nd-ui/public/fonts/`, `.github/m1nd-logo.svg`, `docs/HUMAN-LAYER-PRD.md`, `skills/m1nd-first/SKILL.md`, e o card da medulla `~/.m1nd/runtimes/claude/agent-memory/m1nd-brand-visuals-violate-aesthetic-doctrine.light.md`). Nenhum arquivo modificado; nenhum secret aberto; nenhum ingest.
+**Verificação factual (read-only, por amostragem):** `proofs/gen-002/north-packet-sample.json` (payload real de referência) e o repo `~/m1nd` (`m1nd-ui/tailwind.config.ts`, `m1nd-ui/src/lib/softProof.ts`, `m1nd-ui/src/lib/preflight.ts`, `m1nd-ui/src/components/soft/VerdictChip.tsx`, `m1nd-ui/scripts/violet-lint.mjs`, `m1nd-ui/public/fonts/`, `.github/m1nd-logo.svg`, `docs/HUMAN-LAYER-PRD.md`, `skills/m1nd-first/SKILL.md`, e o card da medulla `~/.m1nd/runtimes/claude/agent-memory/m1nd-brand-visuals-violate-aesthetic-doctrine.light.md`). Nenhum arquivo modificado; nenhum secret aberto; nenhum ingest.
 
 ---
 

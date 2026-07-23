@@ -36,7 +36,7 @@ Este é o item que o protocolo manda perseguir. Cada canal visual do brief tem f
 - **`tags[]` por nó** — EXISTE em `snapshot_slice.json` (campos por nó: `change_frequency, external_id, label, last_modified, node_type, provenance, tags`). O estado deriva de `xray:state:*` nessas tags. ✔
 - **Grafo 100% unpainted** — CONFIRMADO: **0 de 40** nós têm tag `xray:state:*`. O brief trata `unpainted` como o primeiro-contato real; o dado prova. ✔
 - **Distribuição de estreia** `scanned=199, bedrock=0, overgrowth=195, unproven=4, erosion_candidate=0, proof_coverage=0.0` — bate VERBATIM com `xray_paint_dryrun.json` (`counts.scanned=199, bedrock=0, overgrowth=195, unproven=4, erosion_candidate=0, painted=0, proof_coverage=0.0`). ✔
-- **`manifest_source` presente** — CONFIRMADO (`file:/Users/kle1nz/m1nd/xray.manifest.json`), sustentando a lógica "no manifest active" vs manifesto presente. ✔
+- **`manifest_source` presente** — CONFIRMADO (`file:~/m1nd/xray.manifest.json`), sustentando a lógica "no manifest active" vs manifesto presente. ✔
 - **Números exibidos como número, não brilho; não oscilam** — declarado explicitamente (§2 fim, §8-motion). `coverage_session` excluído como eixo de saúde (§2), fiel à lei de produto do dossiê.
 
 Nenhuma telemetria aponta para estado que o motor não computa. **Zero cosplay técnico.**

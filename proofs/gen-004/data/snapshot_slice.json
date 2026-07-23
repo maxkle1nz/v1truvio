@@ -21,7 +21,7 @@
     "namespace:light",
     "light:created:1783115076136",
     "light:source_agent:living-tree-live",
-    "light:origin_brain:/Users/kle1nz/m1nd"
+    "light:origin_brain:~/m1nd"
    ]
   },
   {
@@ -42,7 +42,7 @@
     "light:protocol",
     "light:created:1783115076136",
     "light:source_agent:living-tree-live",
-    "light:origin_brain:/Users/kle1nz/m1nd"
+    "light:origin_brain:~/m1nd"
    ]
   },
   {
@@ -63,7 +63,7 @@
     "light:node",
     "light:created:1783115076136",
     "light:source_agent:living-tree-live",
-    "light:origin_brain:/Users/kle1nz/m1nd"
+    "light:origin_brain:~/m1nd"
    ]
   },
   {
@@ -84,7 +84,7 @@
     "light:state",
     "light:created:1783115076136",
     "light:source_agent:living-tree-live",
-    "light:origin_brain:/Users/kle1nz/m1nd"
+    "light:origin_brain:~/m1nd"
    ]
   },
   {
@@ -105,7 +105,7 @@
     "light:section",
     "light:created:1783115076136",
     "light:source_agent:living-tree-live",
-    "light:origin_brain:/Users/kle1nz/m1nd"
+    "light:origin_brain:~/m1nd"
    ]
   },
   {
@@ -126,7 +126,7 @@
     "light:declares_metadata",
     "light:created:1783115076136",
     "light:source_agent:living-tree-live",
-    "light:origin_brain:/Users/kle1nz/m1nd"
+    "light:origin_brain:~/m1nd"
    ]
   },
   {
@@ -147,7 +147,7 @@
     "light:declares_event",
     "light:created:1783115076136",
     "light:source_agent:living-tree-live",
-    "light:origin_brain:/Users/kle1nz/m1nd"
+    "light:origin_brain:~/m1nd"
    ]
   },
   {
@@ -169,7 +169,7 @@
     "light:confidence:0.80",
     "light:created:1783115076136",
     "light:source_agent:living-tree-live",
-    "light:origin_brain:/Users/kle1nz/m1nd"
+    "light:origin_brain:~/m1nd"
    ]
   },
   {
@@ -190,7 +190,7 @@
     "light:evidenced_by",
     "light:created:1783115076136",
     "light:source_agent:living-tree-live",
-    "light:origin_brain:/Users/kle1nz/m1nd"
+    "light:origin_brain:~/m1nd"
    ]
   },
   {
@@ -211,7 +211,7 @@
     "light:evidenced_by",
     "light:created:1783115076136",
     "light:source_agent:living-tree-live",
-    "light:origin_brain:/Users/kle1nz/m1nd"
+    "light:origin_brain:~/m1nd"
    ]
   },
   {
@@ -232,7 +232,7 @@
     "light:declares_metadata",
     "light:created:1783115076136",
     "light:source_agent:living-tree-live",
-    "light:origin_brain:/Users/kle1nz/m1nd"
+    "light:origin_brain:~/m1nd"
    ]
   },
   {
@@ -253,7 +253,7 @@
     "light:declares_event",
     "light:created:1783115076136",
     "light:source_agent:living-tree-live",
-    "light:origin_brain:/Users/kle1nz/m1nd"
+    "light:origin_brain:~/m1nd"
    ]
   },
   {
@@ -275,7 +275,7 @@
     "light:confidence:0.80",
     "light:created:1783115076136",
     "light:source_agent:living-tree-live",
-    "light:origin_brain:/Users/kle1nz/m1nd"
+    "light:origin_brain:~/m1nd"
    ]
   },
   {
@@ -296,7 +296,7 @@
     "light:evidenced_by",
     "light:created:1783115076136",
     "light:source_agent:living-tree-live",
-    "light:origin_brain:/Users/kle1nz/m1nd"
+    "light:origin_brain:~/m1nd"
    ]
   },
   {
@@ -317,7 +317,7 @@
     "light:evidenced_by",
     "light:created:1783115076136",
     "light:source_agent:living-tree-live",
-    "light:origin_brain:/Users/kle1nz/m1nd"
+    "light:origin_brain:~/m1nd"
    ]
   },
   {
@@ -338,7 +338,7 @@
     "light:declares_state",
     "light:created:1783115076136",
     "light:source_agent:living-tree-live",
-    "light:origin_brain:/Users/kle1nz/m1nd"
+    "light:origin_brain:~/m1nd"
    ]
   },
   {
@@ -360,7 +360,7 @@
     "light:confidence:0.80",
     "light:created:1783115076136",
     "light:source_agent:living-tree-live",
-    "light:origin_brain:/Users/kle1nz/m1nd"
+    "light:origin_brain:~/m1nd"
    ]
   },
   {
@@ -381,7 +381,7 @@
     "light:evidenced_by",
     "light:created:1783115076136",
     "light:source_agent:living-tree-live",
-    "light:origin_brain:/Users/kle1nz/m1nd"
+    "light:origin_brain:~/m1nd"
    ]
   },
   {
@@ -402,7 +402,7 @@
     "namespace:light",
     "light:created:1783160938475",
     "light:source_agent:reception-2rd",
-    "light:origin_brain:/Users/kle1nz/m1nd"
+    "light:origin_brain:~/m1nd"
    ]
   },
   {
@@ -423,7 +423,7 @@
     "light:protocol",
     "light:created:1783160938475",
     "light:source_agent:reception-2rd",
-    "light:origin_brain:/Users/kle1nz/m1nd"
+    "light:origin_brain:~/m1nd"
    ]
   },
   {
@@ -444,7 +444,7 @@
     "light:node",
     "light:created:1783160938475",
     "light:source_agent:reception-2rd",
-    "light:origin_brain:/Users/kle1nz/m1nd"
+    "light:origin_brain:~/m1nd"
    ]
   },
   {
@@ -465,7 +465,7 @@
     "light:state",
     "light:created:1783160938475",
     "light:source_agent:reception-2rd",
-    "light:origin_brain:/Users/kle1nz/m1nd"
+    "light:origin_brain:~/m1nd"
    ]
   },
   {
@@ -486,7 +486,7 @@
     "light:section",
     "light:created:1783160938475",
     "light:source_agent:reception-2rd",
-    "light:origin_brain:/Users/kle1nz/m1nd"
+    "light:origin_brain:~/m1nd"
    ]
   },
   {
@@ -507,7 +507,7 @@
     "light:declares_entity",
     "light:created:1783160938475",
     "light:source_agent:reception-2rd",
-    "light:origin_brain:/Users/kle1nz/m1nd"
+    "light:origin_brain:~/m1nd"
    ]
   },
   {
@@ -529,7 +529,7 @@
     "light:confidence:0.90",
     "light:created:1783160938475",
     "light:source_agent:reception-2rd",
-    "light:origin_brain:/Users/kle1nz/m1nd"
+    "light:origin_brain:~/m1nd"
    ]
   },
   {
@@ -550,7 +550,7 @@
     "light:evidenced_by",
     "light:created:1783160938475",
     "light:source_agent:reception-2rd",
-    "light:origin_brain:/Users/kle1nz/m1nd"
+    "light:origin_brain:~/m1nd"
    ]
   },
   {
@@ -571,7 +571,7 @@
     "light:evidenced_by",
     "light:created:1783160938475",
     "light:source_agent:reception-2rd",
-    "light:origin_brain:/Users/kle1nz/m1nd"
+    "light:origin_brain:~/m1nd"
    ]
   },
   {
@@ -592,7 +592,7 @@
     "light:evidenced_by",
     "light:created:1783160938475",
     "light:source_agent:reception-2rd",
-    "light:origin_brain:/Users/kle1nz/m1nd"
+    "light:origin_brain:~/m1nd"
    ]
   },
   {
@@ -613,7 +613,7 @@
     "namespace:light",
     "light:created:1783085122016",
     "light:source_agent:fable-orchestrator",
-    "light:origin_brain:/Users/kle1nz/m1nd"
+    "light:origin_brain:~/m1nd"
    ]
   },
   {
@@ -634,7 +634,7 @@
     "light:protocol",
     "light:created:1783085122016",
     "light:source_agent:fable-orchestrator",
-    "light:origin_brain:/Users/kle1nz/m1nd"
+    "light:origin_brain:~/m1nd"
    ]
   },
   {
@@ -655,7 +655,7 @@
     "light:node",
     "light:created:1783085122016",
     "light:source_agent:fable-orchestrator",
-    "light:origin_brain:/Users/kle1nz/m1nd"
+    "light:origin_brain:~/m1nd"
    ]
   },
   {
@@ -676,7 +676,7 @@
     "light:state",
     "light:created:1783085122016",
     "light:source_agent:fable-orchestrator",
-    "light:origin_brain:/Users/kle1nz/m1nd"
+    "light:origin_brain:~/m1nd"
    ]
   },
   {
@@ -697,7 +697,7 @@
     "light:section",
     "light:created:1783085122016",
     "light:source_agent:fable-orchestrator",
-    "light:origin_brain:/Users/kle1nz/m1nd"
+    "light:origin_brain:~/m1nd"
    ]
   },
   {
@@ -718,7 +718,7 @@
     "light:declares_event",
     "light:created:1783085122016",
     "light:source_agent:fable-orchestrator",
-    "light:origin_brain:/Users/kle1nz/m1nd"
+    "light:origin_brain:~/m1nd"
    ]
   },
   {
@@ -740,7 +740,7 @@
     "light:confidence:0.95",
     "light:created:1783085122016",
     "light:source_agent:fable-orchestrator",
-    "light:origin_brain:/Users/kle1nz/m1nd"
+    "light:origin_brain:~/m1nd"
    ]
   },
   {
@@ -761,7 +761,7 @@
     "light:evidenced_by",
     "light:created:1783085122016",
     "light:source_agent:fable-orchestrator",
-    "light:origin_brain:/Users/kle1nz/m1nd"
+    "light:origin_brain:~/m1nd"
    ]
   },
   {
@@ -782,7 +782,7 @@
     "light:declares_event",
     "light:created:1783085122016",
     "light:source_agent:fable-orchestrator",
-    "light:origin_brain:/Users/kle1nz/m1nd"
+    "light:origin_brain:~/m1nd"
    ]
   },
   {
@@ -804,7 +804,7 @@
     "light:confidence:0.95",
     "light:created:1783085122016",
     "light:source_agent:fable-orchestrator",
-    "light:origin_brain:/Users/kle1nz/m1nd"
+    "light:origin_brain:~/m1nd"
    ]
   },
   {
@@ -825,7 +825,7 @@
     "light:evidenced_by",
     "light:created:1783085122016",
     "light:source_agent:fable-orchestrator",
-    "light:origin_brain:/Users/kle1nz/m1nd"
+    "light:origin_brain:~/m1nd"
    ]
   },
   {
@@ -846,7 +846,7 @@
     "light:declares_event",
     "light:created:1783085122016",
     "light:source_agent:fable-orchestrator",
-    "light:origin_brain:/Users/kle1nz/m1nd"
+    "light:origin_brain:~/m1nd"
    ]
   }
  ],

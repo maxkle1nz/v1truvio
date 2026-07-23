@@ -2,9 +2,9 @@
 
 > **Papel:** JUIZ FRIO (adversarial, sem acesso ao histórico do maker).
 > **Data:** 2026-07-06.
-> **Documento julgado:** `/Users/kle1nz/v1truvio/proofs/gen-001/BRIEF.md` (Design Brief, maker).
+> **Documento julgado:** `~/v1truvio/proofs/gen-001/BRIEF.md` (Design Brief, maker).
 > **Mente aplicada:** CONTRACT · MANIFESTO · VECTORS · MODES + cards citados (rams, tadao-ando, lissitzky, moholy-nagy, stuart-hall; + detournement e teenage-engineering lidos para julgar os itens 5/10 e a exclusão declarada).
-> **Escopo da verificação factual (read-only) no repo `/Users/kle1nz/flight-watcher`:** li `analyze.py`, `config.toml`, `flightwatch/storage.py`, `flightwatch/report.py`, `flightwatch/engine.py`, `run.py`; consultei `data/history.sqlite` (tabela `prices`); inspecionei o relatório real `reports/passagens-20260706-1017.html`. **NÃO** abri `secret.toml` (proibido).
+> **Escopo da verificação factual (read-only) no repo `~/flight-watcher`:** li `analyze.py`, `config.toml`, `flightwatch/storage.py`, `flightwatch/report.py`, `flightwatch/engine.py`, `run.py`; consultei `data/history.sqlite` (tabela `prices`); inspecionei o relatório real `reports/passagens-20260706-1017.html`. **NÃO** abri `secret.toml` (proibido).
 
 ---
 
@@ -31,7 +31,7 @@ Checklist binário do CONTRACT ("GATE ANTI-PADRÕES"). **PASSA** = anti-padrão 
 
 | # | Pergunta resumida | Veredito | Evidência citada |
 |---|---|---|---|
-| **1** | Elemento luminoso/animado sem mudar entendimento nem ação? | **PASSA** | §6 e §8: a única "luz" é a fresta quente reservada ao veredito-em-alvo e ao gesto de compra (`[card:tadao-ando]`); o único movimento contínuo é o "pulso de frescor" — e ele **sinaliza estado real** (daemon batendo a cada 30 min → confirmado por `com.kle1nz.flightwatch.plist` e 371 coletas no DB). §6 "Verificação Lei 1" remove explicitamente rota decorativa, contador-vaidade e blob de deep_link. Nenhum brilho/animação órfão de função. |
+| **1** | Elemento luminoso/animado sem mudar entendimento nem ação? | **PASSA** | §6 e §8: a única "luz" é a fresta quente reservada ao veredito-em-alvo e ao gesto de compra (`[card:tadao-ando]`); o único movimento contínuo é o "pulso de frescor" — e ele **sinaliza estado real** (daemon batendo a cada 30 min → confirmado por `com.local.flightwatch.plist` e 371 coletas no DB). §6 "Verificação Lei 1" remove explicitamente rota decorativa, contador-vaidade e blob de deep_link. Nenhum brilho/animação órfão de função. |
 | **2** | Telemetria sem fonte real no sistema? | **PASSA** | Verificação factual item a item confirmou TODAS as fontes: veredito de oportunidade = thresholds `[alert]` RT≤960/OW≤900 (`config.toml:25-26`, lógica em `run.py:42-49`); melhor oferta atual = `MIN(price)` da varredura (report real); posição histórica "Mín. já visto" = `storage.historical_min` (`storage.py:32-39`, coluna no `report.py:28,75`); tendência = slope %/hora normalizado pela mediana do trecho (`analyze.py:23-32,114-117`); frescor+confiança = `ts` + honestidade estatística "<48h = RUÍDO / confiável ~5-7 dias" (`analyze.py:119-125`, texto literal). §2 declara "Zero telemetria decorativa" e nega explicitamente "confiança do modelo" fabricada / "N pessoas viram" / progresso de scraping / mapa pulsante — nenhum desses aparece no design. **Nenhuma telemetria proposta sem fonte real.** |
 | **3** | Atrito em ação sem consequência (buscar, ler, navegar, fechar dica)? | **PASSA** | §7: abrir, ler, investigar, alternar RT/OW, varrer a matriz — todos declarados **fluidos, cerimonialidade 0**. O único atrito (nível 3) recai sobre "Iniciar compra" — ação com consequência financeira real (~€1000, sai para o Google Flights). §7 é explícito: "nenhum rito em abrir, ler, investigar, alternar, fechar"; o selo "amostra é ruído" **informa, não bloqueia**. |
 | **4** | Rito não listado no mapa de atrito? | **PASSA** | §7 lista exatamente 1 ação com rito (compra, nível 3). Nenhum outro rito aparece em §6/§8/§9 — a "leitura de consequência" da §9 é a materialização desse mesmo nível-3, não um segundo rito. Confirmação/pausa não surgem em nenhuma outra zona. |

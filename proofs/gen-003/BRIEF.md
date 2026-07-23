@@ -1,7 +1,7 @@
-# DESIGN BRIEF — gen-003 · Cherry Bubbles "Direzione"
+# DESIGN BRIEF — gen-003 · a fidelity product "Direzione"
 
 > **Mente:** O Novo Uomo Vitruviano (V1TRUVIO).
-> **Produto-alvo:** a *Direzione* — painel de administração/gestão do Cherry Bubbles, app italiano de programa de fedeltà (loyalty) para negozi + rede comissional de venditori (società 90Steps Srls), em produção.
+> **Produto-alvo:** a *Direzione* — painel de administração/gestão do a fidelity product, app italiano de programa de fedeltà (loyalty) para negozi + rede comissional de venditori (società the client company), em produção.
 > **Papel deste documento:** Design Brief gerado pelo maker. Não é código; não aplica gates (juiz frio separado julga o brief; depois o artefato).
 > **Precedência (inviolável):** Leis > Modo > Vetores > Cards.
 > **Dado da prova:** `proofs/gen-003/data-sample.json` (estrutura verbatim dos endpoints reais: `server.ts` mapCoreStaff 1855-1880, GET `/api/core/admin/pendenze-denaro` 8536-8611, computeMonthlyCommissions 2320-2426 base INCASSATO).
@@ -13,7 +13,7 @@
 
 **Quem opera.** Três perfis, um posto de comando:
 
-- **Direzione (Filippo, Letizia)** — os donos da 90Steps Srls. Gente de **negócio**, não técnicos. Gerem uma rede comercial real (agenti/venditori), aprovam pagamentos que saem da conta da società, decidem quem é suspenso, autorizam a emissão de fatture eletrônicas com efeito fiscal. Cada decisão deles tem consequência de **dinheiro real e de fisco real**.
+- **Direzione (Filippo, Letizia)** — os donos da the client company. Gente de **negócio**, não técnicos. Gerem uma rede comercial real (agenti/venditori), aprovam pagamentos que saem da conta da società, decidem quem é suspenso, autorizam a emissão de fatture eletrônicas com efeito fiscal. Cada decisão deles tem consequência de **dinheiro real e de fisco real**.
 - **Admin de serviço** — operação corrente: cadastra esercente, dá baixa em insoluto, empurra o pipeline de leads. Menos autoridade, mais volume.
 - **Contexto físico:** operam no **celular** (Capacitor iOS/Android) **e** no **desktop**, frequentemente **em movimento** — no bar do esercente, no trem, entre reuniões. O celular não é o "caso pobre"; é o caso primário de muitas sessões.
 
@@ -313,16 +313,16 @@ Três gestos formais **proprietários**: forma/corte/comportamento que **só a D
 1. **Canone €137 vs €129:** o `data-sample.json` traz `canone: 137`, mas a verificação read-only do backend (`prod-seed.ts` `cb_settings.pricing.baseMonthlyPrice: 129`) **não** reconcilia 137 com o base 129 (129×1,22 IVA ≈ 157, não 137). O preço real é travado na assinatura (`monthly_price_at_signature` por contrato) e pode variar por plano. **Não afirmo** que €137 é o canone universal — a tela deve exibir o `canone` que o endpoint retornar por esercente, não uma constante. Lacuna a reconciliar na fatturazione durante a aterrissagem.
 2. **Numerazione — próximo número exato:** o formato `CB/2026/NNNNNN` é fato (sezionale "CB", 6 dígitos que crescem sem quebrar; `server.ts:627-635`, atômico por (sezionale, ano)). O próximo progressivo (ex.: `000020`) é **ilustrativo** derivado de `fattureEmesse:19`. O selo Protocollo deve puxar o número real via `allocateProgressiveInvoiceNumber` do backend, **nunca** calcular no cliente.
 3. **Truncamento de pendenze:** o endpoint `pendenze-denaro` **limita cada categoria a 100 linhas**. A banda de decisione e as listas expandidas devem exibir a **contagem real** (`counts.*`) mesmo quando a lista vier truncada, e sinalizar "+N oltre le prime 100" honestamente — nunca deixar o operador crer que viu tudo.
-4. **Superfície atual (confirmada, read-only):** `AdminView.tsx` em `/Users/kle1nz/CHERRYBUBBLES/Cherrybubbles1/src/components/AdminView.tsx`, **4.246 linhas**, **Tailwind inline sem tokens** (cores hardcoded: `#1D2D44`, `#E63946`, paletas slate/emerald/rose), 7 seções (dashboard/staff/leads/merchants/freeplans/listino/audit), **sidebar desktop → bottom-nav mobile** no breakpoint `md:`, KPIs no mount + banda pendenze lazy sob demanda. Verificado — não é dossiê não-checado. (Produto-alvo permanece **intocado**.)
+4. **Superfície atual (confirmada, read-only):** `AdminView.tsx` em `~/FIDELITY-PRODUCT/FidelityProduct1/src/components/AdminView.tsx`, **4.246 linhas**, **Tailwind inline sem tokens** (cores hardcoded: `#1D2D44`, `#E63946`, paletas slate/emerald/rose), 7 seções (dashboard/staff/leads/merchants/freeplans/listino/audit), **sidebar desktop → bottom-nav mobile** no breakpoint `md:`, KPIs no mount + banda pendenze lazy sob demanda. Verificado — não é dossiê não-checado. (Produto-alvo permanece **intocado**.)
 5. **SGANCIO — resolvido, não lacuna:** a condição exata (`ancestor.levelOrder > descendant.levelOrder`, `server.ts:2388-2401`) foi confirmada e já está no Gesto 1; registrada aqui só para rastreabilidade.
 
 ---
 
 ## Assinatura
 
-**Maker:** mente V1TRUVIO (O Novo Uomo Vitruviano), geração **gen-003**, produto **Cherry Bubbles — Direzione**.
+**Maker:** mente V1TRUVIO (O Novo Uomo Vitruviano), geração **gen-003**, produto **a fidelity product — Direzione**.
 **Data:** 2026-07-06.
-**Escopo respeitado:** nenhum código escrito; nada fora de `proofs/gen-003/`; produto-alvo `/Users/kle1nz/CHERRYBUBBLES/Cherrybubbles1` **read-only e intocado**; nenhum commit.
+**Escopo respeitado:** nenhum código escrito; nada fora de `proofs/gen-003/`; produto-alvo `~/FIDELITY-PRODUCT/FidelityProduct1` **read-only e intocado**; nenhum commit.
 **Estilo como input:** **negado** — nenhuma decisão estética veio do dossiê; todas derivam do diagnóstico do operador (§1), da máquina (§2) e do dado (`data-sample.json`).
 **Precedência:** Leis > Modo > Vetores > Cards, aplicada em todo conflito.
 **Gates:** este brief **não** foi auto-julgado como aprovado — a auto-checagem do maker é rascunho; o veredito é do juiz frio (12 itens sobre o brief; 13–14 sobre o artefato aterrissado).

@@ -9,8 +9,8 @@
       "node_count": 521,
       "edge_count": 500,
       "graph_finalized": true,
-      "ingest_roots": ["/Users/kle1nz/almus", "/Users/kle1nz/.m1nd/runtimes/claude/agent-memory"],
-      "runtime_root": "/Users/kle1nz/.m1nd/runtimes/claude",
+      "ingest_roots": ["~/almus", "~/.m1nd/runtimes/claude/agent-memory"],
+      "runtime_root": "~/.m1nd/runtimes/claude",
       "process_id": 32202
     }
   },
@@ -50,11 +50,11 @@
   "reception": {
     "match": "caller_root_mismatch",
     "honest": "this graph does NOT cover your repo",
-    "bound_workspace": "/Users/kle1nz/.m1nd/runtimes/claude/agent-memory",
-    "caller_root": "/Users/kle1nz",
+    "bound_workspace": "~/.m1nd/runtimes/claude/agent-memory",
+    "caller_root": "~",
     "options": [
       {"action": "continue_bound", "note": "keep using this graph, but treat its answers as NOT covering your current repo — verify against local files"},
-      {"action": "ingest_your_repo", "call": "ingest with project_root=/Users/kle1nz — ONE call: creates a per-project brain..."}
+      {"action": "ingest_your_repo", "call": "ingest with project_root=~ — ONE call: creates a per-project brain..."}
     ]
   }
 }

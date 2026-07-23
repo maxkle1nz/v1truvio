@@ -1,6 +1,6 @@
 {
-  "_source": "Estrutura verbatim dos endpoints reais da Direzione do Cherry Bubbles: server.ts:1855-1880 (mapCoreStaff), server.ts:8536-8611 (GET /api/core/admin/pendenze-denaro, escrito em 2026-07-06), dashboard KPIs derivados de computeMonthlyCommissions (server.ts:2320-2426, base INCASSATO). Valores do dominio REAL — canone Publisher EUR 137/mese, niveis L1-L6 do piano provvigionale ufficiale (Venditore/Supervisore/Coordinatore/Manager), status ATTIVO/SOSPESO/OMAGGIO, regola tetto 5000 EUR procacciatore. Nomi italiani generici (nessun PII di produzione).",
-  "azienda": "Cherry Bubbles — Direzione (90Steps Srls)",
+  "_source": "Estrutura verbatim dos endpoints reais da Direzione do a fidelity product: server.ts:1855-1880 (mapCoreStaff), server.ts:8536-8611 (GET /api/core/admin/pendenze-denaro, escrito em 2026-07-06), dashboard KPIs derivados de computeMonthlyCommissions (server.ts:2320-2426, base INCASSATO). Valores do dominio REAL — canone Publisher EUR 137/mese, niveis L1-L6 do piano provvigionale ufficiale (Venditore/Supervisore/Coordinatore/Manager), status ATTIVO/SOSPESO/OMAGGIO, regola tetto 5000 EUR procacciatore. Nomi italiani generici (nessun PII di produzione).",
+  "azienda": "a fidelity product — Direzione (the client company)",
   "kpi": {
     "mrrNazionale": 3151,
     "esercentiAttivi": 23,
